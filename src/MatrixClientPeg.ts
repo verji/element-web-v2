@@ -41,6 +41,7 @@ import PlatformPeg from "./PlatformPeg";
 import { formatList } from "./utils/FormattingUtils";
 import SdkConfig from "./SdkConfig";
 import { setDeviceIsolationMode } from "./settings/controllers/DeviceIsolationModeController.ts";
+import { ModuleRunner } from "./modules/ModuleRunner.ts";
 
 export interface IMatrixClientCreds {
     homeserverUrl: string;

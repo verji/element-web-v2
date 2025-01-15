@@ -12,6 +12,9 @@ export type BuildConfig = {
     // Dev note: make everything here optional for user safety. Invalid
     // configs are very possible.
 
+    // VERJI: Allow config to skip dependency version check
+    skip_module_dependency_version_check?: boolean;
+
     // The module references to include in the build.
     modules?: string[];
 };

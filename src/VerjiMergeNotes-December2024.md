@@ -77,8 +77,7 @@ I will denote each file with:
     - UIFeature.RoomSummaryFilesOption
     - SettingsStore.getValue(UIFeature.ShowAddWidgetsInRoomInfo)
 - Tooltip.tsx ❌
-- LegacyRoomHeader.tsx ✅
-    - CustomComponentLifecycle.LegacyRoomHeader
+- LegacyRoomHeader.tsx ❌ remove as it causes issues
 - SearchBar.tsx ✅
     - SettingsStore.getValue(UIFeature.SearchInAllRooms)
 - EmailAddresses.tsx ✅
