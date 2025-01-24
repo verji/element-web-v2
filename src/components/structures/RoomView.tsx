@@ -2604,38 +2604,26 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
             analyticsRoomType =
                 this.state.mainSplitContentType === MainSplitContentType.Call ? "video_room" : "maximised_widget";
         }
-        let excludedRightPanelPhaseButtons = [RightPanelPhases.Timeline];
         // VERJI MERGE - MAY CONTAIN ISSUES - CHANGES MADE IN ROOMVIEW
-        let onAppsClick: (() => void) | null = this.onAppsClick;
-        let onForgetClick: (() => void) | null = this.onForgetClick;
-        let onSearchClick: (() => void) | null = this.onSearchClick;
-        let onInviteClick: (() => void) | null = null;
-        let viewingCall = false;
+        //let excludedRightPanelPhaseButtons = [RightPanelPhases.Timeline];
+        // let onForgetClick: (() => void) | null = this.onForgetClick;
+        // let onInviteClick: (() => void) | null = null;
+        // let viewingCall = false;
 
-        // Simplify the header for other main split types
-        switch (this.state.mainSplitContentType) {
-            case MainSplitContentType.MaximisedWidget:
-                excludedRightPanelPhaseButtons = [];
-                onAppsClick = null;
-                onForgetClick = null;
-                onSearchClick = null;
-                break;
-            case MainSplitContentType.Call:
-                excludedRightPanelPhaseButtons = [];
-                onAppsClick = null;
-                onForgetClick = null;
-                onSearchClick = null;
-                if (this.state.room.canInvite(this.context.client.getSafeUserId())) {
-                    onInviteClick = this.onInviteClick;
-                }
-                viewingCall = true;
-        }
-
-        const myMember = this.state.room!.getMember(this.context.client!.getSafeUserId());
-        const showForgetButton =
-            !this.context.client.isGuest() &&
-            (([KnownMembership.Leave, KnownMembership.Ban] as Array<string>).includes(myMembership) ||
-                myMember?.isKicked());
+        // // Simplify the header for other main split types
+        // switch (this.state.mainSplitContentType) {
+        //     case MainSplitContentType.MaximisedWidget:
+        //         excludedRightPanelPhaseButtons = [];
+        //         onForgetClick = null;
+        //         break;
+        //     case MainSplitContentType.Call:
+        //         excludedRightPanelPhaseButtons = [];
+        //         onForgetClick = null;
+        //         if (this.state.room.canInvite(this.context.client.getSafeUserId())) {
+        //             onInviteClick = this.onInviteClick;
+        //         }
+        //         viewingCall = true;
+        // }
 
         const CustomRoomView = { CustomComponent: React.Fragment };
         ModuleRunner.instance.invoke(CustomComponentLifecycle.RoomView, CustomRoomView as CustomComponentOpts);

@@ -138,7 +138,7 @@ export function ShareDialog({ target, customTitle, onFinished, permalinkCreator 
                         clearTimeout(timeoutIdRef.current);
                         await copyPlaintext(url);
                         setIsCopied(true);
-                        timeoutIdRef.current = setTimeout(() => setIsCopied(false), 2000);
+                        timeoutIdRef.current = setTimeout(() => setIsCopied(false), 2000) as unknown as number;
                     }}
                 >
                     {isCopied ? _t("share|link_copied") : _t("action|copy_link")}

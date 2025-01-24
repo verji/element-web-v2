@@ -19,7 +19,6 @@ import {
     Relations,
     Thread,
     M_POLL_START,
-    EventTimeline,
 } from "matrix-js-sdk/src/matrix";
 import {
     CustomComponentLifecycle,
@@ -167,7 +166,7 @@ export default class MessageContextMenu extends React.Component<IProps, IState> 
     private checkPermissions = (): void => {
         const cli = MatrixClientPeg.safeGet();
         const room = cli.getRoom(this.props.mxEvent.getRoomId());
-        const roomState = room?.getLiveTimeline().getState(EventTimeline.FORWARDS); // Verji
+        //const roomState = room?.getLiveTimeline().getState(EventTimeline.FORWARDS); // Verji
 
         // We explicitly decline to show the redact option on ACL events as it has a potential
         // to obliterate the room - https://github.com/matrix-org/synapse/issues/4042
@@ -201,7 +200,7 @@ export default class MessageContextMenu extends React.Component<IProps, IState> 
     };
 
     private canEndPoll(mxEvent: MatrixEvent): boolean {
-        // ROSBERG isMyEvent to overide verji strict canRedact rules - in case where ender of the poll is the owner of the poll
+        // VERJI isMyEvent to overide verji strict canRedact rules - in case where ender of the poll is the owner of the poll
         const isMyEvent = mxEvent.sender?.userId === MatrixClientPeg.safeGet().getSafeUserId();
         return (
             M_POLL_START.matches(mxEvent.getType()) &&

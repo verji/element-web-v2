@@ -2834,6 +2834,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/content-type@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@types/content-type/-/content-type-1.1.8.tgz#319644d07ee6b4bfc734483008393b89b99f0219"
+  integrity sha512-1tBhmVUeso3+ahfyaKluXe38p+94lovUZdoVfQ3OnJo9uJC42JT7CBoN3k9HYhAae+GwiBYmHu+N9FZhOG+2Pg==
+
 "@types/counterpart@^0.18.1":
   version "0.18.4"
   resolved "https://registry.yarnpkg.com/@types/counterpart/-/counterpart-0.18.4.tgz#e3e331b7e0d5496873d417839f3b2bbcf555bb73"
@@ -3404,10 +3409,10 @@
   resolved "https://registry.yarnpkg.com/@vector-im/compound-design-tokens/-/compound-design-tokens-2.1.1.tgz#d6175a99fe4b97688464126f255386990f3048d6"
   integrity sha512-QnUi2K14D9KTXxcLQKUU3V75cforZLMwhaaJDNftT8F5mG86950hAM+qhgDNEpEU+pkTffQj0/g/5859YmqWzQ==
 
-"@vector-im/compound-web@^7.5.0":
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/@vector-im/compound-web/-/compound-web-7.5.0.tgz#1547af5f0ee27b94f79ab11eee006059f3d09707"
-  integrity sha512-Xhef8H5WrRmPuanzRBs8rnl+hwbcQnC7nKSCupUczAQ5hjlieBx4vcQYQ/nMkrs4rMGjgfFtR3E18wT5LlML/A==
+"@vector-im/compound-web@^7.6.2":
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/@vector-im/compound-web/-/compound-web-7.6.2.tgz#84d30615948b822be60edb782ed796c4260c1398"
+  integrity sha512-jR/YsMg9329s2U6Dh0KEwQdv4EYrWLMk406Jx9d8GVUE7GXWISy9H1J0ZEJtoV/Y5BnziLX42sxmnAXpZXLtzg==
   dependencies:
     "@floating-ui/react" "^0.27.0"
     "@radix-ui/react-context-menu" "^2.2.1"
@@ -3417,7 +3422,6 @@
     "@radix-ui/react-separator" "^1.1.0"
     "@radix-ui/react-slot" "^1.1.0"
     classnames "^2.5.1"
-    ts-xor "^1.3.0"
     vaul "^1.0.0"
 
 "@vector-im/matrix-wysiwyg@2.37.13":
@@ -11467,11 +11471,6 @@ ts-prune@^0.10.3:
     lodash "^4.17.21"
     "true-myth" "^4.1.0"
     ts-morph "^13.0.1"
-
-ts-xor@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/ts-xor/-/ts-xor-1.3.0.tgz#3e59f24f0321f9f10f350e0cee3b534b89a2c70b"
-  integrity sha512-RLXVjliCzc1gfKQFLRpfeD0rrWmjnSTgj7+RFhoq3KRkUYa8LE/TIidYOzM5h+IdFBDSjjSgk9Lto9sdMfDFEA==
 
 tsconfig-paths@^3.15.0:
   version "3.15.0"

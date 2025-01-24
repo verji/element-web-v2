@@ -118,7 +118,7 @@ module.exports = (env, argv) => {
     const jsSdkSrcDir = path.resolve(require.resolve("matrix-js-sdk/package.json"), "..", "src");
 
     // VERJI - re add for react-sdk
-    const reactSdkSrcDir = path.resolve(require.resolve("matrix-react-sdk/package.json"), "..", "src");
+    //const reactSdkSrcDir = path.resolve(require.resolve("matrix-react-sdk/package.json"), "..", "src");
 
     return {
         ...development,
@@ -231,12 +231,12 @@ module.exports = (env, argv) => {
                 // VERJI: Polyfill needed for @verji/verji-cryptosetup-module
                 "events": require.resolve("events/"),
                 // VERJI: Polyfill needed for @verji/verji-news-module
-                "https": require.resolve("https-browserify"),
-                "stream": require.resolve("stream-browserify"),
-                "url": require.resolve("url/"),
-                "timers": require.resolve("timers-browserify"),
-                "http": require.resolve("stream-http"),
-                "buffer": false,
+                //"https": require.resolve("https-browserify"),
+                //"stream": require.resolve("stream-browserify"),
+                //"url": require.resolve("url/"),
+                //"timers": require.resolve("timers-browserify"),
+                //"http": require.resolve("stream-http"),
+                //"buffer": false,
                 // Polyfill needed by sentry
                 "process/browser": require.resolve("process/browser"),
             },
@@ -285,7 +285,7 @@ module.exports = (env, argv) => {
                         if (f.startsWith(jsSdkSrcDir)) return true;
 
                         // VERJI - Readd react-sdk for modules
-                        if (f.startsWith(reactSdkSrcDir)) return true;
+                        //if (f.startsWith(reactSdkSrcDir)) return true;
                         // Some of the syntax in this package is not understood by
                         // either webpack or our babel setup.
                         // When we do get to upgrade our current setup, this should

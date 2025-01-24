@@ -86,9 +86,7 @@ const DevtoolsDialog: React.FC<IProps> = ({ roomId, threadRootId, onFinished }) 
                         <h3>{_t(categoryLabels[category as unknown as Category])}</h3>
                         {tools.map(([label, tool]) => {
                             if (
-                                (tool != VerificationExplorer && tool != TimelineEventEditor) ||
-                                ((tool === VerificationExplorer || tool === TimelineEventEditor) &&
-                                    SettingsStore.getValue(UIFeature.EnableRoomDevTools))
+                                (SettingsStore.getValue(UIFeature.EnableRoomDevTools))
                             ) {
                                 const onClick = (): void => {
                                     setTool([label, tool]);
