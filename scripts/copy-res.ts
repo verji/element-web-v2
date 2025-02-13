@@ -125,6 +125,7 @@ function watchLanguage(lang: string, dest: string, langFileMap: Record<string, s
             })
             .on("add", makeLang)
             .on("change", makeLang)
+            //@ts-ignore VERJI - Should not be necessary, but unsure why this occurs maybe minor version change issue
             .on("error", errCheck);
     });
 }

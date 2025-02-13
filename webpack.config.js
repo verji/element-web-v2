@@ -231,11 +231,11 @@ module.exports = (env, argv) => {
                 // VERJI: Polyfill needed for @verji/verji-cryptosetup-module
                 "events": require.resolve("events/"),
                 // VERJI: Polyfill needed for @verji/verji-news-module
-                //"https": require.resolve("https-browserify"),
-                //"stream": require.resolve("stream-browserify"),
+                "https": require.resolve("https-browserify"),
+                "stream": require.resolve("stream-browserify"),
+                "timers": require.resolve("timers-browserify"),
+                "http": require.resolve("stream-http"),
                 //"url": require.resolve("url/"),
-                //"timers": require.resolve("timers-browserify"),
-                //"http": require.resolve("stream-http"),
                 //"buffer": false,
                 // Polyfill needed by sentry
                 "process/browser": require.resolve("process/browser"),
