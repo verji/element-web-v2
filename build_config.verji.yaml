@@ -33,3 +33,4 @@ modules:
     - "@verji/verji-onboarding-module"
     - "@verji/verji-usersearch-module"
     - "@verji/verji-news-module"
+    - "@verji/verji-eventsearch-module"

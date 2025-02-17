@@ -530,6 +530,8 @@
   },
   "a11y_jump_first_unread_room": "Gå til første uleste rom.",
   "action": {
+    "create_account": "Opprett konto",
+    "open": "Åpne",
     "accept": "Godta",
     "add": "Legg til",
     "add_existing_room": "Legg til et eksisterende rom",
@@ -804,6 +806,7 @@
       "security_code_prompt": "Hvis du blir spurt, skriv inn koden nedenfor på den andre enheten.",
       "select_qr_code": "Velg \"%(scanQRCode)s\"",
       "sign_in_new_device": "Logg på ny enhet",
+      "sso_complete_in_browser_dialog_title": "Gå til nettleseren din for å fullføre innloggingen",
       "start_at_sign_in_screen": "Start at the sign in screen",
       "waiting_for_device": "Venter på at enheten skal logge på"
     },
@@ -1583,6 +1586,14 @@
     "verify_toast_title": "Verifiser denne økten"
   },
   "error": {
+    "app_launch_unexpected_error": "Uventet feil ved klargjøring av appen. Se konsollen for detaljer.",
+    "cannot_load_config": "Kan ikke laste inn konfigurasjonsfil: oppdater siden for å prøve igjen.",
+    "invalid_configuration_mixed_server": "Ugyldig konfigurasjon: en default_hs_url kan ikke spesifiseres sammen med default_server_name eller default_server_config",
+    "invalid_configuration_no_server": "Ugyldig konfigurasjon: ingen standardserver spesifisert.",
+    "invalid_json": "Din Verji konfigurasjon inneholder ugyldig JSON. Løs problemet og last siden på nytt.",
+    "invalid_json_detail": "Meldingen fra parseren er: %(message)s",
+    "invalid_json_generic": "Ugyldig JSON",
+    "misconfigured": "Din Verji er feilkonfigurert",
     "admin_contact": "Venligst ta <a> kontakt med tjenesteadministratoren din </a> for å fortsette å bruke denne tjenesten.",
     "admin_contact_short": "Kontakt din <a>serveradministrator</a>.",
     "connection": "Det oppstod et problem med å kommunisere med hjemmeserveren. Prøv igjen senere.",
@@ -4739,5 +4750,35 @@
       "wordByItself": "Et ord i seg selv er lett å gjette"
     }
   },
-  "Åland Islands": "Åland"
+  "Åland Islands": "Åland",
+  "desktop_default_device_name": "%(brand)s Desktop: %(platformName)s",
+  "download_completed": "Nedlasting Fullført",
+  "failed_to_start": "Kunne ikke starte",
+  "go_to_element_io": "Gå til client.prod.verji.app",
+  "incompatible_browser": {
+    "browser_links": "Vennligst installer <chromeLink>Chrome</chromeLink>, <firefoxLink>Firefox</firefoxLink>, eller <safariLink>Safari</safariLink> for den beste opplevelsen.",
+    "continue": "Fortsett uansett",
+    "continue_warning": "Jeg forstår risikoen og ønsker å fortsette",
+    "description": "%(brand)s bruker noen nettleserfunksjoner som ikke er tilgjengelige i din nåværende nettleser. %(detail)s",
+    "detail_can_continue": "Hvis du fortsetter, kan noen funksjoner slutte å fungere, og det er en risiko for at du kan miste data i fremtiden.",
+    "detail_no_continue": "Prøv å oppdatere denne nettleseren hvis du ikke bruker den nyeste versjonen, og prøv igjen.",
+    "feature_warning": "Du kan fortsette å bruke din nåværende nettleser, men noen eller alle funksjonene fungerer kanskje ikke, og utseendet og følelsen av applikasjonen kan være feil.",
+    "features": "%(brand)s bruker avanserte nettleserfunksjoner som ikke støttes av din nåværende nettleser.",
+    "learn_more": "Les mer",
+    "linux": "Linux",
+    "macos": "Mac",
+    "summary": "Nettleseren din kan ikke kjøre %(brand)s",
+    "supported_browsers": "For den beste opplevelsen, bruk <Chrome> Chrome</Chrome>, <Firefox> Firefox </Firefox>,<Edge> Edge</Edge> eller <Safari> Safari</Safari>.",
+    "title": "Ustøttet nettleser",
+    "use_desktop_heading": "Bruk %(brand)s Desktop i stedet",
+    "use_mobile_heading": "Bruk %(brand)s på mobil i stedet",
+    "use_mobile_heading_after_desktop": "Eller bruk vår mobilapp",
+    "windows": "Windows (%(bits)s-bit)"
+  },
+  "powered_by_matrix": "Drevet av Matrix",
+  "powered_by_matrix_with_logo": "Desentralisert, kryptert chat & samhandling basert på $matrixLogo",
+  "unknown_device": "Ukjent enhet",
+  "use_brand_on_mobile": "Bruk %(brand)s på mobil",
+  "web_default_device_name": "%(appName)s: %(browserName)s på %(osName)s",
+  "welcome_to_element": "Velkommen til Verji"
 }

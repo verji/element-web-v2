@@ -225,7 +225,12 @@ module.exports = (env, argv) => {
                 "net": false,
                 "tls": false,
                 "crypto": false,
-
+                "https": require.resolve("https-browserify"),
+                "http": require.resolve("stream-http"),
+                "url": require.resolve("url/"),
+                "timers": require.resolve("timers-browserify"),
+                "stream": require.resolve("stream-browserify"),
+                //"events":false,
                 // Polyfill needed by counterpart
                 "util": require.resolve("util/"),
                 // VERJI: Polyfill needed for @verji/verji-cryptosetup-module
@@ -689,6 +694,8 @@ module.exports = (env, argv) => {
                     { from: "media/**", context: path.resolve(__dirname, "res/") },
                     { from: "config.json", noErrorOnMissing: true },
                     "contribute.json",
+                    "res/verji.rss",
+                    "res/verji2.rss",
                 ],
             }),
 
@@ -742,10 +749,11 @@ module.exports = (env, argv) => {
                 },
             },
 
-            static: {
+            static: [
                 // Where to serve static assets from
-                directory: "./webapp",
-            },
+                {directory: "./webapp" } ,
+                {directory: "./" },
+            ],            
 
             devMiddleware: {
                 // Only output errors, warnings, or new compilations.
