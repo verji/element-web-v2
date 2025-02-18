@@ -1,16 +1,17 @@
-name: Pull Request
-on:
-    pull_request_target:
-        types: [opened, edited, labeled, unlabeled, synchronize]
-    # merge_group:
-    #     types: [checks_requested]
-permissions: {}
-jobs:
-    action:
+# VERJI - Skip not working in this case, commented out instead
+# name: Pull Request
+# on:
+#     pull_request_target:
+#         types: [opened, edited, labeled, unlabeled, synchronize]
+#     # merge_group:
+#     #     types: [checks_requested]
+# permissions: {}
+# jobs:
+    # action:
         # VERJI skip this check by setting false
-        if: ${{false}}
-        uses: matrix-org/matrix-js-sdk/.github/workflows/pull_request.yaml@develop
-        permissions:
-            pull-requests: write
-        secrets:
-            ELEMENT_BOT_TOKEN: ${{ secrets.ELEMENT_BOT_TOKEN }}
+        # if: ${{false}}
+        # uses: matrix-org/matrix-js-sdk/.github/workflows/pull_request.yaml@develop
+        # permissions:
+        #     pull-requests: write
+        # secrets:
+        #     ELEMENT_BOT_TOKEN: ${{ secrets.ELEMENT_BOT_TOKEN }}
