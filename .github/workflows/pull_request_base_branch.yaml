@@ -5,6 +5,8 @@ on:
 permissions: {} # No permissions required
 jobs:
     check_base_branch:
+        # VERJI skip PR basebranch check by setting false
+        if: ${{false}}
         name: Check PR base branch
         runs-on: ubuntu-24.04
         steps:

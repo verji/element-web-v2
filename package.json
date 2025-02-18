@@ -98,6 +98,7 @@
         "await-lock": "^2.1.0",
         "bloom-filters": "^3.0.3",
         "blurhash": "^2.0.3",
+        "browserify": "^17.0.1",
         "browserslist": "^4.23.2",
         "classnames": "^2.2.6",
         "commonmark": "^0.31.0",

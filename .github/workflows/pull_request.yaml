@@ -7,6 +7,8 @@ on:
 permissions: {}
 jobs:
     action:
+        # VERJI skip this check by setting false
+        if: ${{false}}
         uses: matrix-org/matrix-js-sdk/.github/workflows/pull_request.yaml@develop
         permissions:
             pull-requests: write
