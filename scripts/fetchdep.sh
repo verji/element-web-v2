@@ -63,13 +63,13 @@ fi
 # branch name. Based on the results, we clone.
 BRANCH_ARRAY=(${head//:/ })
 TRY_ORG=$deforg
-TRY_BRANCH=${BRANCH_ARRAY[0]}
+TRY_BRANCH=$defbranch #${BRANCH_ARRAY[0]} Verji overide try branch to be the defined branch
 if [[ "$head" == *":"* ]]; then
     # ... but only match that fork if it's a real fork
     if [ "${BRANCH_ARRAY[0]}" != "$PR_ORG" ]; then
         TRY_ORG=${BRANCH_ARRAY[0]}
     fi
-    TRY_BRANCH=${BRANCH_ARRAY[1]}
+    TRY_BRANCH=$defbranch #${BRANCH_ARRAY[1]} Verji overide try branch to be the defined branch
 fi
 clone ${TRY_ORG} $defrepo ${TRY_BRANCH}
 
