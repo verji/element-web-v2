@@ -50,4 +50,5 @@ yarn link @matrix-org/react-sdk-module-api
 yarn link
 yarn list react @types/react
 yarn install # TRY WITHOUT FROZEN --frozen-lockfile
+echo "COMPLETE SETUP
 
