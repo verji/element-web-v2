@@ -23,6 +23,7 @@ clone() {
     org=$1
     repo=$2
     branch=$3
+    echo "cloning branch: $org $repo $branch"
     if [ -n "$branch" ]
     then
         echo "Trying to use $org/$repo#$branch"
