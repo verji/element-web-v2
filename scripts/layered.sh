@@ -13,7 +13,7 @@ set -ex
 # development setup places them all at the same level. We are nesting them here
 # because some CI systems do not allow moving to a directory above the checkout
 # for the primary repo (react-sdk in this case).
-
+echo "Running PROOF"
 # Set up the js-sdk first
 scripts/fetchdep.sh verji matrix-js-sdk-v2 verji-merge-matrix-js-sdk
 pushd matrix-js-sdk-v2
