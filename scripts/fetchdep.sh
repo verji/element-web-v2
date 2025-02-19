@@ -5,7 +5,7 @@ set -x
 deforg="$1"
 defrepo="$2"
 defbranch="$3"
-
+echo "Running fetchdep! $deforg $defrepo $defbranch" 
 rm -r "$defrepo" || true
 
 # figure out where to look for pull requests:
