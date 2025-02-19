@@ -19,7 +19,7 @@ scripts/fetchdep.sh verji matrix-js-sdk-v2 verji-merge-matrix-js-sdk
 pushd matrix-js-sdk-v2
 [ -n "$JS_SDK_GITHUB_BASE_REF" ] && git fetch --depth 1 origin $JS_SDK_GITHUB_BASE_REF && git checkout $JS_SDK_GITHUB_BASE_REF
 yarn link
-yarn install --frozen-lockfile
+yarn install #--frozen-lockfile
 popd
 
 # VERJI ADD custom module-api
@@ -48,5 +48,6 @@ yarn link matrix-js-sdk
 yarn link @matrix-org/react-sdk-module-api
 [ -d matrix-analytics-events ] && yarn link @matrix-org/analytics-events
 yarn link
+yarn list react @types/react
 yarn install # TRY WITHOUT FROZEN --frozen-lockfile
 
