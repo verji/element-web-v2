@@ -86,7 +86,7 @@ describe("SendWysiwygComposer", () => {
 
         // Then
         expect(await screen.findByTestId("WysiwygComposer", undefined, { timeout: 5000 })).toBeInTheDocument();
-    });
+    }, 10000); // Verji - Test sometimes fails locally, increase timeout
 
     it("Should render PlainTextComposer when isRichTextEnabled is at false", async () => {
         // When

@@ -6,7 +6,7 @@ SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
 Please see LICENSE files in the repository root for full details.
 */
 
-import React from "react";
+import React, { ReactNode } from "react";
 import { render, screen, fireEvent, act, cleanup } from "jest-matrix-react";
 import { mocked } from "jest-mock";
 import { MatrixClient, Room } from "matrix-js-sdk/src/matrix";
@@ -14,7 +14,7 @@ import { MatrixClient, Room } from "matrix-js-sdk/src/matrix";
 import { MatrixClientPeg } from "../../../../../src/MatrixClientPeg";
 import { MetaSpace, SpaceKey } from "../../../../../src/stores/spaces";
 import { shouldShowComponent } from "../../../../../src/customisations/helpers/UIComponents";
-import { UIComponent } from "../../../../../src/settings/UIFeature";
+import { UIComponent, UIFeature } from "../../../../../src/settings/UIFeature";
 import { mkStubRoom, wrapInMatrixClientContext, wrapInSdkContext } from "../../../../test-utils";
 import { SdkContextClass } from "../../../../../src/contexts/SDKContext";
 import SpaceStore from "../../../../../src/stores/spaces/SpaceStore";
@@ -22,6 +22,8 @@ import DMRoomMap from "../../../../../src/utils/DMRoomMap";
 import { SpaceNotificationState } from "../../../../../src/stores/notifications/SpaceNotificationState";
 import SettingsStore from "../../../../../src/settings/SettingsStore";
 import UnwrappedSpacePanel from "../../../../../src/components/views/spaces/SpacePanel";
+import { ModuleRunner } from "../../../../../src/modules/ModuleRunner";
+import { CustomComponentLifecycle, CustomComponentOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 // DND test utilities based on
 // https://github.com/colinrobertbrooks/react-beautiful-dnd-test-utils/issues/18#issuecomment-1373388693
@@ -169,6 +171,28 @@ describe("<SpacePanel />", () => {
             fireEvent.click(screen.getByTestId("create-space-button"));
             screen.getByTestId("create-space-button");
         });
+        // VERJI
+        it("renders create space button when UIFeature is true", () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((name) => {
+                if (name === UIFeature.ShowCreateSpaceButton) return true;
+                return true;
+            });
+            mocked(shouldShowComponent).mockReturnValue(true);
+            render(<SpacePanel />);
+            expect(screen.queryByTestId("create-space-button")).not.toBeNull();
+            expect(screen.queryByTestId("create-space-button")).toBeInTheDocument();
+        });
+        it("does not render create space button when UIFeature is false", () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((name) => {
+                if (name === UIFeature.ShowCreateSpaceButton) return false;
+                return true;
+            });
+            mocked(shouldShowComponent).mockReturnValue(true);
+            render(<SpacePanel />);
+            expect(screen.queryByTestId("create-space-button")).toBeNull();
+            expect(screen.queryByTestId("create-space-button")).not.toBeInTheDocument();
+        });
+        // End Verji
     });
 
     it("should allow rearranging via drag and drop", async () => {
@@ -188,5 +212,48 @@ describe("<SpacePanel />", () => {
         await drop(room1);
 
         expect(SpaceStore.instance.moveRootSpace).toHaveBeenCalledWith(0, 1);
+    });
+    // VERJI - CustomComponentTest
+    describe("CustomComponentLifecycle.UserMenu", () => {
+        it("should invoke CustomComponentLifecycle.UserMenu on render", () => {
+            jest.spyOn(ModuleRunner.instance, "invoke");
+            render(<SpacePanel />);
+            expect(ModuleRunner.instance.invoke).toHaveBeenCalledWith(CustomComponentLifecycle.UserMenu, {
+                CustomComponent: expect.any(Symbol),
+            });
+        });
+
+        it("should render the standard <UserMenu> if if there are no module-implementations using the lifecycle", () => {
+            render(<SpacePanel />);
+            const userMenu = screen.getByLabelText("User menu");
+            expect(userMenu).toBeTruthy();
+        });
+
+        it("should replace the <UserMenu> and return <div data-testid='custom-user-menu'> instead", () => {
+            let userMenuChildren: ReactNode;
+            jest.spyOn(ModuleRunner.instance, "invoke").mockImplementation((lifecycleEvent, opts) => {
+                if (lifecycleEvent === CustomComponentLifecycle.UserMenu) {
+                    (opts as CustomComponentOpts).CustomComponent = ({ children }) => {
+                        // Get the UserMenu passed in by the wrapper
+                        const userMenu = React.Children.toArray(children)[0] as any;
+                        userMenuChildren = userMenu.props.children;
+                        return (
+                            <>
+                                <div data-testid="custom-user-menu">
+                                    {/* We wish to keep the original children of the usermenu as children of our custom-user-menu*/}
+                                    {userMenuChildren}
+                                </div>
+                            </>
+                        );
+                    };
+                }
+            });
+
+            render(<SpacePanel />);
+
+            const customUserMenu = screen.queryByTestId("custom-user-menu");
+            expect(customUserMenu?.children.length).toBe(React.Children.count(userMenuChildren));
+            expect(customUserMenu).toBeInTheDocument();
+        });
     });
 });

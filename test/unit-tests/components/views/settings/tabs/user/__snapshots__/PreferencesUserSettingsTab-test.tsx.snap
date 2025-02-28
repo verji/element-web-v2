@@ -445,10 +445,10 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   </span>
                 </label>
                 <div
-                  aria-checked="false"
+                  aria-checked="true"
                   aria-disabled="true"
                   aria-label="Automatically replace plain text Emoji"
-                  class="mx_AccessibleButton mx_ToggleSwitch"
+                  class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_auy1OmnTidX4"
                   role="switch"
                   tabindex="0"
@@ -537,10 +537,10 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   </span>
                 </label>
                 <div
-                  aria-checked="false"
+                  aria-checked="true"
                   aria-disabled="true"
                   aria-label="Use Ctrl + Enter to send a message"
-                  class="mx_AccessibleButton mx_ToggleSwitch"
+                  class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_aTLcRsQRlYy7"
                   role="switch"
                   tabindex="0"
@@ -591,10 +591,10 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   </span>
                 </label>
                 <div
-                  aria-checked="true"
+                  aria-checked="false"
                   aria-disabled="true"
                   aria-label="Show stickers button"
-                  class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
+                  class="mx_AccessibleButton mx_ToggleSwitch"
                   id="mx_SettingsFlag_u1JYVtOyR5kb"
                   role="switch"
                   tabindex="0"
@@ -962,14 +962,14 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Show join/leave messages (invites/removes/bans unaffected)
+                    Show display name changes
                   </span>
                 </label>
                 <div
-                  aria-checked="true"
+                  aria-checked="false"
                   aria-disabled="true"
-                  aria-label="Show join/leave messages (invites/removes/bans unaffected)"
-                  class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
+                  aria-label="Show display name changes"
+                  class="mx_AccessibleButton mx_ToggleSwitch"
                   id="mx_SettingsFlag_8jmzPIlPoBCv"
                   role="switch"
                   tabindex="0"
@@ -989,13 +989,13 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Show display name changes
+                    Show profile picture changes
                   </span>
                 </label>
                 <div
                   aria-checked="true"
                   aria-disabled="true"
-                  aria-label="Show display name changes"
+                  aria-label="Show profile picture changes"
                   class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_enFRaTjdsFou"
                   role="switch"
@@ -1016,13 +1016,13 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Show chat effects (animations when receiving e.g. confetti)
+                    Show avatars in user, room and event mentions
                   </span>
                 </label>
                 <div
                   aria-checked="true"
                   aria-disabled="true"
-                  aria-label="Show chat effects (animations when receiving e.g. confetti)"
+                  aria-label="Show avatars in user, room and event mentions"
                   class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_bfwnd5rz4XNX"
                   role="switch"
@@ -1043,13 +1043,13 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Show profile picture changes
+                    Enable big emoji in chat
                   </span>
                 </label>
                 <div
                   aria-checked="true"
                   aria-disabled="true"
-                  aria-label="Show profile picture changes"
+                  aria-label="Enable big emoji in chat"
                   class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_gs5uWEzYzZrS"
                   role="switch"
@@ -1070,13 +1070,13 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Show avatars in user, room and event mentions
+                    Jump to the bottom of the timeline when you send a message
                   </span>
                 </label>
                 <div
                   aria-checked="true"
                   aria-disabled="true"
-                  aria-label="Show avatars in user, room and event mentions"
+                  aria-label="Jump to the bottom of the timeline when you send a message"
                   class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_qWg7OgID1yRR"
                   role="switch"
@@ -1097,14 +1097,14 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Enable big emoji in chat
+                    Show current profile picture and name for users in message history
                   </span>
                 </label>
                 <div
-                  aria-checked="true"
+                  aria-checked="false"
                   aria-disabled="true"
-                  aria-label="Enable big emoji in chat"
-                  class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
+                  aria-label="Show current profile picture and name for users in message history"
+                  class="mx_AccessibleButton mx_ToggleSwitch"
                   id="mx_SettingsFlag_pOPewl7rtMbV"
                   role="switch"
                   tabindex="0"
@@ -1124,13 +1124,13 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Jump to the bottom of the timeline when you send a message
+                    Show join/leave messages (invites/removes/bans unaffected)
                   </span>
                 </label>
                 <div
                   aria-checked="true"
                   aria-disabled="true"
-                  aria-label="Jump to the bottom of the timeline when you send a message"
+                  aria-label="Show join/leave messages (invites/removes/bans unaffected)"
                   class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_cmt3PZSyNp3v"
                   role="switch"
@@ -1151,14 +1151,14 @@ exports[`PreferencesUserSettingsTab should render 1`] = `
                   <span
                     class="mx_SettingsFlag_labelText"
                   >
-                    Show current profile picture and name for users in message history
+                    Show chat effects (animations when receiving e.g. confetti)
                   </span>
                 </label>
                 <div
-                  aria-checked="false"
+                  aria-checked="true"
                   aria-disabled="true"
-                  aria-label="Show current profile picture and name for users in message history"
-                  class="mx_AccessibleButton mx_ToggleSwitch"
+                  aria-label="Show chat effects (animations when receiving e.g. confetti)"
+                  class="mx_AccessibleButton mx_ToggleSwitch mx_ToggleSwitch_on"
                   id="mx_SettingsFlag_dJJz3lHUv9XX"
                   role="switch"
                   tabindex="0"

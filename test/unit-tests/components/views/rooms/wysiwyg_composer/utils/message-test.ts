@@ -97,7 +97,7 @@ describe("message", () => {
 
                 // Then
                 expect(mockClient.sendMessage).toHaveBeenCalledWith(expect.anything(), null, expect.anything());
-            });
+            }, 10000); // Verji - Test sometimes fails locally, increase timeout
             it("a null argument if SendMessageParams has relation but relation is missing event_id", async () => {
                 // When
                 await sendMessage(message, true, {

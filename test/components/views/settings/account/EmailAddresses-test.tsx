@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "jest-matrix-react";
 import { IThreepid, ThreepidMedium } from "matrix-js-sdk/src/matrix";
 
 import EmailAddresses from "../../../../../src/components/views/settings/account/EmailAddresses";

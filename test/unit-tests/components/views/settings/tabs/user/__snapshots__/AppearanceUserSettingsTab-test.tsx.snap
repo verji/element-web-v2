@@ -137,6 +137,45 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                   </div>
                 </div>
               </form>
+              <div
+                class="mx_ThemeChoicePanel_CustomTheme"
+              >
+                <form
+                  class="_root_ssths_24 mx_ThemeChoicePanel_CustomTheme_EditInPlace"
+                >
+                  <div
+                    class="_field_ssths_34"
+                  >
+                    <label
+                      class="_label_ssths_67"
+                      for="radix-:r3:"
+                    >
+                      Add custom theme
+                    </label>
+                    <div
+                      class="_controls_1h4nb_17"
+                    >
+                      <input
+                        aria-describedby="radix-:r4:"
+                        class="_control_9gon8_18"
+                        id="radix-:r3:"
+                        name="input"
+                        title=""
+                        value=""
+                      />
+                    </div>
+                    <span
+                      class="_message_ssths_93 _help-message_ssths_99"
+                      id="radix-:r4:"
+                    >
+                      Enter the URL of a custom theme you want to apply.
+                    </span>
+                  </div>
+                </form>
+                <ul
+                  class="mx_ThemeChoicePanel_CustomThemeList"
+                />
+              </div>
             </div>
             <div
               class="_separator_144s5_17"
@@ -170,7 +209,7 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                   <label
                     aria-label="Modern"
                     class="_label_ssths_67"
-                    for="radix-:r3:"
+                    for="radix-:r5:"
                   >
                     <div
                       class="mxLayoutSwitcher_LayoutSelector_LayoutRadio_inline"
@@ -181,7 +220,7 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                         <input
                           checked=""
                           class="_input_1vw5h_26"
-                          id="radix-:r3:"
+                          id="radix-:r5:"
                           name="layout"
                           title=""
                           type="radio"
@@ -297,7 +336,7 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                   <label
                     aria-label="Message bubbles"
                     class="_label_ssths_67"
-                    for="radix-:rc:"
+                    for="radix-:re:"
                   >
                     <div
                       class="mxLayoutSwitcher_LayoutSelector_LayoutRadio_inline"
@@ -307,7 +346,7 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                       >
                         <input
                           class="_input_1vw5h_26"
-                          id="radix-:rc:"
+                          id="radix-:re:"
                           name="layout"
                           title=""
                           type="radio"
@@ -423,7 +462,7 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                   <label
                     aria-label="IRC (experimental)"
                     class="_label_ssths_67"
-                    for="radix-:rl:"
+                    for="radix-:rn:"
                   >
                     <div
                       class="mxLayoutSwitcher_LayoutSelector_LayoutRadio_inline"
@@ -433,7 +472,7 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                       >
                         <input
                           class="_input_1vw5h_26"
-                          id="radix-:rl:"
+                          id="radix-:rn:"
                           name="layout"
                           title=""
                           type="radio"
@@ -557,9 +596,9 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                       class="_container_qnvru_18"
                     >
                       <input
-                        aria-describedby="radix-:rv:"
+                        aria-describedby="radix-:r11:"
                         class="_input_qnvru_32"
-                        id="radix-:ru:"
+                        id="radix-:r10:"
                         name="compactLayout"
                         title=""
                         type="checkbox"
@@ -574,13 +613,13 @@ exports[`AppearanceUserSettingsTab should render 1`] = `
                   >
                     <label
                       class="_label_ssths_67"
-                      for="radix-:ru:"
+                      for="radix-:r10:"
                     >
                       Show compact text and messages
                     </label>
                     <span
                       class="_message_ssths_93 _help-message_ssths_99"
-                      id="radix-:rv:"
+                      id="radix-:r11:"
                     >
                       Modern layout must be selected to use this feature.
                     </span>

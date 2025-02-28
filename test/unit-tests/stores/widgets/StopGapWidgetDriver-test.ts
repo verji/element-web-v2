@@ -607,7 +607,7 @@ describe("StopGapWidgetDriver", () => {
                 results: [{ userId: "@user", displayName: "Name", avatarUrl: "mxc://" }],
             });
 
-            expect(client.searchUserDirectory).toHaveBeenCalledWith({ term: "foo", limit: undefined });
+            expect(client.searchUserDirectory).toHaveBeenCalledWith({ term: "foo", limit: undefined }, {}, {}); // Verji - Modify params to include search extension from our matrix-js-sdk
         });
 
         it("searches for users with a custom limit", async () => {
@@ -621,7 +621,7 @@ describe("StopGapWidgetDriver", () => {
                 results: [],
             });
 
-            expect(client.searchUserDirectory).toHaveBeenCalledWith({ term: "foo", limit: 25 });
+            expect(client.searchUserDirectory).toHaveBeenCalledWith({ term: "foo", limit: 25 }, {}, {}); // Verji - Modify test to include search extension from our matrix-js-sdk
         });
     });
 

@@ -39,6 +39,8 @@ import { ReadPinsEventId } from "../../../../../src/components/views/right_panel
 import { Action } from "../../../../../src/dispatcher/actions";
 import { createMessageEventContent } from "../../../../test-utils/events";
 import { ScopedRoomContextProvider } from "../../../../../src/contexts/ScopedRoomContext.tsx";
+import { ModuleRunner } from "../../../../../src/modules/ModuleRunner.ts";
+import { CustomComponentLifecycle, CustomComponentOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 jest.mock("../../../../../src/utils/strings", () => ({
     copyPlaintext: jest.fn(),
@@ -487,6 +489,38 @@ describe("MessageContextMenu", () => {
                 rootEvent: mxEvent,
                 push: false,
             });
+        });
+    });
+    describe("wrapping MessageContextMenu with a custom component", () => {
+        it("should wrap the MessageContextMenu with a custom component", () => {
+            jest.spyOn(ModuleRunner.instance, "invoke").mockImplementation((lifecycleEvent, opts) => {
+                if (lifecycleEvent === CustomComponentLifecycle.MessageContextMenu) {
+                    (opts as CustomComponentOpts).CustomComponent = ({ children }) => {
+                        return (
+                            <>
+                                <div data-testid="wrapper-header">Header</div>
+                                <div data-testid="wrapper-MessageContextMenu">{children}</div>
+                                <div data-testid="wrapper-footer">Footer</div>
+                            </>
+                        );
+                    };
+                }
+            });
+
+            const eventContent = createMessageEventContent("hello");
+            const mxEvent = new MatrixEvent({ type: EventType.RoomMessage, content: eventContent });
+
+            createMenu(mxEvent);
+
+            expect(document.querySelector('[data-testid="wrapper-header"]')).toBeDefined();
+            expect(document.querySelector('[data-testid="wrapper-MessageContextMenu"]')).toBeDefined();
+            expect(document.querySelector('[data-testid="wrapper-footer"]')).toBeDefined();
+            expect(document.querySelector('[data-testid="wrapper-header"]')?.nextSibling).toBe(
+                document.querySelector('[data-testid="wrapper-MessageContextMenu"]'),
+            );
+            expect(document.querySelector('[data-testid="wrapper-MessageContextMenu"]')?.nextSibling).toBe(
+                document.querySelector('[data-testid="wrapper-footer"]'),
+            );
         });
     });
 });
