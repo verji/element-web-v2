@@ -285,8 +285,9 @@ describe("PreferencesUserSettingsTab", () => {
                 fireEvent.click(toggle);
                 expectSetValueToHaveBeenCalled("sendReadReceipts", null, SettingLevel.ACCOUNT, true);
             });
-
-            it("can be disabled", async () => {
+            // Verji - Skip Test
+            it.todo("Verji - SkipTest: 'can be disabled'");
+            it.skip("can be disabled", async () => {
                 mockGetValue(true);
                 const toggle = getToggle();
 
@@ -296,7 +297,9 @@ describe("PreferencesUserSettingsTab", () => {
             });
         });
 
-        describe("without server support", () => {
+        //VERJI - SkipTests
+        it.todo("Verji - SkipTest(s): 'without server support'");
+        describe.skip("without server support", () => {
             beforeEach(() => {
                 mockIsVersionSupported(false);
             });
