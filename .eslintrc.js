@@ -201,7 +201,7 @@ module.exports = {
                 // We do this sometimes to brand interfaces
                 "@typescript-eslint/no-empty-object-type": "off",
                 // VERJI - For some reason, eslint complains in "workflow" when 'Imports are only used as type  @typescript-eslint/consistent-type-imports', but not locally
-                "@typescript-eslint/consistent-type-imports": "off"
+                "@typescript-eslint/consistent-type-imports": "off",
             },
         },
         // temporary override for offending icon require files

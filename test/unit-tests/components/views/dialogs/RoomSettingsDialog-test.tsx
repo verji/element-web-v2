@@ -183,8 +183,8 @@ describe("<RoomSettingsDialog />", () => {
     // Verji FeatureFlag
     describe("UIFeature.RoomSettingsSecurity", () => {
         beforeAll(() => {
-            jest.clearAllMocks()
-        })
+            jest.clearAllMocks();
+        });
         it("renders security & privacy if UIFeature is on", () => {
             jest.spyOn(SettingsStore, "getValue").mockImplementation((name: string) => {
                 if (name == UIFeature.RoomSettingsSecurity) return true;
@@ -201,6 +201,5 @@ describe("<RoomSettingsDialog />", () => {
             // expect(container.querySelectorAll(".mx_TabbedView_tabLabel")).toMatchSnapshot();
             expect(screen.queryByText("Security & Privacy")).toBeNull();
         });
-    })
-
+    });
 });

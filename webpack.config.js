@@ -751,9 +751,9 @@ module.exports = (env, argv) => {
 
             static: [
                 // Where to serve static assets from
-                {directory: "./webapp" } ,
-                {directory: "./" },
-            ],            
+                { directory: "./webapp" },
+                { directory: "./" },
+            ],
 
             devMiddleware: {
                 // Only output errors, warnings, or new compilations.

@@ -556,7 +556,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                                     serverConfig={this.props.serverConfig}
                                     onServerConfigChange={this.props.onServerConfigChange}
                                     disabled={this.isBusy()}
-                    />
+                                />
                                 {this.renderLoginComponentForFlows()}
                                 {footer}
                             </AuthBody>

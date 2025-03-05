@@ -322,7 +322,7 @@ describe("<ExportDialog />", () => {
 
             expect(htmlExporterInstance.export).toHaveBeenCalled();
         });
-        // Verji 
+        // Verji
         it("renders size limit input when feature is on", () => {
             console.log("Eik : feature is on");
             jest.spyOn(SettingsStore, "getValue").mockImplementation((name: string) => {

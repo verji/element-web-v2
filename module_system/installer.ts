@@ -9,7 +9,7 @@ import * as fs from "fs";
 import * as childProcess from "child_process";
 import * as semver from "semver";
 
-import { BuildConfig } from "./BuildConfig";
+import { type BuildConfig } from "./BuildConfig";
 
 // This expects to be run from ./scripts/install.ts
 
@@ -58,7 +58,7 @@ export function installer(config: BuildConfig): void {
         const optionalDepNames = getOptionalDepNames(pkgJsonStr);
         const installedModules = optionalDepNames.filter((d) => !currentOptDeps.includes(d));
         // Verji - this flag is something we have implemented
-        if(!config.skip_module_dependency_version_check){
+        if (!config.skip_module_dependency_version_check) {
             // Ensure all the modules are compatible. We check them all and report at the end to
             // try and save the user some time debugging this sort of failure.
             const ourApiVersion = getTopLevelDependencyVersion(moduleApiDepName);

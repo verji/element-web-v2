@@ -38,7 +38,9 @@ describe("useUserDirectory", () => {
             });
     });
 
-    it.todo("Verji - Fix: Test 'search for users in the identity server' is failing on 'expect(result.current.loading).toBe(false)'")
+    it.todo(
+        "Verji - Fix: Test 'search for users in the identity server' is failing on 'expect(result.current.loading).toBe(false)'",
+    );
     it.skip("search for users in the identity server", async () => {
         const query = "Bob";
         const { result } = render();

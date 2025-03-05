@@ -413,7 +413,11 @@ const RoomSummaryCard: React.FC<IProps> = ({
                             </div>
                         </ReleaseAnnouncement>
                         {SettingsStore.getValue(UIFeature.RoomSummaryFilesOption) && (
-                            <MenuItem Icon={FilesIcon} label={_t("right_panel|files_button")} onSelect={onRoomFilesClick} />
+                            <MenuItem
+                                Icon={FilesIcon}
+                                label={_t("right_panel|files_button")}
+                                onSelect={onRoomFilesClick}
+                            />
                         )}
                         <MenuItem
                             Icon={ExtensionsIcon}

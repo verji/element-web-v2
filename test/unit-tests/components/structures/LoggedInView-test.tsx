@@ -12,6 +12,10 @@ import { ConditionKind, EventType, IPushRule, MatrixEvent, ClientEvent, PushRule
 import { MediaHandler } from "matrix-js-sdk/src/webrtc/mediaHandler";
 import { logger } from "matrix-js-sdk/src/logger";
 import userEvent from "@testing-library/user-event";
+import {
+    CustomComponentLifecycle,
+    CustomComponentOpts,
+} from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 import LoggedInView from "../../../../src/components/structures/LoggedInView";
 import { SDKContext } from "../../../../src/contexts/SDKContext";
@@ -26,7 +30,6 @@ import { Action } from "../../../../src/dispatcher/actions";
 import Modal from "../../../../src/Modal";
 import { SETTINGS } from "../../../../src/settings/Settings";
 import { ModuleRunner } from "../../../../src/modules/ModuleRunner";
-import { CustomComponentLifecycle, CustomComponentOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 describe("<LoggedInView />", () => {
     const userId = "@alice:domain.org";
@@ -481,7 +484,7 @@ describe("<LoggedInView />", () => {
             expect(mockClient.deleteExtendedProfileProperty).toHaveBeenCalledWith("us.cloke.msc4175.tz");
         });
     });
-describe("CustomComponentLifecycles", () => {
+    describe("CustomComponentLifecycles", () => {
         describe("on CustomComponentLifecycle.LeftPanel", () => {
             it("should invoke CustomComponentLifecycle.LeftPanel on rendering the LeftPanel", async () => {
                 jest.spyOn(ModuleRunner.instance, "invoke");

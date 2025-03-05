@@ -436,7 +436,7 @@ describe("<SendMessageComposer/>", () => {
             });
         });
 
-        it.todo("Verji - Skip Test: 'persists to session history upon sending'")
+        it.todo("Verji - Skip Test: 'persists to session history upon sending'");
         it.skip("persists to session history upon sending", async () => {
             mockPlatformPeg({ overrideBrowserShortcuts: jest.fn().mockReturnValue(false) });
 
@@ -461,7 +461,7 @@ describe("<SendMessageComposer/>", () => {
             });
         });
 
-        it.todo("Verji - Skip Test: 'correctly sends a message'")
+        it.todo("Verji - Skip Test: 'correctly sends a message'");
         it.skip("correctly sends a message", () => {
             mocked(doMaybeLocalRoomAction).mockImplementation(
                 <T,>(roomId: string, fn: (actualRoomId: string) => Promise<T>, _client?: MatrixClient) => {
@@ -482,7 +482,7 @@ describe("<SendMessageComposer/>", () => {
             });
         });
 
-        it.todo("Verji - Skip Test: 'correctly sends a reply using a slash command'")
+        it.todo("Verji - Skip Test: 'correctly sends a reply using a slash command'");
         it.skip("correctly sends a reply using a slash command", async () => {
             stubClient();
             mocked(doMaybeLocalRoomAction).mockImplementation(
@@ -521,7 +521,7 @@ describe("<SendMessageComposer/>", () => {
             );
         });
 
-        it.todo("Verji - Skip Test: 'shows chat effects on message sending' ")
+        it.todo("Verji - Skip Test: 'shows chat effects on message sending'");
         it.skip("shows chat effects on message sending", () => {
             mocked(doMaybeLocalRoomAction).mockImplementation(
                 <T,>(roomId: string, fn: (actualRoomId: string) => Promise<T>, _client?: MatrixClient) => {
@@ -544,7 +544,7 @@ describe("<SendMessageComposer/>", () => {
             expect(defaultDispatcher.dispatch).toHaveBeenCalledWith({ action: `effects.confetti` });
         });
 
-        it.todo("Verji - Skip Test: 'not to send chat effects on message sending for threads' ")
+        it.todo("Verji - Skip Test: 'not to send chat effects on message sending for threads'");
         it.skip("not to send chat effects on message sending for threads", () => {
             mocked(doMaybeLocalRoomAction).mockImplementation(
                 <T,>(roomId: string, fn: (actualRoomId: string) => Promise<T>, _client?: MatrixClient) => {

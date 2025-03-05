@@ -2655,7 +2655,6 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
                                             room={this.state.room}
                                             additionalButtons={this.state.viewRoomOpts.buttons}
                                         />
-
                                     </customRoomHeaderOpts.CustomComponent>
                                     {mainSplitBody}
                                 </div>

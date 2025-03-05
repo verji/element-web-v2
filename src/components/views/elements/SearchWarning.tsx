@@ -84,27 +84,32 @@ export default function SearchWarning({ isRoomEncrypted, kind, showLogo = true }
                 );
                 break;
             case WarningKind.Search:
-                SettingsStore.getValue(UIFeature.SearchWarnings) == false
-                    ? (text = "")
-                    : (text = _t(
-                          "seshat|warning_kind_search_app",
-                          {},
-                          {
-                              a: (sub) => (
-                                  <a href={buildUrl} target="_blank" rel="noreferrer noopener">
-                                      {sub}
-                                  </a>
-                              ),
-                          },
-                      ));
+                if (!SettingsStore.getValue(UIFeature.SearchWarnings)) {
+                    text = "";
+                } else {
+                    text = _t(
+                        "seshat|warning_kind_search_app",
+                        {},
+                        {
+                            a: (sub) => (
+                                <a href={buildUrl} target="_blank" rel="noreferrer noopener">
+                                    {sub}
+                                </a>
+                            ),
+                        },
+                    );
+                }
                 break;
         }
     } else {
         switch (kind) {
             case WarningKind.Files:
-                SettingsStore.getValue(UIFeature.SearchWarnings) == false
-                    ? (text = "")
-                    : (text = _t("seshat|warning_kind_files", { brand }));
+                // VERJI Featureflag
+                if (!SettingsStore.getValue(UIFeature.SearchWarnings)) {
+                    text = "";
+                } else {
+                    text = _t("seshat|warning_kind_files", { brand });
+                }
                 break;
             case WarningKind.Search:
                 text = _t("seshat|warning_kind_search", { brand });

@@ -10,6 +10,10 @@ import React, { ReactNode } from "react";
 import { render, screen, fireEvent, act, cleanup } from "jest-matrix-react";
 import { mocked } from "jest-mock";
 import { MatrixClient, Room } from "matrix-js-sdk/src/matrix";
+import {
+    CustomComponentLifecycle,
+    CustomComponentOpts,
+} from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 import { MatrixClientPeg } from "../../../../../src/MatrixClientPeg";
 import { MetaSpace, SpaceKey } from "../../../../../src/stores/spaces";
@@ -23,7 +27,6 @@ import { SpaceNotificationState } from "../../../../../src/stores/notifications/
 import SettingsStore from "../../../../../src/settings/SettingsStore";
 import UnwrappedSpacePanel from "../../../../../src/components/views/spaces/SpacePanel";
 import { ModuleRunner } from "../../../../../src/modules/ModuleRunner";
-import { CustomComponentLifecycle, CustomComponentOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 // DND test utilities based on
 // https://github.com/colinrobertbrooks/react-beautiful-dnd-test-utils/issues/18#issuecomment-1373388693

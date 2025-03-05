@@ -180,7 +180,7 @@ export default class EntityTile extends React.PureComponent<IProps, IState> {
                         </div>
                         {nameAndPresence}
                         {powerLabel}
-                        </AccessibleButton>
+                    </AccessibleButton>
                 </div>
             </CustomEntityTile.CustomComponent>
         );

@@ -185,8 +185,10 @@ export default class PowerSelector<K extends undefined | string> extends React.C
                     text: Roles.textualPowerLevel(level, this.props.usersDefault),
                 };
             });
-            SettingsStore.getValue(UIFeature.PowerSelectorCustomValue) &&
+            // VERJI - feature flag
+            if (SettingsStore.getValue(UIFeature.PowerSelectorCustomValue)) {
                 options.push({ value: CUSTOM_VALUE, text: _t("power_level|custom_level") });
+            }
             const optionsElements = options.map((op) => {
                 return (
                     <option value={op.value} key={op.value} data-testid={`power-level-option-${op.value}`}>

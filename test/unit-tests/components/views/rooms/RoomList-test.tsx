@@ -272,7 +272,7 @@ describe("RoomList", () => {
                     room_id: space1,
                 });
             });
-            // VERJI 
+            // VERJI
             it("UIFeature.addExistingRoomToSpace = true: should render 'Add existing room' context menu option", async () => {
                 jest.spyOn(SettingsStore, "getValue").mockImplementation((val) =>
                     val === UIFeature.AddExistingRoomToSpace ? true : "default",

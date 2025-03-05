@@ -1,4 +1,4 @@
-name: Build and push image to Verji Azure Image Registry 
+name: Build and push image to Verji Azure Image Registry
 on:
     workflow_dispatch: {}
     # push:
@@ -40,7 +40,7 @@ jobs:
             - name: Prepare
               if: matrix.prepare
               run: ${{ matrix.prepare }}
-        
+
             - name: Set up QEMU
               uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 # v3
 
@@ -79,12 +79,12 @@ jobs:
                   file: Dockerfile.Verji
                   push: true
                   build-args: |
-                    USE_CUSTOM_SDKS=true
-                    REACT_SDK_REPO=${{ secrets.REACT_SDK_WITH_TOKEN }}
-                    JS_SDK_REPO=${{secrets.JS_SDK_WITH_TOKEN}}
-                    MODULE_API_REPO=${{secrets.MODULE_API_WITH_TOKEN}}
-                    BUILD_ID=${{ steps.buildnumber.outputs.build_number }}
-                    GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}
+                      USE_CUSTOM_SDKS=true
+                      REACT_SDK_REPO=${{ secrets.REACT_SDK_WITH_TOKEN }}
+                      JS_SDK_REPO=${{secrets.JS_SDK_WITH_TOKEN}}
+                      MODULE_API_REPO=${{secrets.MODULE_API_WITH_TOKEN}}
+                      BUILD_ID=${{ steps.buildnumber.outputs.build_number }}
+                      GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}
                   platforms: linux/amd64,linux/arm64
                   #tags: acrverjing.azurecr.io/verji-element-app-image:${{ env.RELEASE_VERSION }}
                   tags: ${{ steps.meta.outputs.tags }}-${{steps.buildnumber.outputs.build_number}}

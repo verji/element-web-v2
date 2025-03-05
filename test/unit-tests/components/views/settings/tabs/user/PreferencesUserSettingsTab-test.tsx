@@ -25,7 +25,7 @@ describe("PreferencesUserSettingsTab", () => {
     });
 
     const renderTab = (): RenderResult => {
-        console.log("Rendering...")
+        console.log("Rendering...");
         return render(<PreferencesUserSettingsTab closeSettingsFn={() => {}} />);
     };
 
@@ -33,37 +33,34 @@ describe("PreferencesUserSettingsTab", () => {
         const { asFragment } = renderTab();
         expect(asFragment()).toMatchSnapshot();
     });
-    describe.only("Feature flag tests for PreferencesUserSettingsTab", () => {
-        jest.spyOn(SettingsStore, "getValue").mockImplementation( (settingName) => {
-            return false
-        })
+    describe("Feature flag tests for PreferencesUserSettingsTab", () => {
+        jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
+            return false;
+        });
         describe("Feature flag: ShowStickersButtonSetting", () => {
-
             beforeEach(() => {
                 //jest.clearAllMocks();
                 jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
-                    return false
-                }); 
+                    return false;
+                });
             });
-            it("ShowStickersButtonSetting: false > should NOT render the 'Show Sticker button' toggle",async () => {
+            it("ShowStickersButtonSetting: false > should NOT render the 'Show Sticker button' toggle", async () => {
                 jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
-                    return false
+                    return false;
                 });
 
-                
                 renderTab();
-                screen.debug()
+                screen.debug();
                 expect(screen.queryByText("Show stickers button")).toBeFalsy();
             });
             it("ShowStickersButtonSetting: true > should render the 'Show Sticker button' toggle", () => {
                 jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
-                    return settingName === UIFeature.ShowStickersButtonSetting
+                    return settingName === UIFeature.ShowStickersButtonSetting;
                 });
 
                 renderTab();
                 expect(screen.queryByText("Show stickers button")).toBeTruthy();
             });
-
         });
 
         describe("Feature flag: InsertTrailingColonSetting", () => {
@@ -79,10 +76,9 @@ describe("PreferencesUserSettingsTab", () => {
             });
 
             it("InsertTrailingColonSetting: true > should render the 'Insert a trailing colon after user mentions at the start of a message' toggle", () => {
-                
-                jest.spyOn(SettingsStore, "getValue").mockImplementation( (settingName) => {
-                    return true
-                })
+                jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
+                    return true;
+                });
                 renderTab();
                 expect(
                     screen.queryByText("Insert a trailing colon after user mentions at the start of a message"),
@@ -93,21 +89,22 @@ describe("PreferencesUserSettingsTab", () => {
         describe("Feature flag: ShowJoinLeavesSetting", () => {
             beforeEach(() => {
                 jest.clearAllMocks();
-                jest.spyOn(SettingsStore, "getValue").mockImplementation( (settingName) => {
-                    return false
-                })
+                jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
+                    return false;
+                });
             });
-            it.todo("Verji - Fix test: 'ShowJoinLeavesSetting: false > should NOT render the 'Show join/leave messages (invites/removes/bans unaffected)' toggle' ")
+            it.todo(
+                "Verji - Fix test: 'ShowJoinLeavesSetting: false > should NOT render the 'Show join/leave messages (invites/removes/bans unaffected)' toggle'",
+            );
             it.skip("ShowJoinLeavesSetting: false > should NOT render the 'Show join/leave messages (invites/removes/bans unaffected)' toggle", () => {
-
                 renderTab();
                 expect(screen.queryByText("Show join/leave messages (invites/removes/bans unaffected)")).toBeNull();
             });
 
             it("InsertTrailingColonSetting: true > should render the 'Show join/leave messages (invites/removes/bans unaffected)' toggle", () => {
-                jest.spyOn(SettingsStore, "getValue").mockImplementation( (settingName) => {
-                    return true
-                })
+                jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
+                    return true;
+                });
 
                 renderTab();
                 expect(screen.queryByText("Show join/leave messages (invites/removes/bans unaffected)")).toBeTruthy();
@@ -117,21 +114,23 @@ describe("PreferencesUserSettingsTab", () => {
         describe("Feature flag: ShowChatEffectSetting", () => {
             beforeEach(() => {
                 //jest.clearAllMocks();
-                jest.spyOn(SettingsStore, "getValue").mockImplementation( (settingName) => {
-                    return false
-                })
+                jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
+                    return false;
+                });
             });
 
-            it.todo("Verji - Fix test: 'ShowChatEffectSetting: false > should NOT render the 'Show chat effects (animations when receiving e.g. confetti)' toggle' ")
+            it.todo(
+                "Verji - Fix test: 'ShowChatEffectSetting: false > should NOT render the 'Show chat effects (animations when receiving e.g. confetti)' toggle'",
+            );
             it.skip("ShowChatEffectSetting: false > should NOT render the 'Show chat effects (animations when receiving e.g. confetti)' toggle", () => {
                 renderTab();
                 expect(screen.queryByText("Show chat effects (animations when receiving e.g. confetti)")).toBeNull();
             });
 
             it("ShowChatEffectSetting: true > should render the 'Show chat effects (animations when receiving e.g. confetti)' toggle", () => {
-                jest.spyOn(SettingsStore, "getValue").mockImplementation( (settingName) => {
-                    return true
-                })
+                jest.spyOn(SettingsStore, "getValue").mockImplementation((settingName) => {
+                    return true;
+                });
                 renderTab();
                 expect(screen.queryByText("Show chat effects (animations when receiving e.g. confetti)")).toBeTruthy();
             });
@@ -319,6 +318,5 @@ describe("PreferencesUserSettingsTab", () => {
                 expect(SettingsStore.setValue).not.toHaveBeenCalled();
             });
         });
-
     });
 });

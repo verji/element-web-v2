@@ -178,28 +178,28 @@ export const NetworkDropdown: React.FC<IProps> = ({ protocols, config, setConfig
     }));
 
     const addNewServer = useCallback(
-        ({ closeMenu }: AdditionalOptionsProps) => 
+        ({ closeMenu }: AdditionalOptionsProps) =>
             SettingsStore.getValue(UIFeature.NetworkOptions) && (
-            <>
-                <span className="mx_GenericDropdownMenu_divider" />
-                <MenuItemRadio
-                    active={false}
-                    className="mx_GenericDropdownMenu_Option mx_GenericDropdownMenu_Option--item"
-                    onClick={async (): Promise<void> => {
-                        closeMenu();
-                        const { finished } = Modal.createDialog(
-                            TextInputDialog,
-                            {
-                                title: _t("spotlight|public_rooms|network_dropdown_add_dialog_title"),
-                                description: _t("spotlight|public_rooms|network_dropdown_add_dialog_description"),
-                                button: _t("action|add"),
-                                hasCancel: false,
-                                placeholder: _t("spotlight|public_rooms|network_dropdown_add_dialog_placeholder"),
-                                validator: validServer,
-                                fixedWidth: false,
-                            },
-                            "mx_NetworkDropdown_dialog",
-                        );
+                <>
+                    <span className="mx_GenericDropdownMenu_divider" />
+                    <MenuItemRadio
+                        active={false}
+                        className="mx_GenericDropdownMenu_Option mx_GenericDropdownMenu_Option--item"
+                        onClick={async (): Promise<void> => {
+                            closeMenu();
+                            const { finished } = Modal.createDialog(
+                                TextInputDialog,
+                                {
+                                    title: _t("spotlight|public_rooms|network_dropdown_add_dialog_title"),
+                                    description: _t("spotlight|public_rooms|network_dropdown_add_dialog_description"),
+                                    button: _t("action|add"),
+                                    hasCancel: false,
+                                    placeholder: _t("spotlight|public_rooms|network_dropdown_add_dialog_placeholder"),
+                                    validator: validServer,
+                                    fixedWidth: false,
+                                },
+                                "mx_NetworkDropdown_dialog",
+                            );
 
                             const [ok, newServer] = await finished;
                             if (!ok) return;

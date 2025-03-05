@@ -34,7 +34,7 @@ import { IProfileInfo } from "../../../../../src/hooks/useProfileInfo";
 import { DirectoryMember, startDmOnFirstMessage } from "../../../../../src/utils/direct-messages";
 import SettingsStore from "../../../../../src/settings/SettingsStore";
 import SpaceStore from "../../../../../src/stores/spaces/SpaceStore";
-import * as SortMembers from "../../../../../src/utils/SortMembers" 
+import * as SortMembers from "../../../../../src/utils/SortMembers";
 import { UIFeature } from "../../../../../src/settings/UIFeature";
 
 const mockGetAccessToken = jest.fn().mockResolvedValue("getAccessToken");
@@ -185,7 +185,7 @@ describe("InviteDialog", () => {
     afterAll(() => {
         jest.restoreAllMocks();
     });
-describe("UIFeature.ShowRoomMembersInSuggestions", () => {
+    describe("UIFeature.ShowRoomMembersInSuggestions", () => {
         const testUser = {
             _userId: "@suggestedMember:verji.app",
             displayName: "Suggested Member",

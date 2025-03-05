@@ -249,7 +249,7 @@ describe("<CreateRoomDialog />", () => {
         describe("when feature is disabled", () => {
             it("should not have the option to create a knock room", async () => {
                 //jest.spyOn(SettingsStore, "getValue").mockReturnValue(false);
-                // VERJI 
+                // VERJI
                 jest.spyOn(SettingsStore, "getValue").mockImplementation((setting) => {
                     if (setting === UIFeature.CreateRoomShowJoinRuleDropdown) return true;
                     if (setting === UIFeature.CreateRoomE2eeSection) return true;

@@ -129,10 +129,9 @@ export class CreationGrouper extends BaseGrouper {
             summaryText = _t("timeline|creation_summary_room", { creator });
         }
 
-        {
-            SettingsStore.getValue(UIFeature.EnableNewRoomIntro) && ret.push(<NewRoomIntro key="newroomintro" />);
+        if (SettingsStore.getValue(UIFeature.EnableNewRoomIntro)) {
+            ret.push(<NewRoomIntro key="newroomintro" />);
         }
-
         ret.push(
             <GenericEventListSummary
                 key="roomcreationsummary"

@@ -62,5 +62,4 @@ describe("LeftPanel", () => {
             expect(screen.queryByRole("button", { name: "Explore rooms" })).not.toBeInTheDocument();
         });
     });
-
 });

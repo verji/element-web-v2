@@ -86,7 +86,7 @@ describe("<ExtensionsCard />", () => {
         expect(document.querySelector(".mx_IconizedContextMenu")).toMatchSnapshot();
     });
 
-    it.todo("Verji - Skip Test: 'should show set room layout button'")
+    it.todo("Verji - Skip Test: 'should show set room layout button'");
     it.skip("should show set room layout button", async () => {
         jest.spyOn(WidgetLayoutStore.instance, "canCopyLayoutToRoom").mockReturnValue(true);
         mocked(useWidgets).mockReturnValue([

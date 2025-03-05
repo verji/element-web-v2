@@ -414,7 +414,7 @@ describe("AppTile", () => {
                 );
             });
 
-            it.todo("Verji - Skip Test: 'clicking 'un-maximise' should send the widget to the top' ")
+            it.todo("Verji - Skip Test: 'clicking 'un-maximise' should send the widget to the top'");
             it.skip("clicking 'un-maximise' should send the widget to the top", async () => {
                 await userEvent.click(renderResult.getByLabelText("Un-maximise"));
                 expect(moveToContainerSpy).toHaveBeenCalledWith(r1, app1, Container.Top);
@@ -440,7 +440,7 @@ describe("AppTile", () => {
                     </MatrixClientContext.Provider>,
                 );
             });
-            it.todo("Verji - Skip Test: 'should display the »Popout widget« button'")
+            it.todo("Verji - Skip Test: 'should display the »Popout widget« button'");
             it.skip("should display the »Popout widget« button", () => {
                 expect(renderResult.getByLabelText("Popout widget")).toBeInTheDocument();
             });

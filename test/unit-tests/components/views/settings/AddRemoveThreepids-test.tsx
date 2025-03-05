@@ -571,7 +571,7 @@ describe("AddRemoveThreepids", () => {
         expect(screen.getByLabelText("Loading…")).toBeInTheDocument();
     });
 
-    it.todo("Verji - Skip test: 'should render email addresses'")
+    it.todo("Verji - Skip test: 'should render email addresses'");
     it.skip("should render email addresses", async () => {
         const { container } = render(
             <AddRemoveThreepids
@@ -587,7 +587,7 @@ describe("AddRemoveThreepids", () => {
         expect(container).toMatchSnapshot();
     });
 
-    it.todo("Verji - Skip test: 'should render phone numbers'")
+    it.todo("Verji - Skip test: 'should render phone numbers'");
     it.skip("should render phone numbers", async () => {
         const { container } = render(
             <AddRemoveThreepids

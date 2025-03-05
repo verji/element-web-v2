@@ -85,9 +85,7 @@ const DevtoolsDialog: React.FC<IProps> = ({ roomId, threadRootId, onFinished }) 
                     <div key={category}>
                         <h3>{_t(categoryLabels[category as unknown as Category])}</h3>
                         {tools.map(([label, tool]) => {
-                            if (
-                                (SettingsStore.getValue(UIFeature.EnableRoomDevTools))
-                            ) {
+                            if (SettingsStore.getValue(UIFeature.EnableRoomDevTools)) {
                                 const onClick = (): void => {
                                     setTool([label, tool]);
                                 };

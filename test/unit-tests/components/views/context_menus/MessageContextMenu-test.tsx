@@ -25,6 +25,10 @@ import {
 import { PollStartEvent } from "matrix-js-sdk/src/extensible_events_v1/PollStartEvent";
 import { mocked } from "jest-mock";
 import userEvent from "@testing-library/user-event";
+import {
+    CustomComponentLifecycle,
+    CustomComponentOpts,
+} from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 import { MatrixClientPeg } from "../../../../../src/MatrixClientPeg";
 import { TimelineRenderingType } from "../../../../../src/contexts/RoomContext";
@@ -40,7 +44,6 @@ import { Action } from "../../../../../src/dispatcher/actions";
 import { createMessageEventContent } from "../../../../test-utils/events";
 import { ScopedRoomContextProvider } from "../../../../../src/contexts/ScopedRoomContext.tsx";
 import { ModuleRunner } from "../../../../../src/modules/ModuleRunner.ts";
-import { CustomComponentLifecycle, CustomComponentOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 jest.mock("../../../../../src/utils/strings", () => ({
     copyPlaintext: jest.fn(),

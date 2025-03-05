@@ -7,4 +7,3 @@ concurrency: ${{ github.workflow }}
 jobs:
     draft:
         uses: verji/matrix-js-sdk/.github/workflows/verji-release-drafter-workflow.yml@verji-develop
-

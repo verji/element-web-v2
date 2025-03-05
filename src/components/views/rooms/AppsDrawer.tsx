@@ -345,7 +345,7 @@ const PersistentVResizer: React.FC<IPersistentResizerProps> = ({
         defaultHeight = clamp(defaultHeight, 0, 100);
         defaultHeight = percentageWithin(defaultHeight / 100, minHeight, maxHeight);
     } else {
-        defaultHeight = SdkConfig.get().default_widget_container_height ?? 380; // Verji changed fallback 
+        defaultHeight = SdkConfig.get().default_widget_container_height ?? 380; // Verji changed fallback
     }
 
     return (

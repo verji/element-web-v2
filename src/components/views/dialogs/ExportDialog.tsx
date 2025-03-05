@@ -67,16 +67,16 @@ const useExportFormState = (): ExportConfig => {
     const [exportType, setExportType] = useState(
         SettingsStore.getValue(UIFeature.AllExportTypes) == false
             ? ExportType.Beginning
-            : config.range ?? ExportType.Timeline,
+            : (config.range ?? ExportType.Timeline),
     );
     const [includeAttachments, setAttachments] = useState(
         SettingsStore.getValue(UIFeature.ExportAttatchmentsDefaultOff) == false
             ? true
-            : config.includeAttachments ?? false,
+            : (config.includeAttachments ?? false),
     );
     const [numberOfMessages, setNumberOfMessages] = useState<number>(config.numberOfMessages ?? 100);
     const [sizeLimit, setSizeLimit] = useState<number>(
-        SettingsStore.getValue(UIFeature.ExportDefaultSizeLimit) == false ? 20 : config.sizeMb ?? 8,
+        SettingsStore.getValue(UIFeature.ExportDefaultSizeLimit) == false ? 20 : (config.sizeMb ?? 8),
     );
 
     return {

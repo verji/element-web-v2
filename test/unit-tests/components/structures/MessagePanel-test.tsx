@@ -103,7 +103,7 @@ describe("MessagePanel", function () {
         jest.clearAllMocks();
         // HACK: We assume all settings want to be disabled
         jest.spyOn(SettingsStore, "getValue").mockImplementation((arg) => {
-            if (arg == UIFeature.EnableNewRoomIntro) return true; // Verji 
+            if (arg == UIFeature.EnableNewRoomIntro) return true; // Verji
             return arg === "showDisplaynameChanges";
         });
 

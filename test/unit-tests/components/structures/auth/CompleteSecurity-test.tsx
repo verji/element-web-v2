@@ -44,7 +44,7 @@ describe("CompleteSecurity", () => {
         );
         // Verji - Mock feature flags to false (setupEncryptionResetButton)
         jest.spyOn(SettingsStore, "getValue").mockImplementation((name: string) => {
-            console.log("Mocking feature flag to false: ", name)
+            console.log("Mocking feature flag to false: ", name);
             return false;
         });
     });

@@ -25,7 +25,7 @@ import WidgetUtils from "../../../../../src/utils/WidgetUtils";
 import { ModuleRunner } from "../../../../../src/modules/ModuleRunner";
 import SettingsStore from "../../../../../src/settings/SettingsStore";
 
-it.todo("Verji - Tests broken, not sure why. Should investigate, not critical for us")
+it.todo("Verji - Tests broken, not sure why. Should investigate, not critical for us");
 describe.skip("<WidgetContextMenu />", () => {
     const widgetId = "w1";
     const eventId = "e1";
@@ -46,7 +46,6 @@ describe.skip("<WidgetContextMenu />", () => {
     let mockClient: MatrixClient;
 
     let onFinished: () => void;
-
 
     beforeEach(() => {
         onFinished = jest.fn();

@@ -279,7 +279,7 @@ describe("<RoomSummaryCard />", () => {
         );
     });
     // TODO: Verji Fix test
-    it.todo("Verji - Fix: renders 'add widgets, bridges..' option when UIFeature is enabled")
+    it.todo("Verji - Fix: renders 'add widgets, bridges..' option when UIFeature is enabled");
     it.skip("renders 'add widgets, bridges..' option when UIFeature is enabled", () => {
         jest.spyOn(SettingsStore, "getValue").mockImplementation((setting) => {
             if (setting === UIFeature.Widgets) return true;
@@ -321,7 +321,7 @@ describe("<RoomSummaryCard />", () => {
         expect(screen.queryByText(_t("right_panel|files_button"))).toBeFalsy();
     });
     // Verji Fix
-    it.todo("Verji - Fix: does not render 'Copy link' option when UIFeature is false")
+    it.todo("Verji - Fix: does not render 'Copy link' option when UIFeature is false");
     it.skip("does not render 'Copy link' option when UIFeature is false", () => {
         jest.spyOn(SettingsStore, "getValue").mockImplementation((setting) => {
             if (setting === UIFeature.RoomSummaryCopyLink) return false;
@@ -333,7 +333,7 @@ describe("<RoomSummaryCard />", () => {
         expect(screen.queryByText(_t("action|copy_link"))).toBeFalsy();
     });
     // Verji Fix
-    it.todo("Verji - Fix: does not render 'Copy link' option when UIFeature is true")
+    it.todo("Verji - Fix: does not render 'Copy link' option when UIFeature is true");
     it.skip("does not render 'Copy link' option when UIFeature is true", () => {
         jest.spyOn(SettingsStore, "getValue").mockImplementation((setting) => {
             if (setting === UIFeature.RoomSummaryCopyLink) return true;
@@ -445,7 +445,7 @@ describe("<RoomSummaryCard />", () => {
     });
     describe("UIFeature.showAddWidgetsInRoomInfo", () => {
         // Verji fix test
-        it.todo("Verji - Fix: shows the add widgets button when enabled")
+        it.todo("Verji - Fix: shows the add widgets button when enabled");
         it.skip("shows the add widgets button when enabled", () => {
             jest.spyOn(SettingsStore, "getValue").mockImplementation((val) =>
                 val === UIFeature.ShowAddWidgetsInRoomInfo ? true : "default",

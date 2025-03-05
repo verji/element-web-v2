@@ -119,8 +119,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                     <customSessionManagerTabOpts.CustomComponent>
                         <SessionManagerTab showMsc4108QrCode={showMsc4108QrCode} />
                     </customSessionManagerTabOpts.CustomComponent>
-                )
-                ,
+                ),
                 undefined,
             ),
         );

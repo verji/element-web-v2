@@ -399,7 +399,7 @@ describe("Login", function () {
             expect(screen.getByLabelText("Username")).toBeInTheDocument();
         });
 
-        it.todo("Verji - Skipping Test 'should attempt to register oidc client' - is broken. probably due to some FF")
+        it.todo("Verji - Skipping Test 'should attempt to register oidc client' - is broken. probably due to some FF");
         it.skip("should attempt to register oidc client", async () => {
             // dont mock, spy so we can check config values were correctly passed
             jest.spyOn(registerClientUtils, "getOidcClientId");
@@ -414,7 +414,9 @@ describe("Login", function () {
             expect(registerClientUtils.getOidcClientId).toHaveBeenCalledWith(delegatedAuth, oidcStaticClientsConfig);
         });
 
-        it.todo("Verji - Skipping Test 'should fallback to normal login when client registration fails' - is broken. probably due to some FF")
+        it.todo(
+            "Verji - Skipping Test 'should fallback to normal login when client registration fails' - is broken. probably due to some FF",
+        );
         it.skip("should fallback to normal login when client registration fails", async () => {
             fetchMock.post(delegatedAuth.registrationEndpoint!, { status: 500 });
             getComponent(hsUrl, isUrl, delegatedAuth);
@@ -431,7 +433,9 @@ describe("Login", function () {
             expect(screen.getByLabelText("Username")).toBeInTheDocument();
         });
 
-        it.todo("Verji - Skipping Test 'should show continue button when oidc native flow is correctly configured' - is broken. probably due to some FF")
+        it.todo(
+            "Verji - Skipping Test 'should show continue button when oidc native flow is correctly configured' - is broken. probably due to some FF",
+        );
         // short term during active development, UI will be added in next PRs
         it.skip("should show continue button when oidc native flow is correctly configured", async () => {
             fetchMock.post(delegatedAuth.registrationEndpoint!, { client_id: "abc123" });
