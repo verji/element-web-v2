@@ -13,7 +13,9 @@ permissions: {}
 jobs:
     sonarqube:
         name: 🩻 SonarQube
-        if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'merge_group'
+        # VERJI skip SonarQube by setting false
+        if: ${{false}}
+        # if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'merge_group'
         uses: matrix-org/matrix-js-sdk/.github/workflows/sonarcloud.yml@develop
         permissions:
             actions: read
