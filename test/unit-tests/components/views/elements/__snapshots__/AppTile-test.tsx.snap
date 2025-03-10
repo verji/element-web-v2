@@ -128,7 +128,7 @@ exports[`AppTile for a pinned widget should render 1`] = `
         class="mx_AppTileMenuBar_widgets"
       >
         <div
-          aria-label="widget"
+          aria-label="widget|unmaximise"
           class="mx_AccessibleButton mx_AppTileMenuBar_widgets_button"
           role="button"
           tabindex="0"
@@ -240,7 +240,7 @@ exports[`AppTile for a pinned widget should render permission request 1`] = `
         class="mx_AppTileMenuBar_widgets"
       >
         <div
-          aria-label="widget"
+          aria-label="widget|unmaximise"
           class="mx_AccessibleButton mx_AppTileMenuBar_widgets_button"
           role="button"
           tabindex="0"
@@ -312,7 +312,7 @@ exports[`AppTile for a pinned widget should render permission request 1`] = `
           <div
             class="mx_AppPermission_content_bolder"
           >
-            widget
+            widget|added_by
           </div>
           <div>
             <span
@@ -333,10 +333,10 @@ exports[`AppTile for a pinned widget should render permission request 1`] = `
             <div />
           </div>
           <div>
-            widget
+            widget|shared_data_warning
           </div>
           <div>
-            widget 
+            widget|cookie_warning 
           </div>
           <div>
             <div
