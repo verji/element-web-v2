@@ -1470,7 +1470,9 @@
         "name_mxid_share_room": "Invite someone using their name, or invite new guest using their email address.",
         "email_limit_one": "Invites by email can only be sent one at a time",
         "transfer_user_directory_tab": "User Directory",
-        "transfer_dial_pad_tab": "Dial pad"
+        "transfer_dial_pad_tab": "Dial pad",
+        "start_conversation_name_email_mxid_prompt": "Start a conversation with someone using their name, or invite by using their email address.",
+        "start_conversation_name_mxid_prompt": "Start a conversation with someone using their name, or invite by using their email address."
     },
     "widget": {
         "error_need_to_be_logged_in": "widget|error_need_to_be_logged_in",
