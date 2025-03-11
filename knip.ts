@@ -27,7 +27,7 @@ export default {
         "src/components/views/misc_header/MiscHeaderButtons.tsx",
         "src/components/views/rooms/SearchBar.tsx",
         "src/dispatcher/payloads/OpenReportEventDialogPayload.ts",
-        " src/SecurityManager.ts",
+        "src/SecurityManager.ts",
         // VERJI - Ignore webpack config because we have to polyfill some dependencies
         ".webpack.config.js",
     ],
