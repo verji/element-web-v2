@@ -24,7 +24,7 @@ ignore.push("/SecurityManager.ts");
 ignore.push("/OpenReportEventDialogPayload.ts");
 ignore.push("/MiscHeaderButtons.tsx");
 ignore.push("/SearchBar.tsx");
-ignore.push("/matrix-react-sdk-module-api/");
+ignore.push("/matrix-react-sdk-module-api/lib/");
 
 
 
