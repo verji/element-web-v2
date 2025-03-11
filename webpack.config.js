@@ -225,20 +225,20 @@ module.exports = (env, argv) => {
                 "net": false,
                 "tls": false,
                 "crypto": false,
-                "https": require.resolve("https-browserify"),
+                // "https": require.resolve("https-browserify"),
                 "http": require.resolve("stream-http"),
                 "url": require.resolve("url/"),
-                "timers": require.resolve("timers-browserify"),
-                "stream": require.resolve("stream-browserify"),
+                // "timers": require.resolve("timers-browserify"),
+                // "stream": require.resolve("stream-browserify"),
                 //"events":false,
                 // Polyfill needed by counterpart
                 "util": require.resolve("util/"),
                 // VERJI: Polyfill needed for @verji/verji-cryptosetup-module
                 "events": require.resolve("events/"),
                 // VERJI: Polyfill needed for @verji/verji-news-module
-                "https": require.resolve("https-browserify"),
-                "stream": require.resolve("stream-browserify"),
-                "timers": require.resolve("timers-browserify"),
+                //"https": require.resolve("https-browserify"), // Dead Code?
+                //"stream": require.resolve("stream-browserify"), // Dead Code?
+                //"timers": require.resolve("timers-browserify"),// Dead Code?
                 "http": require.resolve("stream-http"),
                 //"url": require.resolve("url/"),
                 //"buffer": false,
