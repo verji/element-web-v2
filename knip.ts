@@ -21,6 +21,8 @@ export default {
         "src/hooks/useLocalStorageState.ts",
         "src/components/views/elements/InfoTooltip.tsx",
         "src/components/views/elements/StyledCheckbox.tsx",
+        // VERJI - Ignore webpack config because we have to polyfill some dependencies
+        ".webpack.config.js",
     ],
     ignoreDependencies: [
         // Required for `action-validator`
@@ -46,7 +48,7 @@ export default {
         "@types/seedrandom",
         // Verji ignore dependencies used in verji-modules
         "browserify",
-        "rss-parser"
+        "rss-parser",
     ],
     ignoreBinaries: [
         // Used in scripts & workflows
