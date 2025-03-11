@@ -160,57 +160,57 @@ async function getSecretStorageKey({
     return [keyId, key];
 }
 // VERJI - Dead code?
-// export async function getDehydrationKey(
-//     keyInfo: SecretStorage.SecretStorageKeyDescription,
-//     checkFunc: (data: Uint8Array) => void,
-// ): Promise<Uint8Array> {
-//     // const keyFromCustomisations = SecurityCustomisations.getSecretStorageKey?.();
-//     const keyFromCustomisations = ModuleRunner.instance.extensions.cryptoSetup?.getSecretStorageKey();
-//     if (keyFromCustomisations) {
-//         logger.log("CryptoSetupExtension: Using key from extension (dehydration)");
-//         return keyFromCustomisations;
-//     }
+export async function getDehydrationKey(
+    keyInfo: SecretStorage.SecretStorageKeyDescription,
+    checkFunc: (data: Uint8Array) => void,
+): Promise<Uint8Array> {
+    // const keyFromCustomisations = SecurityCustomisations.getSecretStorageKey?.();
+    const keyFromCustomisations = ModuleRunner.instance.extensions.cryptoSetup?.getSecretStorageKey();
+    if (keyFromCustomisations) {
+        logger.log("CryptoSetupExtension: Using key from extension (dehydration)");
+        return keyFromCustomisations;
+    }
 
-//     const inputToKey = makeInputToKey(keyInfo);
-//     const { finished } = Modal.createDialog(
-//         AccessSecretStorageDialog,
-//         /* props= */
-//         {
-//             keyInfo,
-//             checkPrivateKey: async (input: KeyParams): Promise<boolean> => {
-//                 const key = await inputToKey(input);
-//                 try {
-//                     checkFunc(key);
-//                     return true;
-//                 } catch (e) {
-//                     console.error(e);
-//                     return false;
-//                 }
-//             },
-//         },
-//         /* className= */ undefined,
-//         /* isPriorityModal= */ false,
-//         /* isStaticModal= */ false,
-//         /* options= */ {
-//             onBeforeClose: async (reason): Promise<boolean> => {
-//                 if (reason === "backgroundClick") {
-//                     return confirmToDismiss();
-//                 }
-//                 return true;
-//             },
-//         },
-//     );
-//     const [input] = await finished;
-//     if (!input) {
-//         throw new AccessCancelledError();
-//     }
-//     const key = await inputToKey(input);
+    const inputToKey = makeInputToKey(keyInfo);
+    const { finished } = Modal.createDialog(
+        AccessSecretStorageDialog,
+        /* props= */
+        {
+            keyInfo,
+            checkPrivateKey: async (input: KeyParams): Promise<boolean> => {
+                const key = await inputToKey(input);
+                try {
+                    checkFunc(key);
+                    return true;
+                } catch (e) {
+                    console.error(e);
+                    return false;
+                }
+            },
+        },
+        /* className= */ undefined,
+        /* isPriorityModal= */ false,
+        /* isStaticModal= */ false,
+        /* options= */ {
+            onBeforeClose: async (reason): Promise<boolean> => {
+                if (reason === "backgroundClick") {
+                    return confirmToDismiss();
+                }
+                return true;
+            },
+        },
+    );
+    const [input] = await finished;
+    if (!input) {
+        throw new AccessCancelledError();
+    }
+    const key = await inputToKey(input);
 
-//     // need to copy the key because rehydration (unpickling) will clobber it
-//     dehydrationCache = { key: new Uint8Array(key), keyInfo };
+    // need to copy the key because rehydration (unpickling) will clobber it
+    dehydrationCache = { key: new Uint8Array(key), keyInfo };
 
-//     return key;
-// }
+    return key;
+}
 
 function cacheSecretStorageKey(
     keyId: string,

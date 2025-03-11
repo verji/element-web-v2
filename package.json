@@ -98,6 +98,7 @@
         "await-lock": "^2.1.0",
         "bloom-filters": "^3.0.3",
         "blurhash": "^2.0.3",
+        "browserify": "^17.0.1",
         "browserslist": "^4.23.2",
         "classnames": "^2.2.6",
         "commonmark": "^0.31.0",
@@ -144,7 +145,7 @@
         "react-focus-lock": "^2.5.1",
         "react-transition-group": "^4.4.1",
         "rfc4648": "^1.4.0",
-
+        "rss-parser": "^3.12.0",
         "sanitize-filename": "^1.6.3",
         "sanitize-html": "2.13.1",
         "stream-http": "^3.2.0",

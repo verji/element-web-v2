@@ -226,24 +226,24 @@ module.exports = (env, argv) => {
                 "tls": false,
                 "crypto": false,
                 // "https": require.resolve("https-browserify"),
-                "http": require.resolve("stream-http"),
-                "url": require.resolve("url/"),
+                //"http": require.resolve("stream-http"),
+                //"url": require.resolve("url/"),
                 // "timers": require.resolve("timers-browserify"),
                 // "stream": require.resolve("stream-browserify"),
                 //"events":false,
                 // Polyfill needed by counterpart
                 "util": require.resolve("util/"),
                 // VERJI: Polyfill needed for @verji/verji-cryptosetup-module
-                "events": require.resolve("events/"),
+                //"events": require.resolve("events/"),
                 // VERJI: Polyfill needed for @verji/verji-news-module
                 //"https": require.resolve("https-browserify"), // Dead Code?
                 //"stream": require.resolve("stream-browserify"), // Dead Code?
                 //"timers": require.resolve("timers-browserify"),// Dead Code?
-                "http": require.resolve("stream-http"),
+                //"http": require.resolve("stream-http"),
                 //"url": require.resolve("url/"),
                 //"buffer": false,
                 // Polyfill needed by sentry
-                "process/browser": require.resolve("process/browser"),
+                //"process/browser": require.resolve("process/browser"),
             },
 
             // Enable the custom "wasm-esm" export condition [1] to indicate to
