@@ -44,6 +44,9 @@ export default {
         "ts-prune",
         // Required due to bug in bloom-filters https://github.com/Callidon/bloom-filters/issues/75
         "@types/seedrandom",
+        // Verji ignore dependencies used in verji-modules
+        "browserify",
+        "rss-parser"
     ],
     ignoreBinaries: [
         // Used in scripts & workflows
