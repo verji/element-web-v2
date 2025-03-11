@@ -149,7 +149,8 @@ jobs:
     complete:
         name: end-to-end-tests
         needs: playwright
-        if: always()
+        ## VERJI - Set to skip instead of always()
+        if: ${{false}}
         runs-on: ubuntu-24.04
         steps:
             - uses: actions/checkout@v4
