@@ -24,7 +24,7 @@ ignore.push("/SecurityManager.ts");
 ignore.push("/OpenReportEventDialogPayload.ts");
 ignore.push("/MiscHeaderButtons.tsx");
 ignore.push("/SearchBar.tsx");
-ignore.push("/matrix-react-sdk-module-api/lib/");
+ignore.push("matrix-react-sdk-module-api");
 
 // We ignore js-sdk by default as it may export for other non element-web projects
 if (!includeJSSDK) ignore.push("matrix-js-sdk");
