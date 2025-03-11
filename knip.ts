@@ -21,6 +21,12 @@ export default {
         "src/hooks/useLocalStorageState.ts",
         "src/components/views/elements/InfoTooltip.tsx",
         "src/components/views/elements/StyledCheckbox.tsx",
+        // VERJI - Ignore the following: TechDebt re-implement the following
+        "src/components/structures/scripts/freshworks.js",
+        "src/components/views/misc_header/MiscButton.tsx",
+        "src/components/views/misc_header/MiscHeaderButtons.tsx",
+        "src/components/views/rooms/SearchBar.tsx",
+        "src/dispatcher/payloads/OpenReportEventDialogPayload.ts",
         // VERJI - Ignore webpack config because we have to polyfill some dependencies
         ".webpack.config.js",
     ],
@@ -49,6 +55,9 @@ export default {
         // Verji ignore dependencies used in verji-modules
         "browserify",
         "rss-parser",
+        "https-browserify",
+        "timers-browserify",
+        "stream-browserify",
     ],
     ignoreBinaries: [
         // Used in scripts & workflows
