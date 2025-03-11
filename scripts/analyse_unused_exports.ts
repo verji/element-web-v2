@@ -19,6 +19,8 @@ ignore.push("/OpenSpotlightPayload.ts");
 ignore.push("/PinnedMessageBadge.tsx");
 ignore.push("/editor/mock.ts");
 ignore.push("DeviceIsolationModeController.ts");
+// VERJI - Ignore this file, due to "unusedExport getDehydrationKey"
+ignore.push("/SecurityManager.ts");
 
 // We ignore js-sdk by default as it may export for other non element-web projects
 if (!includeJSSDK) ignore.push("matrix-js-sdk");
