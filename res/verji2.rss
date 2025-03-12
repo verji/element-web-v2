@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <rss version="2.0" xmlns:p="http://world.episerver.com/feeds/EpiserverRSS20.xsd">
+      <channel>
+        <title>Rss 2.0 Sample customer product catalog feed</title>
+        <link>http://www.yourdomain.com</link>
+        <description>The latest product catalog feed of sample customer.</description>
+        <item>
+          <title>Sample Coat 001</title>
+          <link>http://yourdomain.com/c001.aspx</link>
+          <guid>c001</guid>
+          <p:imageLink>htto://yourdomain.com/image/c001.jpg</p:imageLink>
+          <pubDate>Sun, 20 Apr 2008 00:00:00 GMT</pubDate>
+          <description>High quality wool coat.</description>
+          <category><![CDATA[Coats>Winter Wear]]></category>
+          <category><![CDATA[Coats>Cashmere]]></category>
+          <p:brand>SampleManufactor1</p:brand>
+          <p:inStock>Y</p:inStock>
+          <p:stock>20</p:stock>
+          <p:recommend>Y</p:recommend>
+          <p:tags>short sleeve,blue,men’s,outdoor</p:tags>
+          <p:recommended>h001,h003</p:recommended>
+          <p:attribute name="Colour">Black,Grey</p:attribute>
+          <p:attribute name="Size">10, 12, 14</p:attribute>
+          <p:price>  
+            <p:unitPrice>10</p:unitPrice>  
+            <p:salePrice>8.50</p:salePrice>
+            <p:currency>GBP</p:currency>
+          </p:price>
+        </item>
+        <item>
+          <title>Sample Hat 002</title>
+          <link>http://yourdomain.com/h002.aspx</link>
+          <guid>h002</guid>
+          <p:imageLink>http://yourdomain.com/image/h002.jpg</p:imageLink>
+          <pubDate>Wed, 30 Apr 2008 00:00:00 GMT</pubDate>
+          <description>Low quality wool hat.</description>
+          <category><![CDATA[Hats>Wool Hat]]></category>
+          <p:brand>SampleManufactor2</p:brand>
+          <p:inStock>Y</p:inStock>
+          <p:stock>20</p:stock>
+          <p:recommend>Y</p:recommend>
+          <p:tags>short sleeve,blue,men’s,outdoor</p:tags>
+          <p:recommended>h001,h003</p:recommended>
+          <p:attribute name="Colour">Black </p:attribute>
+          <p:attribute name="Size">16,18,20</p:attribute>
+          <p:price>  
+            <p:unitPrice>5</p:unitPrice>  
+            <p:currency>GBP</p:currency>
+          </p:price>
+        </item>
+      </channel>
+    </rss>

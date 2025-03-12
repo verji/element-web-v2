@@ -28,7 +28,7 @@ import { logger } from "matrix-js-sdk/src/logger";
 import { Heading, MenuItem, Text, Tooltip } from "@vector-im/compound-web";
 import ChatIcon from "@vector-im/compound-design-tokens/assets/web/icons/chat";
 import CheckIcon from "@vector-im/compound-design-tokens/assets/web/icons/check";
-import ShareIcon from "@vector-im/compound-design-tokens/assets/web/icons/share";
+// import ShareIcon from "@vector-im/compound-design-tokens/assets/web/icons/share";
 import MentionIcon from "@vector-im/compound-design-tokens/assets/web/icons/mention";
 import InviteIcon from "@vector-im/compound-design-tokens/assets/web/icons/user-add";
 import BlockIcon from "@vector-im/compound-design-tokens/assets/web/icons/block";
@@ -63,7 +63,7 @@ import PowerSelector from "../elements/PowerSelector";
 import MemberAvatar from "../avatars/MemberAvatar";
 import PresenceLabel from "../rooms/PresenceLabel";
 import BulkRedactDialog from "../dialogs/BulkRedactDialog";
-import { ShareDialog } from "../dialogs/ShareDialog";
+// import { ShareDialog } from "../dialogs/ShareDialog";
 import ErrorDialog from "../dialogs/ErrorDialog";
 import QuestionDialog from "../dialogs/QuestionDialog";
 import ConfirmUserActionDialog from "../dialogs/ConfirmUserActionDialog";
@@ -72,7 +72,7 @@ import { ComposerInsertPayload } from "../../../dispatcher/payloads/ComposerInse
 import ConfirmSpaceUserActionDialog from "../dialogs/ConfirmSpaceUserActionDialog";
 import { bulkSpaceBehaviour } from "../../../utils/space";
 import { shouldShowComponent } from "../../../customisations/helpers/UIComponents";
-import { UIComponent } from "../../../settings/UIFeature";
+import { UIComponent, UIFeature } from "../../../settings/UIFeature";
 import { TimelineRenderingType } from "../../../contexts/RoomContext";
 import RightPanelStore from "../../../stores/right-panel/RightPanelStore";
 import { IRightPanelCardState } from "../../../stores/right-panel/RightPanelStoreIPanelState";
@@ -85,6 +85,7 @@ import { asyncSome } from "../../../utils/arrays";
 import { Flex } from "../../utils/Flex";
 import CopyableText from "../elements/CopyableText";
 import { useUserTimezone } from "../../../hooks/useUserTimezone";
+import SettingsStore from "../../../settings/SettingsStore";
 export interface IDevice extends Device {
     ambiguous?: boolean;
 }
@@ -210,7 +211,7 @@ export function DeviceItem({
 
     const onDeviceClick = (): void => {
         const user = cli.getUser(userId);
-        if (user) {
+        if (user && SettingsStore.getValue(UIFeature.UserInfoVerifyDevice)) {
             verifyDevice(cli, user, device);
         }
     };
@@ -424,11 +425,12 @@ export const UserOptionsSection: React.FC<{
     let readReceiptButton: JSX.Element | undefined;
 
     const isMe = member.userId === cli.getUserId();
-    const onShareUserClick = (): void => {
-        Modal.createDialog(ShareDialog, {
-            target: member,
-        });
-    };
+    // VERJI : Unused const
+    // const onShareUserClick = (): void => {
+    //     Modal.createDialog(ShareDialog, {
+    //         target: member,
+    //     });
+    // };
 
     // Only allow the user to ignore the user if its not ourselves
     // same goes for jumping to read receipt
@@ -534,30 +536,33 @@ export const UserOptionsSection: React.FC<{
         }
     }
 
-    const shareUserButton = (
-        <MenuItem
-            role="button"
-            onSelect={async (ev) => {
-                ev.preventDefault();
-                onShareUserClick();
-            }}
-            label={_t("user_info|share_button")}
-            Icon={ShareIcon}
-        />
-    );
+    // VERJI: Unused const
+    // const shareUserButton = (
+    //     <MenuItem
+    //         role="button"
+    //         onSelect={async (ev) => {
+    //             ev.preventDefault();
+    //             onShareUserClick();
+    //         }}
+    //         label={_t("user_info|share_button")}
+    //         Icon={ShareIcon}
+    //     />
+    // );
 
     const directMessageButton =
         isMe || !shouldShowComponent(UIComponent.CreateRooms) ? null : <MessageButton member={member} />;
 
     return (
-        <Container>
-            {children}
-            {directMessageButton}
-            {inviteUserButton}
-            {readReceiptButton}
-            {shareUserButton}
-            {insertPillButton}
-        </Container>
+        <div className="mx_UserInfo_container">
+            <h3>{_t("common|options")}</h3>
+            <div>
+                {SettingsStore.getValue(UIFeature.ShowSendMessageToUserLink) && directMessageButton}
+                {readReceiptButton}
+                {SettingsStore.getValue(UIFeature.ShowSendMessageToUserLink) && directMessageButton}
+                {insertPillButton}
+                {inviteUserButton}
+            </div>
+        </div>
     );
 };
 
@@ -1138,6 +1143,8 @@ export const RoomAdminToolsContainer: React.FC<IBaseRoomProps> = ({
                 {redactButton}
                 {kickButton}
                 {banButton}
+                {/* If you dont want users to be able to delete messages, set the flag to false in settings.tsx */}
+                {SettingsStore.getValue(UIFeature.UserInfoRedactButton) && redactButton}
                 {children}
             </Container>
         );

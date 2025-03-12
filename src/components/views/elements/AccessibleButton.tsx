@@ -80,6 +80,7 @@ type Props<T extends ElementType = "div"> = {
     /**
      * The tooltip to show on hover or focus.
      */
+    // @ts-ignore - VERJI: For some reason, ts claims that this property 'label' dows not exist on type PropsWithChildren<TooltipProps>
     title?: TooltipProps["label"];
     /**
      * The caption is a secondary text displayed under the `title` of the tooltip.

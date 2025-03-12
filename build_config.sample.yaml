@@ -13,6 +13,16 @@
 # Over time we might expand this config to better support some use cases.
 # Watch the release notes for features which might impact this config.
 
+#
+# false => installer will perform checks to try to ensure correct versions of dependencies
+# true => installer will skip dependency version checks.
+# Enable skipping at your own peril, and manually ensure all modules reference/load the correct version
+# of the extension module
+#
+# This may be useful during development due to limitations/incompatilibilities in "npm list ..."
+#
+skip_module_dependency_version_check: true
+
 # The modules to install. See ./docs/modules.md for more information on
 # what modules are.
 #

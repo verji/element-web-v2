@@ -37,6 +37,10 @@ import { CallState, MatrixCall } from "matrix-js-sdk/src/webrtc/call";
 import { debounce, throttle } from "lodash";
 import { CryptoEvent } from "matrix-js-sdk/src/crypto-api";
 import { ViewRoomOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/RoomViewLifecycle";
+import {
+    CustomComponentLifecycle,
+    CustomComponentOpts,
+} from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 import shouldHideEvent from "../../shouldHideEvent";
 import { _t } from "../../languageHandler";
@@ -59,6 +63,7 @@ import { TimelineRenderingType, MainSplitContentType } from "../../contexts/Room
 import { E2EStatus, shieldStatusForRoom } from "../../utils/ShieldUtils";
 import { Action } from "../../dispatcher/actions";
 import { IMatrixClientCreds } from "../../MatrixClientPeg";
+//import LegacyRoomHeader, { ISearchInfo } from "../views/rooms/LegacyRoomHeader";
 import ScrollPanel from "./ScrollPanel";
 import TimelinePanel from "./TimelinePanel";
 import ErrorBoundary from "../views/elements/ErrorBoundary";
@@ -128,6 +133,9 @@ import { onView3pidInvite } from "../../stores/right-panel/action-handlers";
 import RoomSearchAuxPanel from "../views/rooms/RoomSearchAuxPanel";
 import { PinnedMessageBanner } from "../views/rooms/PinnedMessageBanner";
 import { ScopedRoomContextProvider, useScopedRoomContext } from "../../contexts/ScopedRoomContext";
+import { ModuleRunner } from "../../modules/ModuleRunner";
+// import eventSearch from "../../Searching";
+import searchAllEventsLocally from "../../VerjiLocalSearch"; // VERJI
 
 const DEBUG = false;
 const PREVENT_MULTIPLE_JITSI_WITHIN = 30_000;
@@ -306,11 +314,14 @@ function LocalRoomView(props: LocalRoomViewProps): ReactElement {
             />
         );
     }
-
+    const customRoomHeaderOpts = { CustomComponent: React.Fragment };
+    ModuleRunner.instance.invoke(CustomComponentLifecycle.RoomHeader, customRoomHeaderOpts as CustomComponentOpts);
     return (
         <div className="mx_RoomView mx_RoomView--local">
             <ErrorBoundary>
-                <RoomHeader room={room} />
+                <customRoomHeaderOpts.CustomComponent>
+                    <RoomHeader room={room} />
+                </customRoomHeaderOpts.CustomComponent>
                 <main className="mx_RoomView_body" ref={props.roomView}>
                     <FileDropTarget parent={props.roomView.current} onFileDrop={props.onFileDrop} />
                     <div className="mx_RoomView_timeline">
@@ -342,10 +353,14 @@ interface ILocalRoomCreateLoaderProps {
  */
 function LocalRoomCreateLoader(props: ILocalRoomCreateLoaderProps): ReactElement {
     const text = _t("room|creating_room_text", { names: props.names });
+    const customRoomHeaderOpts = { CustomComponent: React.Fragment };
+    ModuleRunner.instance.invoke(CustomComponentLifecycle.RoomHeader, customRoomHeaderOpts as CustomComponentOpts);
     return (
         <div className="mx_RoomView mx_RoomView--local">
             <ErrorBoundary>
-                <RoomHeader room={props.localRoom} />
+                <customRoomHeaderOpts.CustomComponent>
+                    <RoomHeader room={props.localRoom} />
+                </customRoomHeaderOpts.CustomComponent>
                 <div className="mx_RoomView_body">
                     <LargeLoader text={text} />
                 </div>
@@ -1698,7 +1713,16 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
         const roomId = scope === SearchScope.Room ? this.getRoomId() : undefined;
         debuglog("sending search request");
         const abortController = new AbortController();
-        const promise = eventSearch(this.context.client!, term, roomId, abortController.signal);
+
+        // VERJI START
+        let promise: Promise<ISearchResults>;
+        // currently, we use the local search for all events. edit this 'if' statement to change that.
+        if (scope === SearchScope.Room || scope === SearchScope.All) {
+            promise = searchAllEventsLocally(this.context.client!, term, roomId);
+        } else {
+            promise = eventSearch(this.context.client!, term, roomId, abortController.signal);
+        }
+        // VERJI END
 
         this.setState({
             timelineRenderingType: TimelineRenderingType.Search,
@@ -2506,6 +2530,9 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
 
         const showChatEffects = SettingsStore.getValue("showChatEffects");
 
+        const customAppsDrawerOpts = { CustomComponent: React.Fragment };
+        ModuleRunner.instance.invoke(CustomComponentLifecycle.AppsDrawer, customAppsDrawerOpts as CustomComponentOpts);
+
         let mainSplitBody: JSX.Element | undefined;
         let mainSplitContentClassName: string | undefined;
         // Decide what to show in the main split
@@ -2536,13 +2563,15 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
                 mainSplitContentClassName = "mx_MainSplit_maximisedWidget";
                 mainSplitBody = (
                     <>
-                        <AppsDrawer
-                            room={this.state.room}
-                            userId={this.context.client.getSafeUserId()}
-                            resizeNotifier={this.props.resizeNotifier}
-                            showApps={true}
-                            role="main"
-                        />
+                        <customAppsDrawerOpts.CustomComponent>
+                            <AppsDrawer
+                                room={this.state.room}
+                                userId={this.context.client.getSafeUserId()}
+                                resizeNotifier={this.props.resizeNotifier}
+                                showApps={true}
+                                role="main"
+                            />
+                        </customAppsDrawerOpts.CustomComponent>
                         {previewBar}
                     </>
                 );
@@ -2575,36 +2604,65 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
             analyticsRoomType =
                 this.state.mainSplitContentType === MainSplitContentType.Call ? "video_room" : "maximised_widget";
         }
+        // VERJI MERGE - MAY CONTAIN ISSUES - CHANGES MADE IN ROOMVIEW
+        //let excludedRightPanelPhaseButtons = [RightPanelPhases.Timeline];
+        // let onForgetClick: (() => void) | null = this.onForgetClick;
+        // let onInviteClick: (() => void) | null = null;
+        // let viewingCall = false;
 
+        // // Simplify the header for other main split types
+        // switch (this.state.mainSplitContentType) {
+        //     case MainSplitContentType.MaximisedWidget:
+        //         excludedRightPanelPhaseButtons = [];
+        //         onForgetClick = null;
+        //         break;
+        //     case MainSplitContentType.Call:
+        //         excludedRightPanelPhaseButtons = [];
+        //         onForgetClick = null;
+        //         if (this.state.room.canInvite(this.context.client.getSafeUserId())) {
+        //             onInviteClick = this.onInviteClick;
+        //         }
+        //         viewingCall = true;
+        // }
+
+        const CustomRoomView = { CustomComponent: React.Fragment };
+        ModuleRunner.instance.invoke(CustomComponentLifecycle.RoomView, CustomRoomView as CustomComponentOpts);
+        const customRoomHeaderOpts = { CustomComponent: React.Fragment };
+        ModuleRunner.instance.invoke(CustomComponentLifecycle.RoomHeader, customRoomHeaderOpts as CustomComponentOpts);
+        // VERJI MERGE MAY CONTAIN ISSUES - CHANGES MADE IN WRAPPED COMPONENT
         return (
-            <ScopedRoomContextProvider {...this.state}>
-                <div className={mainClasses} ref={this.roomView} onKeyDown={this.onReactKeyDown}>
-                    {showChatEffects && this.roomView.current && (
-                        <EffectsOverlay roomWidth={this.roomView.current.offsetWidth} />
-                    )}
-                    <ErrorBoundary>
-                        <MainSplit
-                            panel={rightPanel}
-                            resizeNotifier={this.props.resizeNotifier}
-                            sizeKey={sizeKey}
-                            defaultSize={defaultSize}
-                            analyticsRoomType={analyticsRoomType}
-                        >
-                            <div
-                                className={mainSplitContentClasses}
-                                ref={this.roomViewBody}
-                                data-layout={this.state.layout}
+            <CustomRoomView.CustomComponent>
+                <ScopedRoomContextProvider {...this.state}>
+                    <div className={mainClasses} ref={this.roomView} onKeyDown={this.onReactKeyDown}>
+                        {showChatEffects && this.roomView.current && (
+                            <EffectsOverlay roomWidth={this.roomView.current.offsetWidth} />
+                        )}
+                        <ErrorBoundary>
+                            <MainSplit
+                                panel={rightPanel}
+                                resizeNotifier={this.props.resizeNotifier}
+                                sizeKey={sizeKey}
+                                defaultSize={defaultSize}
+                                analyticsRoomType={analyticsRoomType}
                             >
-                                <RoomHeader
-                                    room={this.state.room}
-                                    additionalButtons={this.state.viewRoomOpts.buttons}
-                                />
-                                {mainSplitBody}
-                            </div>
-                        </MainSplit>
-                    </ErrorBoundary>
-                </div>
-            </ScopedRoomContextProvider>
+                                <div
+                                    className={mainSplitContentClasses}
+                                    ref={this.roomViewBody}
+                                    data-layout={this.state.layout}
+                                >
+                                    <customRoomHeaderOpts.CustomComponent>
+                                        <RoomHeader
+                                            room={this.state.room}
+                                            additionalButtons={this.state.viewRoomOpts.buttons}
+                                        />
+                                    </customRoomHeaderOpts.CustomComponent>
+                                    {mainSplitBody}
+                                </div>
+                            </MainSplit>
+                        </ErrorBoundary>
+                    </div>
+                </ScopedRoomContextProvider>
+            </CustomRoomView.CustomComponent>
         );
     }
 }

@@ -117,6 +117,9 @@ module.exports = (env, argv) => {
     // directory, so we don't have to rely on an index.js or similar file existing.
     const jsSdkSrcDir = path.resolve(require.resolve("matrix-js-sdk/package.json"), "..", "src");
 
+    // VERJI - re add for react-sdk
+    //const reactSdkSrcDir = path.resolve(require.resolve("matrix-react-sdk/package.json"), "..", "src");
+
     return {
         ...development,
 
@@ -206,6 +209,8 @@ module.exports = (env, argv) => {
                     __dirname,
                     "node_modules/@matrix-org/react-sdk-module-api",
                 ),
+                // VERJI: We need matrix-react-sdk for modules
+                "matrix-react-sdk": path.resolve(__dirname, "node_modules/matrix-react-sdk"),
                 // and matrix-events-sdk & matrix-widget-api
                 "matrix-events-sdk": path.resolve(__dirname, "node_modules/matrix-events-sdk"),
                 "matrix-widget-api": path.resolve(__dirname, "node_modules/matrix-widget-api"),
@@ -220,9 +225,23 @@ module.exports = (env, argv) => {
                 "net": false,
                 "tls": false,
                 "crypto": false,
-
+                "https": require.resolve("https-browserify"),
+                "http": require.resolve("stream-http"),
+                "url": require.resolve("url/"),
+                "timers": require.resolve("timers-browserify"),
+                "stream": require.resolve("stream-browserify"),
+                //"events":false,
                 // Polyfill needed by counterpart
                 "util": require.resolve("util/"),
+                // VERJI: Polyfill needed for @verji/verji-cryptosetup-module
+                "events": require.resolve("events/"),
+                // VERJI: Polyfill needed for @verji/verji-news-module
+                "https": require.resolve("https-browserify"),
+                "stream": require.resolve("stream-browserify"),
+                "timers": require.resolve("timers-browserify"),
+                "http": require.resolve("stream-http"),
+                //"url": require.resolve("url/"),
+                //"buffer": false,
                 // Polyfill needed by sentry
                 "process/browser": require.resolve("process/browser"),
             },
@@ -253,11 +272,11 @@ module.exports = (env, argv) => {
                 /highlight\.js[\\/]lib[\\/]languages/,
             ],
             rules: [
-                {
-                    test: /\.js$/,
-                    enforce: "pre",
-                    use: ["source-map-loader"],
-                },
+                // {
+                //     test: /\.js$/,
+                //     enforce: "pre",
+                //     use: ["source-map-loader"],
+                // },
                 {
                     test: /\.(ts|js)x?$/,
                     include: (f) => {
@@ -270,6 +289,8 @@ module.exports = (env, argv) => {
                         // include node modules inside these modules, so we add 'src'.
                         if (f.startsWith(jsSdkSrcDir)) return true;
 
+                        // VERJI - Readd react-sdk for modules
+                        //if (f.startsWith(reactSdkSrcDir)) return true;
                         // Some of the syntax in this package is not understood by
                         // either webpack or our babel setup.
                         // When we do get to upgrade our current setup, this should
@@ -673,6 +694,8 @@ module.exports = (env, argv) => {
                     { from: "media/**", context: path.resolve(__dirname, "res/") },
                     { from: "config.json", noErrorOnMissing: true },
                     "contribute.json",
+                    "res/verji.rss",
+                    "res/verji2.rss",
                 ],
             }),
 
@@ -726,10 +749,11 @@ module.exports = (env, argv) => {
                 },
             },
 
-            static: {
+            static: [
                 // Where to serve static assets from
-                directory: "./webapp",
-            },
+                { directory: "./webapp" },
+                { directory: "./" },
+            ],
 
             devMiddleware: {
                 // Only output errors, warnings, or new compilations.

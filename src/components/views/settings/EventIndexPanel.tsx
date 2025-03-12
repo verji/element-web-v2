@@ -210,6 +210,7 @@ export default class EventIndexPanel extends React.Component<{}, IState> {
             );
         } else {
             eventIndexingSettings = (
+                //@ts-ignore
                 <>
                     <SettingsSubsectionText>
                         {this.state.enabling ? <InlineSpinner /> : _t("settings|security|message_search_failed")}

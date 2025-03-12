@@ -89,7 +89,6 @@ describe("<RoomSettingsDialog />", () => {
             const { container } = getComponent();
             expect(container.querySelectorAll(".mx_TabbedView_tabLabel")).toMatchSnapshot();
         });
-
         describe("people settings tab", () => {
             it("does not render when disabled and room join rule is not knock", () => {
                 jest.spyOn(room, "getJoinRule").mockReturnValue(JoinRule.Invite);
@@ -120,7 +119,6 @@ describe("<RoomSettingsDialog />", () => {
                 getComponent();
                 expect(screen.getByTestId("settings-tab-ROOM_PEOPLE_TAB")).toBeInTheDocument();
             });
-
             it("re-renders on room join rule changes", async () => {
                 jest.spyOn(SettingsStore, "getValue").mockImplementation(
                     (setting) => setting === "feature_ask_to_join",
@@ -180,6 +178,28 @@ describe("<RoomSettingsDialog />", () => {
             fireEvent.click(screen.getByText("Polls"));
 
             expect(container.querySelector(".mx_SettingsTab")).toMatchSnapshot();
+        });
+    });
+    // Verji FeatureFlag
+    describe("UIFeature.RoomSettingsSecurity", () => {
+        beforeAll(() => {
+            jest.clearAllMocks();
+        });
+        it("renders security & privacy if UIFeature is on", () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((name: string) => {
+                if (name == UIFeature.RoomSettingsSecurity) return true;
+            });
+            getComponent();
+            // expect(container.querySelectorAll(".mx_TabbedView_tabLabel")).toMatchSnapshot();
+            expect(screen.queryByText("Security & Privacy")).not.toBeNull();
+        });
+        it("does not renders security & privacy if UIFeature is off", () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((name: string) => {
+                if (name == UIFeature.RoomSettingsSecurity) return false;
+            });
+            getComponent();
+            // expect(container.querySelectorAll(".mx_TabbedView_tabLabel")).toMatchSnapshot();
+            expect(screen.queryByText("Security & Privacy")).toBeNull();
         });
     });
 });

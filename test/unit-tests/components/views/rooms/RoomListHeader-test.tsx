@@ -9,7 +9,7 @@ Please see LICENSE files in the repository root for full details.
 import React from "react";
 import { MatrixClient, Room, EventType } from "matrix-js-sdk/src/matrix";
 import { mocked } from "jest-mock";
-import { act, render, screen, fireEvent, RenderResult } from "jest-matrix-react";
+import { act, render, screen, fireEvent, RenderResult, within } from "jest-matrix-react";
 
 import SpaceStore from "../../../../../src/stores/spaces/SpaceStore";
 import { MetaSpace } from "../../../../../src/stores/spaces";
@@ -21,7 +21,7 @@ import { MatrixClientPeg } from "../../../../../src/MatrixClientPeg";
 import SettingsStore from "../../../../../src/settings/SettingsStore";
 import { SettingLevel } from "../../../../../src/settings/SettingLevel";
 import { shouldShowComponent } from "../../../../../src/customisations/helpers/UIComponents";
-import { UIComponent } from "../../../../../src/settings/UIFeature";
+import { UIComponent, UIFeature } from "../../../../../src/settings/UIFeature";
 
 const RoomListHeader = testUtils.wrapInMatrixClientContext(_RoomListHeader);
 
@@ -275,6 +275,57 @@ describe("RoomListHeader", () => {
             checkIsDisabled(items[2]);
             // "Add space" is disabled
             checkIsDisabled(items[3]);
+        });
+    });
+    describe("UIFeature.AddExistingRoomToSpace", () => {
+        it("UIFeature.AddExistingRoomToSpace = true: shows Add existing room in PlusMenu", async () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((val) =>
+                val === UIFeature.AddExistingRoomToSpace ? true : "default",
+            );
+            const testSpace = setupSpace(client);
+            await setupPlusMenu(client, testSpace);
+
+            const menu = screen.getByRole("menu");
+
+            expect(within(menu).getByRole("menuitem", { name: "Add existing room" })).toBeInTheDocument();
+        });
+
+        it("UIFeature.AddExistingRoomToSpace = false: hides Add existing room in PlusMenu", async () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((val) =>
+                val === UIFeature.AddExistingRoomToSpace ? false : "default",
+            );
+            const testSpace = setupSpace(client);
+            await setupPlusMenu(client, testSpace);
+
+            const menu = screen.getByRole("menu");
+
+            expect(within(menu).queryByRole("menuitem", { name: "Add existing room" })).not.toBeInTheDocument();
+        });
+    });
+
+    describe("UIFeature.AddSpace", () => {
+        it("UIFeature.AddSpace = true: renders Add Space when user has permission to add spaces", async () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((name) => {
+                if (name === UIFeature.AddSpace) return true;
+                else return "default";
+            });
+
+            const testSpace = setupSpace(client);
+            await setupPlusMenu(client, testSpace);
+
+            expect(screen.getByText("Add space")).toBeInTheDocument();
+        });
+
+        it("UIFeature.AddSpace = false: does not render Add Space when user has permission to add spaces", async () => {
+            jest.spyOn(SettingsStore, "getValue").mockImplementation((name) => {
+                if (name === UIFeature.AddSpace) return false;
+                else return "default";
+            });
+
+            const testSpace = setupSpace(client);
+            await setupPlusMenu(client, testSpace);
+
+            expect(screen.queryByText("Add space")).not.toBeInTheDocument();
         });
     });
 });

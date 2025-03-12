@@ -97,7 +97,8 @@ describe("WysiwygComposer", () => {
             await waitFor(() => expect(onChange).toHaveBeenCalledWith("foo bar"));
         });
 
-        it("Should call onSend when Enter is pressed", async () => {
+        // Verji edit, Our default is different than Element
+        it("Should NOT call onSend when Enter is pressed", async () => {
             //When
             fireEvent(
                 screen.getByRole("textbox"),
@@ -107,7 +108,7 @@ describe("WysiwygComposer", () => {
             );
 
             // Then it sends a message
-            await waitFor(() => expect(onSend).toHaveBeenCalledTimes(1));
+            await waitFor(() => expect(onSend).toHaveBeenCalledTimes(0)); // Verji Swap to 0 instead of 1 - Verji Default different
         });
 
         it("Should not call onSend when Shift+Enter is pressed", async () => {
@@ -140,13 +141,13 @@ describe("WysiwygComposer", () => {
             // Then it sends a message
             await waitFor(() => expect(onSend).toHaveBeenCalledTimes(0));
         });
-
-        it("Should not call onSend when meta+Enter is pressed", async () => {
+        // Verji edit, Our default is different than Element
+        it("SHOULD call onSend when meta+Enter is pressed", async () => {
             //When
             await userEvent.type(screen.getByRole("textbox"), "{meta>}{enter}");
 
             // Then it sends a message
-            await waitFor(() => expect(onSend).toHaveBeenCalledTimes(0));
+            await waitFor(() => expect(onSend).toHaveBeenCalledTimes(1)); // Verji -swap to should have been called Verji default is different
         });
     });
 

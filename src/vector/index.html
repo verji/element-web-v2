@@ -2,7 +2,7 @@
 <html lang="en" style="height: 100%;">
   <head>
     <meta charset="utf-8">
-    <title>Element</title>
+    <title>Verji</title>
     <link rel="apple-touch-icon" sizes="57x57" href="<%= require('../../res/vector-icons/apple-touch-icon-57.png') %>">
     <link rel="apple-touch-icon" sizes="60x60" href="<%= require('../../res/vector-icons/apple-touch-icon-60.png') %>">
     <link rel="apple-touch-icon" sizes="72x72" href="<%= require('../../res/vector-icons/apple-touch-icon-72.png') %>">
@@ -25,8 +25,8 @@
     <meta property="og:image" content="<%= og_image_url %>" />
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'none';
-        style-src 'self' 'unsafe-inline' <%= csp_extra_source %>;
-        script-src 'self' 'wasm-unsafe-eval' https://www.recaptcha.net/recaptcha/ https://www.gstatic.com/recaptcha/ <%= csp_extra_source %>;
+        style-src 'self' 'unsafe-inline' <%= csp_extra_source %> https://euc-widget.freshworks.com;
+        script-src 'self' 'wasm-unsafe-eval' https://www.recaptcha.net/recaptcha/ https://www.gstatic.com/recaptcha/ <%= csp_extra_source %> https://euc-widget.freshworks.com;
         img-src * blob: data:;
         connect-src * blob:;
         font-src 'self' data: <%= csp_extra_source %>;

@@ -5,7 +5,7 @@ set -x
 deforg="$1"
 defrepo="$2"
 defbranch="$3"
-
+echo "Running fetchdep! $deforg $defrepo $defbranch" 
 rm -r "$defrepo" || true
 
 # figure out where to look for pull requests:
@@ -23,6 +23,7 @@ clone() {
     org=$1
     repo=$2
     branch=$3
+    echo "cloning branch: $org $repo $branch"
     if [ -n "$branch" ]
     then
         echo "Trying to use $org/$repo#$branch"
@@ -62,13 +63,13 @@ fi
 # branch name. Based on the results, we clone.
 BRANCH_ARRAY=(${head//:/ })
 TRY_ORG=$deforg
-TRY_BRANCH=${BRANCH_ARRAY[0]}
+TRY_BRANCH=$defbranch #${BRANCH_ARRAY[0]} Verji overide try branch to be the defined branch
 if [[ "$head" == *":"* ]]; then
     # ... but only match that fork if it's a real fork
     if [ "${BRANCH_ARRAY[0]}" != "$PR_ORG" ]; then
         TRY_ORG=${BRANCH_ARRAY[0]}
     fi
-    TRY_BRANCH=${BRANCH_ARRAY[1]}
+    TRY_BRANCH=$defbranch #${BRANCH_ARRAY[1]} Verji overide try branch to be the defined branch
 fi
 clone ${TRY_ORG} $defrepo ${TRY_BRANCH}
 

@@ -9,7 +9,7 @@ import * as fs from "fs";
 import * as childProcess from "child_process";
 import * as semver from "semver";
 
-import { BuildConfig } from "./BuildConfig";
+import { type BuildConfig } from "./BuildConfig";
 
 // This expects to be run from ./scripts/install.ts
 
@@ -57,25 +57,27 @@ export function installer(config: BuildConfig): void {
         const pkgJsonStr = fs.readFileSync("./package.json", "utf-8");
         const optionalDepNames = getOptionalDepNames(pkgJsonStr);
         const installedModules = optionalDepNames.filter((d) => !currentOptDeps.includes(d));
-
-        // Ensure all the modules are compatible. We check them all and report at the end to
-        // try and save the user some time debugging this sort of failure.
-        const ourApiVersion = getTopLevelDependencyVersion(moduleApiDepName);
-        const incompatibleNames: string[] = [];
-        for (const moduleName of installedModules) {
-            const modApiVersion = getModuleApiVersionFor(moduleName);
-            if (!isModuleVersionCompatible(ourApiVersion, modApiVersion)) {
-                incompatibleNames.push(moduleName);
+        // Verji - this flag is something we have implemented
+        if (!config.skip_module_dependency_version_check) {
+            // Ensure all the modules are compatible. We check them all and report at the end to
+            // try and save the user some time debugging this sort of failure.
+            const ourApiVersion = getTopLevelDependencyVersion(moduleApiDepName);
+            const incompatibleNames: string[] = [];
+            for (const moduleName of installedModules) {
+                const modApiVersion = getModuleApiVersionFor(moduleName);
+                if (!isModuleVersionCompatible(ourApiVersion, modApiVersion)) {
+                    incompatibleNames.push(moduleName);
+                }
             }
-        }
-        if (incompatibleNames.length > 0) {
-            console.error(
-                "The following modules are not compatible with this version of element-web. Please update the module " +
-                    "references and try again.",
-                JSON.stringify(incompatibleNames, null, 4), // stringify to get prettier/complete output
-            );
-            exitCode = 1;
-            return; // hit the finally{} block before exiting
+            if (incompatibleNames.length > 0) {
+                console.error(
+                    "The following modules are not compatible with this version of element-web. Please update the module " +
+                        "references and try again.",
+                    JSON.stringify(incompatibleNames, null, 4), // stringify to get prettier/complete output
+                );
+                exitCode = 1;
+                return; // hit the finally{} block before exiting
+            }
         }
 
         // If we reach here, everything seems fine. Write modules.ts and log some output

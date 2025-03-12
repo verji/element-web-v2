@@ -32,7 +32,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
             >
               <input
                 class="_input_qnvru_32"
-                id="radix-:r28:"
+                id="radix-:r2o:"
                 name="systemTheme"
                 title=""
                 type="checkbox"
@@ -47,7 +47,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
           >
             <label
               class="_label_ssths_67"
-              for="radix-:r28:"
+              for="radix-:r2o:"
             >
               Match system theme
             </label>
@@ -69,7 +69,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
               <input
                 checked=""
                 class="_input_1vw5h_26"
-                id="radix-:r29:"
+                id="radix-:r2p:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -85,7 +85,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r29:"
+              for="radix-:r2p:"
             >
               Light
             </label>
@@ -102,7 +102,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r2a:"
+                id="radix-:r2q:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -118,7 +118,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r2a:"
+              for="radix-:r2q:"
             >
               Dark
             </label>
@@ -135,7 +135,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r2b:"
+                id="radix-:r2r:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -151,7 +151,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r2b:"
+              for="radix-:r2r:"
             >
               High contrast
             </label>
@@ -168,7 +168,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r2c:"
+                id="radix-:r2s:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -184,7 +184,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r2c:"
+              for="radix-:r2s:"
             >
               Alice theme
             </label>
@@ -202,7 +202,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
           >
             <label
               class="_label_ssths_67"
-              for="radix-:r2d:"
+              for="radix-:r2t:"
             >
               Add custom theme
             </label>
@@ -210,9 +210,9 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
               class="_controls_1h4nb_17"
             >
               <input
-                aria-describedby="radix-:r2e:"
+                aria-describedby="radix-:r2u:"
                 class="_control_9gon8_18"
-                id="radix-:r2d:"
+                id="radix-:r2t:"
                 name="input"
                 title=""
                 value=""
@@ -220,7 +220,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
             </div>
             <span
               class="_message_ssths_93 _help-message_ssths_99"
-              id="radix-:r2e:"
+              id="radix-:r2u:"
             >
               Enter the URL of a custom theme you want to apply.
             </span>
@@ -240,7 +240,7 @@ exports[`<ThemeChoicePanel /> custom theme should display custom theme 1`] = `
             </span>
             <button
               aria-label="Delete"
-              aria-labelledby=":r2f:"
+              aria-labelledby=":r2v:"
               class="_icon-button_bh2qc_17 _destructive_bh2qc_83"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -309,7 +309,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
             >
               <input
                 class="_input_qnvru_32"
-                id="radix-:r10:"
+                id="radix-:r1g:"
                 name="systemTheme"
                 title=""
                 type="checkbox"
@@ -324,7 +324,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
           >
             <label
               class="_label_ssths_67"
-              for="radix-:r10:"
+              for="radix-:r1g:"
             >
               Match system theme
             </label>
@@ -346,7 +346,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
               <input
                 checked=""
                 class="_input_1vw5h_26"
-                id="radix-:r11:"
+                id="radix-:r1h:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -362,7 +362,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r11:"
+              for="radix-:r1h:"
             >
               Light
             </label>
@@ -379,7 +379,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r12:"
+                id="radix-:r1i:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -395,7 +395,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r12:"
+              for="radix-:r1i:"
             >
               Dark
             </label>
@@ -412,7 +412,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r13:"
+                id="radix-:r1j:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -428,7 +428,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r13:"
+              for="radix-:r1j:"
             >
               High contrast
             </label>
@@ -445,7 +445,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r14:"
+                id="radix-:r1k:"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -461,7 +461,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
           >
             <label
               class="_label_ssths_67 mx_ThemeChoicePanel_themeSelector_Label"
-              for="radix-:r14:"
+              for="radix-:r1k:"
             >
               Alice theme
             </label>
@@ -479,7 +479,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
           >
             <label
               class="_label_ssths_67"
-              for="radix-:r15:"
+              for="radix-:r1l:"
             >
               Add custom theme
             </label>
@@ -487,9 +487,9 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
               class="_controls_1h4nb_17"
             >
               <input
-                aria-describedby="radix-:r16:"
+                aria-describedby="radix-:r1m:"
                 class="_control_9gon8_18"
-                id="radix-:r15:"
+                id="radix-:r1l:"
                 name="input"
                 title=""
                 value=""
@@ -497,7 +497,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
             </div>
             <span
               class="_message_ssths_93 _help-message_ssths_99"
-              id="radix-:r16:"
+              id="radix-:r1m:"
             >
               Enter the URL of a custom theme you want to apply.
             </span>
@@ -517,7 +517,7 @@ exports[`<ThemeChoicePanel /> custom theme should render the custom theme sectio
             </span>
             <button
               aria-label="Delete"
-              aria-labelledby=":r17:"
+              aria-labelledby=":r1n:"
               class="_icon-button_bh2qc_17 _destructive_bh2qc_83"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -712,6 +712,45 @@ exports[`<ThemeChoicePanel /> renders the theme choice UI 1`] = `
           </div>
         </div>
       </form>
+      <div
+        class="mx_ThemeChoicePanel_CustomTheme"
+      >
+        <form
+          class="_root_ssths_24 mx_ThemeChoicePanel_CustomTheme_EditInPlace"
+        >
+          <div
+            class="_field_ssths_34"
+          >
+            <label
+              class="_label_ssths_67"
+              for="radix-:r4:"
+            >
+              Add custom theme
+            </label>
+            <div
+              class="_controls_1h4nb_17"
+            >
+              <input
+                aria-describedby="radix-:r5:"
+                class="_control_9gon8_18"
+                id="radix-:r4:"
+                name="input"
+                title=""
+                value=""
+              />
+            </div>
+            <span
+              class="_message_ssths_93 _help-message_ssths_99"
+              id="radix-:r5:"
+            >
+              Enter the URL of a custom theme you want to apply.
+            </span>
+          </div>
+        </form>
+        <ul
+          class="mx_ThemeChoicePanel_CustomThemeList"
+        />
+      </div>
     </div>
     <div
       class="_separator_144s5_17"

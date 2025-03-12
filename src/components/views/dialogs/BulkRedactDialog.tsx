@@ -27,6 +27,7 @@ interface Props {
 
 const BulkRedactDialog: React.FC<Props> = (props) => {
     const { matrixClient: cli, room, member, onFinished } = props;
+    //eslint-disable-next-line
     const [keepStateEvents, setKeepStateEvents] = useState(true);
 
     let timeline: EventTimeline | null = room.getLiveTimeline();

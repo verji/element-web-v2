@@ -269,7 +269,7 @@ exports[`<ExtensionsCard /> should show context menu on widget row 1`] = `
     class="mx_IconizedContextMenu_optionList mx_IconizedContextMenu_optionList_notFirst"
   >
     <li
-      aria-label="Remove for everyone"
+      aria-label="widget|context_menu|remove"
       class="mx_AccessibleButton mx_IconizedContextMenu_item"
       role="menuitem"
       tabindex="0"
@@ -277,7 +277,7 @@ exports[`<ExtensionsCard /> should show context menu on widget row 1`] = `
       <span
         class="mx_IconizedContextMenu_label"
       >
-        Remove for everyone
+        widget|context_menu|remove
       </span>
     </li>
   </div>

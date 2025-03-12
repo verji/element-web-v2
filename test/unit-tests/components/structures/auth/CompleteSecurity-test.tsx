@@ -14,6 +14,7 @@ import CompleteSecurity from "../../../../../src/components/structures/auth/Comp
 import { stubClient } from "../../../../test-utils";
 import { Phase, SetupEncryptionStore } from "../../../../../src/stores/SetupEncryptionStore";
 import SdkConfig from "../../../../../src/SdkConfig";
+import SettingsStore from "../../../../../src/settings/SettingsStore";
 
 class MockSetupEncryptionStore extends EventEmitter {
     public phase: Phase = Phase.Intro;
@@ -41,6 +42,11 @@ describe("CompleteSecurity", () => {
         jest.spyOn(SetupEncryptionStore, "sharedInstance").mockReturnValue(
             mockSetupEncryptionStore as SetupEncryptionStore,
         );
+        // Verji - Mock feature flags to false (setupEncryptionResetButton)
+        jest.spyOn(SettingsStore, "getValue").mockImplementation((name: string) => {
+            console.log("Mocking feature flag to false: ", name);
+            return false;
+        });
     });
 
     afterEach(() => {

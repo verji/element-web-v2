@@ -7,11 +7,15 @@ Please see LICENSE files in the repository root for full details.
 */
 
 import React from "react";
-import { render, RenderResult } from "jest-matrix-react";
+import { render, RenderResult, screen } from "jest-matrix-react";
 import { ConditionKind, EventType, IPushRule, MatrixEvent, ClientEvent, PushRuleKind } from "matrix-js-sdk/src/matrix";
 import { MediaHandler } from "matrix-js-sdk/src/webrtc/mediaHandler";
 import { logger } from "matrix-js-sdk/src/logger";
 import userEvent from "@testing-library/user-event";
+import {
+    CustomComponentLifecycle,
+    CustomComponentOpts,
+} from "@matrix-org/react-sdk-module-api/lib/lifecycles/CustomComponentLifecycle";
 
 import LoggedInView from "../../../../src/components/structures/LoggedInView";
 import { SDKContext } from "../../../../src/contexts/SDKContext";
@@ -25,6 +29,7 @@ import { SettingLevel } from "../../../../src/settings/SettingLevel";
 import { Action } from "../../../../src/dispatcher/actions";
 import Modal from "../../../../src/Modal";
 import { SETTINGS } from "../../../../src/settings/Settings";
+import { ModuleRunner } from "../../../../src/modules/ModuleRunner";
 
 describe("<LoggedInView />", () => {
     const userId = "@alice:domain.org";
@@ -69,7 +74,29 @@ describe("<LoggedInView />", () => {
         mockClient.getMediaHandler.mockReturnValue(mediaHandler);
         mockClient.setPushRuleActions.mockReset().mockResolvedValue({});
     });
+    describe("wrap the LoggedInView with a React.Fragment", () => {
+        it("should wrap the LoggedInView with a React.Fragment", () => {
+            jest.spyOn(ModuleRunner.instance, "invoke").mockImplementation((lifecycleEvent, opts) => {
+                if (lifecycleEvent === CustomComponentLifecycle.LoggedInView) {
+                    (opts as CustomComponentOpts).CustomComponent = ({ children }) => {
+                        return (
+                            <>
+                                <div data-testid="wrapper-header">Header</div>
+                                <div data-testid="wrapper-LoggedInView">{children}</div>
+                                <div data-testid="wrapper-footer">Footer</div>
+                            </>
+                        );
+                    };
+                }
+            });
 
+            const { container } = getComponent();
+
+            const header = container.querySelector("[data-testid=wrapper-header]");
+            expect(header?.nextSibling).toBe(container.querySelector("[data-testid=wrapper-LoggedInView]"));
+            expect(container.children[0].tagName).toEqual("DIV");
+        });
+    });
     describe("synced push rules", () => {
         const pushRulesEvent = new MatrixEvent({ type: EventType.PushRules });
 
@@ -455,6 +482,79 @@ describe("<LoggedInView />", () => {
             expect(mockClient.setExtendedProfileProperty).toHaveBeenCalledWith("us.cloke.msc4175.tz", userTimezone);
             await SettingsStore.setValue("userTimezonePublish", null, SettingLevel.DEVICE, false);
             expect(mockClient.deleteExtendedProfileProperty).toHaveBeenCalledWith("us.cloke.msc4175.tz");
+        });
+    });
+    describe("CustomComponentLifecycles", () => {
+        describe("on CustomComponentLifecycle.LeftPanel", () => {
+            it("should invoke CustomComponentLifecycle.LeftPanel on rendering the LeftPanel", async () => {
+                jest.spyOn(ModuleRunner.instance, "invoke");
+                getComponent();
+                await flushPromises();
+                expect(ModuleRunner.instance.invoke).toHaveBeenCalledWith(CustomComponentLifecycle.LeftPanel, {
+                    CustomComponent: expect.any(Symbol),
+                });
+            });
+
+            it("should render standard LeftPanel if if there are no module-implementations using the lifecycle", async () => {
+                const { container } = getComponent();
+                await flushPromises();
+                expect(container.querySelector(".mx_LeftPanel")).toBeVisible();
+            });
+            it("should replace the default LeftPanel and return <div data-testid='custom-left-panel'> instead", async () => {
+                jest.spyOn(ModuleRunner.instance, "invoke").mockImplementation((lifecycleEvent, opts) => {
+                    if (lifecycleEvent === CustomComponentLifecycle.LeftPanel) {
+                        (opts as CustomComponentOpts).CustomComponent = () => {
+                            return (
+                                <>
+                                    <header data-testid="custom-left-panel" />
+                                </>
+                            );
+                        };
+                    }
+                });
+                const container = getComponent().container as HTMLElement;
+                await flushPromises();
+
+                const customSpacePanel = screen.queryByTestId("custom-left-panel");
+                expect(customSpacePanel).toBeVisible();
+                expect(container.querySelector(".mx_LeftPanel")).toBeNull();
+            });
+        });
+        describe("on CustomComponentLifecycle.SpacePanel", () => {
+            it("should invoke CustomComponentLifecycle.SpacePanel on rendering the SpacePanel", async () => {
+                jest.spyOn(ModuleRunner.instance, "invoke");
+                getComponent();
+                await flushPromises();
+                expect(ModuleRunner.instance.invoke).toHaveBeenCalledWith(CustomComponentLifecycle.SpacePanel, {
+                    CustomComponent: expect.any(Symbol),
+                });
+            });
+
+            it("should render standard SpacePanel if if there are no module-implementations using the lifecycle", async () => {
+                const { container } = getComponent();
+                await flushPromises();
+                expect(container.querySelector(".mx_SpacePanel")).toBeVisible();
+            });
+
+            it("should replace the default SpacePanel and return <div data-testid='custom-space-panel'> instead", async () => {
+                jest.spyOn(ModuleRunner.instance, "invoke").mockImplementation((lifecycleEvent, opts) => {
+                    if (lifecycleEvent === CustomComponentLifecycle.SpacePanel) {
+                        (opts as CustomComponentOpts).CustomComponent = () => {
+                            return (
+                                <>
+                                    <header data-testid="custom-space-panel" />
+                                </>
+                            );
+                        };
+                    }
+                });
+                const container = getComponent().container as HTMLElement;
+                await flushPromises();
+
+                const customSpacePanel = screen.queryByTestId("custom-space-panel");
+                expect(customSpacePanel).toBeVisible();
+                expect(container.querySelector(".mx_SpacePanel")).toBeNull();
+            });
         });
     });
 });

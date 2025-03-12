@@ -1,5 +1,7 @@
 name: SonarQube
 on:
+    # VERJI Comment out trigger, replace with manual trigger
+    workflow_dispatch: {}
     workflow_run:
         workflows: ["Tests"]
         types:
@@ -11,7 +13,7 @@ permissions: {}
 jobs:
     sonarqube:
         name: 🩻 SonarQube
-        # VERJI skip PR basebranch check by setting false
+        # VERJI skip SonarQube by setting false
         if: ${{false}}
         # if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'merge_group'
         uses: matrix-org/matrix-js-sdk/.github/workflows/sonarcloud.yml@develop

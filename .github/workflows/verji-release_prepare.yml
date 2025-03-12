@@ -1,0 +1,124 @@
+name: Verji Cut branches
+on:
+    workflow_dispatch:
+        inputs:
+            # element-desktop:
+            #     description: Prepare element-desktop
+            #     required: true
+            #     type: boolean
+            #     default: true
+            element-web:
+                description: Prepare element-web
+                required: true
+                type: boolean
+                default: true
+            matrix-react-sdk:
+                description: Prepare matrix-react-sdk
+                required: true
+                type: boolean
+                default: true
+            matrix-js-sdk:
+                description: Prepare matrix-js-sdk
+                required: true
+                type: boolean
+                default: true
+jobs:
+    prepare:
+        runs-on: ubuntu-latest
+        env:
+            # The order is specified bottom-up to avoid any races for allchange
+            REPOS: matrix-js-sdk matrix-react-sdk element-web #element-desktop
+        steps:
+            # - name: Checkout Element Desktop
+            #   uses: actions/checkout@v4
+            #   if: inputs.element-desktop
+            #   with:
+            #       repository: element-hq/element-desktop
+            #       path: element-desktop
+            #       ref: staging
+            #       fetch-depth: 0
+            #       fetch-tags: true
+            #       token: ${{ secrets.VERJI_BOT_TOKEN }}
+            - name: Checkout Element Web
+              uses: actions/checkout@v4
+              if: inputs.element-web
+              with:
+                  repository: verji/element-web
+                  path: element-web
+                  ref: verji-staging
+                  fetch-depth: 0
+                  fetch-tags: true
+                  token: ${{ secrets.VERJI_BOT_TOKEN }}
+            - name: Checkout Matrix React SDK
+              uses: actions/checkout@v4
+              if: inputs.matrix-react-sdk
+              with:
+                  repository: verji/matrix-react-sdk
+                  path: matrix-react-sdk
+                  ref: verji-staging
+                  fetch-depth: 0
+                  fetch-tags: true
+                  token: ${{ secrets.VERJI_BOT_TOKEN }}
+            - name: Checkout Matrix JS SDK
+              uses: actions/checkout@v4
+              if: inputs.matrix-js-sdk
+              with:
+                  repository: verji/matrix-js-sdk
+                  path: matrix-js-sdk
+                  ref: verji-staging
+                  fetch-depth: 0
+                  fetch-tags: true
+                  token: ${{ secrets.VERJI_BOT_TOKEN }}
+
+            - name: Merge verji-develop
+              run: |
+                  git config --global user.email "development@rosberg.com"
+                  git config --global user.name "verji-bot"
+                  for REPO in $REPOS; do [ -d "$REPO" ] && git -C "$REPO" merge origin/verji-develop; done
+
+            - name: Push verji-staging
+              run: for REPO in $REPOS; do [ -d "$REPO" ] && git -C "$REPO" push origin verji-staging; done
+
+            - name: Wait for matrix-js-sdk draft
+              if: inputs.matrix-js-sdk
+              uses: t3chguy/wait-on-check-action@18541021811b56544d90e0f073401c2b99e249d6 # fork
+              with:
+                  ref: verji-staging
+                  repo: verji/matrix-js-sdk
+                  repo-token: ${{ secrets.VERJI_BOT_TOKEN }}
+                  wait-interval: 10
+                  check-name: draft
+                  allowed-conclusions: success
+
+            - name: Wait for matrix-react-sdk draft
+              if: inputs.matrix-react-sdk
+              uses: t3chguy/wait-on-check-action@18541021811b56544d90e0f073401c2b99e249d6 # fork
+              with:
+                  ref: verji-staging
+                  repo: verji/matrix-react-sdk
+                  repo-token: ${{ secrets.VERJI_BOT_TOKEN }}
+                  wait-interval: 10
+                  check-name: draft
+                  allowed-conclusions: success
+
+            - name: Wait for element-web draft
+              if: inputs.element-web
+              uses: t3chguy/wait-on-check-action@18541021811b56544d90e0f073401c2b99e249d6 # fork
+              with:
+                  ref: verji-staging
+                  repo: verji/element-web
+                  repo-token: ${{ secrets.VERJI_BOT_TOKEN }}
+                  wait-interval: 10
+                  check-name: draft
+                  allowed-conclusions: success
+
+            # - name: Wait for element-desktop draft
+            #   if: inputs.element-desktop
+            #   uses: t3chguy/wait-on-check-action@18541021811b56544d90e0f073401c2b99e249d6 # fork
+            #   with:
+            #       ref: staging
+            #       repo: element-hq/element-desktop
+            #       repo-token: ${{ secrets.VERJI_BOT_TOKEN }}
+            #       wait-interval: 10
+            #       check-name: draft
+            #       allowed-conclusions: success
