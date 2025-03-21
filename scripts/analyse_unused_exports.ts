@@ -22,7 +22,6 @@ ignore.push("DeviceIsolationModeController.ts");
 // VERJI - Ignore this file, due to "unusedExport getDehydrationKey"
 ignore.push("/SecurityManager.ts");
 ignore.push("/OpenReportEventDialogPayload.ts");
-ignore.push("/MiscHeaderButtons.tsx");
 ignore.push("/SearchBar.tsx");
 ignore.push("matrix-react-sdk-module-api");
 

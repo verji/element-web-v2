@@ -23,10 +23,8 @@ export default {
         "src/components/views/elements/StyledCheckbox.tsx",
         // VERJI - Ignore the following: TechDebt re-implement the following
         "src/components/structures/scripts/freshworks.js",
-        "src/components/views/misc_header/MiscButton.tsx",
-        "src/components/views/misc_header/MiscHeaderButtons.tsx",
         "src/components/views/rooms/SearchBar.tsx",
-        "src/dispatcher/payloads/OpenReportEventDialogPayload.ts",
+        "src/dispatcher/payloads/OpenReportEventDialogPayload.ts", // Due to report event not exposed in Verji - keep this on ignored, in case we want to use it later.
         "src/SecurityManager.ts",
         // VERJI - Ignore webpack config because we have to polyfill some dependencies
         ".webpack.config.js",

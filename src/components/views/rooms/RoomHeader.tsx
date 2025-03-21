@@ -52,7 +52,7 @@ import { MainSplitContentType } from "../../structures/RoomView";
 import defaultDispatcher from "../../../dispatcher/dispatcher.ts";
 import { RoomSettingsTab } from "../dialogs/RoomSettingsDialog.tsx";
 import { useScopedRoomContext } from "../../../contexts/ScopedRoomContext.tsx";
-
+import { verjiRoomHeaderOpts } from "../../../verji/VerjiRoomHeaderOpts.tsx";
 export default function RoomHeader({
     room,
     additionalButtons,
@@ -108,6 +108,12 @@ export default function RoomHeader({
         (ev: React.MouseEvent) => videoCallClick(ev, callOptions[0]),
         [callOptions, videoCallClick],
     );
+    // VERJI START - Add custom help/support button
+    if(!additionalButtons){
+        additionalButtons = [] // make sure the additionalButtons is defined
+    }
+    additionalButtons = [...additionalButtons, ...verjiRoomHeaderOpts.buttons]
+    // VERJI END
 
     const toggleCallButton = (
         <Tooltip label={isViewingCall ? _t("voip|minimise_call") : _t("voip|maximise_call")}>
@@ -328,7 +334,6 @@ export default function RoomHeader({
                             </Tooltip>
                         );
                     })}
-
                     {isViewingCall && <CallGuestLinkButton room={room} />}
 
                     {hasActiveCallSession && !isConnectedToCall && !isViewingCall ? (
