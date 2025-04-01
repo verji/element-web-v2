@@ -11,6 +11,8 @@ import SearchIcon from "@vector-im/compound-design-tokens/assets/web/icons/searc
 import CloseIcon from "@vector-im/compound-design-tokens/assets/web/icons/close";
 import { IconButton, Link } from "@vector-im/compound-web";
 
+import SettingsStore from "../../../settings/SettingsStore";
+import { UIFeature } from "../../../settings/UIFeature";
 import { _t } from "../../../languageHandler";
 import { PosthogScreenTracker } from "../../../PosthogTrackers";
 import SearchWarning, { WarningKind } from "../elements/SearchWarning";
@@ -45,18 +47,22 @@ const RoomSearchAuxPanel: React.FC<Props> = ({ searchInfo, isRoomEncrypted, onSe
                         )}
                         <SearchWarning kind={WarningKind.Search} isRoomEncrypted={isRoomEncrypted} showLogo={false} />
                     </div>
+                    {}
                 </div>
                 <div className="mx_RoomSearchAuxPanel_buttons">
-                    <Link
-                        onClick={() =>
-                            onSearchScopeChange(scope === SearchScope.Room ? SearchScope.All : SearchScope.Room)
-                        }
-                        kind="primary"
-                    >
-                        {scope === SearchScope.All
-                            ? _t("room|search|this_room_button")
-                            : _t("room|search|all_rooms_button")}
-                    </Link>
+                    {SettingsStore.getValue(UIFeature.SearchInAllRooms) && (
+                        <Link
+                            onClick={() =>
+                                onSearchScopeChange(scope === SearchScope.Room ? SearchScope.All : SearchScope.Room)
+                            }
+                            kind="primary"
+                        >
+                            {scope === SearchScope.All
+                                ? _t("room|search|this_room_button")
+                                : _t("room|search|all_rooms_button")}
+                        </Link>
+                    )}
+
                     <IconButton
                         onClick={onCancelClick}
                         destructive

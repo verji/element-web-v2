@@ -5,7 +5,7 @@ function toggleWidget() {
     } else {
         FreshworksWidget("open");
         // Verji - give the widget a small headstart before we attempt to target and change css.
-        setTimeout(attachCustomCss, 100)
+        setTimeout(attachCustomCss, 100);
     }
 }
 function init() {
@@ -24,11 +24,11 @@ function init() {
     FreshworksWidget("hide", "launcher");
 }
 // Attaches som custom css to the support help widget (change banner color to verji-green)
-function attachCustomCss(){
-    console.log("[Verji] - Support Widget: Attempting to add custom css")
+function attachCustomCss() {
+    console.log("[Verji] - Support Widget: Attempting to add custom css");
     var iframe = document.getElementById("widget-frame");
-    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document
-    if(iframeDocument){
+    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+    if (iframeDocument) {
         const style = document.createElement("style");
 
         style.innerHTML = `
@@ -37,9 +37,9 @@ function attachCustomCss(){
             }
         `;
         iframeDocument.head.appendChild(style);
-        var widgetHeader = iframeDocument.getElementsByClassName('dTKHQv')[0]
-        if(widgetHeader){
-            widgetHeader.setAttribute("id", "verji-support-header")
+        var widgetHeader = iframeDocument.getElementsByClassName("dTKHQv")[0];
+        if (widgetHeader) {
+            widgetHeader.setAttribute("id", "verji-support-header");
         }
     }
 }
