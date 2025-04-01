@@ -52,7 +52,7 @@ import { MainSplitContentType } from "../../structures/RoomView";
 import defaultDispatcher from "../../../dispatcher/dispatcher.ts";
 import { RoomSettingsTab } from "../dialogs/RoomSettingsDialog.tsx";
 import { useScopedRoomContext } from "../../../contexts/ScopedRoomContext.tsx";
-import { verjiRoomHeaderOpts } from "../../../verji/VerjiRoomHeaderOpts.tsx";
+import { verjiRoomHeaderOpts } from "../../../verji/VerjiRoomHeaderOpts.tsx"; // VERJI
 export default function RoomHeader({
     room,
     additionalButtons,
@@ -109,10 +109,10 @@ export default function RoomHeader({
         [callOptions, videoCallClick],
     );
     // VERJI START - Add custom help/support button
-    if(!additionalButtons){
-        additionalButtons = [] // make sure the additionalButtons is defined
+    if (!additionalButtons) {
+        additionalButtons = []; // make sure the additionalButtons is defined
     }
-    additionalButtons = [...additionalButtons, ...verjiRoomHeaderOpts.buttons]
+    additionalButtons = [...additionalButtons, ...verjiRoomHeaderOpts.buttons];
     // VERJI END
 
     const toggleCallButton = (
