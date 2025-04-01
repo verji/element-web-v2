@@ -10,7 +10,7 @@ import React from "react";
 import toggleWidget from "../components/structures/scripts/freshworks.js";
 import { _t } from "../languageHandler";
 
-export const verjiRoomHeaderOpts: ViewRoomOpts = {
+const verjiRoomHeaderOpts: ViewRoomOpts = {
     buttons: [
         {
             icon: () => <HelpIcon />,
@@ -26,3 +26,5 @@ export const verjiRoomHeaderOpts: ViewRoomOpts = {
 function openSupportDialog(): void {
     toggleWidget();
 }
+
+export default verjiRoomHeaderOpts

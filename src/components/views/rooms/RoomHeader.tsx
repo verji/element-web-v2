@@ -52,7 +52,7 @@ import { MainSplitContentType } from "../../structures/RoomView";
 import defaultDispatcher from "../../../dispatcher/dispatcher.ts";
 import { RoomSettingsTab } from "../dialogs/RoomSettingsDialog.tsx";
 import { useScopedRoomContext } from "../../../contexts/ScopedRoomContext.tsx";
-import { verjiRoomHeaderOpts } from "../../../verji/VerjiRoomHeaderOpts.tsx"; // VERJI
+import VerjiRoomHeaderOpts from "../../../verji/VerjiRoomHeaderOpts.tsx"; // VERJI
 export default function RoomHeader({
     room,
     additionalButtons,
@@ -112,7 +112,7 @@ export default function RoomHeader({
     if (!additionalButtons) {
         additionalButtons = []; // make sure the additionalButtons is defined
     }
-    additionalButtons = [...additionalButtons, ...verjiRoomHeaderOpts.buttons];
+    additionalButtons = [...additionalButtons, ...VerjiRoomHeaderOpts.buttons];
     // VERJI END
 
     const toggleCallButton = (
