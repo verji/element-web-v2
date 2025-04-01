@@ -93,7 +93,7 @@ jobs:
             matrix:
                 # Run multiple instances in parallel to speed up the tests
                 # VERJI - take out tests: 1, 2, 3, 4
-                runner: [5, 6] #1, 2, 3, 4
+                runner: [1, 2] #1, 2, 3, 4, 5, 6
         steps:
             - uses: actions/checkout@v4
               with:

@@ -27,4 +27,4 @@ function openSupportDialog(): void {
     toggleWidget();
 }
 
-export default verjiRoomHeaderOpts
+export default verjiRoomHeaderOpts;
