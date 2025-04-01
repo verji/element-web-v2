@@ -12,7 +12,7 @@ import React from "react";
 import SyntaxHighlight from "../../../../../src/components/views/elements/SyntaxHighlight";
 
 // VERJI Skip - Should be looked into
-it.todo("Verji skip tests <SyntaxHighlight />")
+it.todo("Verji skip tests <SyntaxHighlight />");
 describe.skip("<SyntaxHighlight />", () => {
     it("renders", async () => {
         const { container } = render(<SyntaxHighlight>console.log("Hello, World!");</SyntaxHighlight>);
