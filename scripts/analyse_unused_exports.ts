@@ -22,9 +22,10 @@ ignore.push("DeviceIsolationModeController.ts");
 // VERJI - Ignore this file, due to "unusedExport getDehydrationKey"
 ignore.push("/SecurityManager.ts");
 ignore.push("/OpenReportEventDialogPayload.ts");
-ignore.push("/MiscHeaderButtons.tsx");
 ignore.push("/SearchBar.tsx");
 ignore.push("matrix-react-sdk-module-api");
+// VERJI - The following ignores are temporary and false-positives which need to be fixed
+ignore.push("/VerjiRoomHeaderOpts.tsx");
 
 // We ignore js-sdk by default as it may export for other non element-web projects
 if (!includeJSSDK) ignore.push("matrix-js-sdk");

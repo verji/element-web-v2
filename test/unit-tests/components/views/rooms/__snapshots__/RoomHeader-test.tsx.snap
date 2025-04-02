@@ -47,7 +47,35 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
       style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
     >
       <button
-        aria-labelledby=":r16c:"
+        aria-label="Support"
+        aria-labelledby=":r1e8:"
+        class="_icon-button_bh2qc_17"
+        role="button"
+        style="--cpd-icon-button-size: 32px;"
+        tabindex="0"
+      >
+        <div
+          class="_indicator-icon_133tf_26"
+          style="--cpd-icon-button-size: 100%;"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+            />
+            <path
+              d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+            />
+          </svg>
+        </div>
+      </button>
+      <button
+        aria-labelledby=":r1ed:"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"
@@ -73,7 +101,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
       <button
         aria-disabled="true"
         aria-label="There's no one here to call"
-        aria-labelledby=":r16h:"
+        aria-labelledby=":r1ei:"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"
@@ -98,7 +126,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
       </button>
       <button
         aria-label="Room info"
-        aria-labelledby=":r16m:"
+        aria-labelledby=":r1en:"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"
@@ -123,7 +151,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
       </button>
       <button
         aria-label="Threads"
-        aria-labelledby=":r16r:"
+        aria-labelledby=":r1es:"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"

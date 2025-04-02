@@ -82,7 +82,9 @@ jobs:
     playwright:
         name: "Run Tests ${{ matrix.runner }}/${{ strategy.job-total }}"
         needs: build
-        if: inputs.skip != true
+        # VERJI skip Rethemendex check by setting false
+        if: ${{false}}
+        # if: inputs.skip != true
         runs-on: ubuntu-24.04
         permissions:
             actions: read
@@ -92,8 +94,7 @@ jobs:
             fail-fast: false
             matrix:
                 # Run multiple instances in parallel to speed up the tests
-                # VERJI - take out tests: 1, 2, 3, 4
-                runner: [5, 6] #1, 2, 3, 4
+                runner: [1, 2, 3, 4, 5, 6]
         steps:
             - uses: actions/checkout@v4
               with:

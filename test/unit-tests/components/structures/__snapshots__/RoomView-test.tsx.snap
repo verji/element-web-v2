@@ -50,6 +50,34 @@ exports[`RoomView for a local room in state CREATING should match the snapshot 1
         style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
       >
         <button
+          aria-label="Support"
+          aria-labelledby=":rhe:"
+          class="_icon-button_bh2qc_17"
+          role="button"
+          style="--cpd-icon-button-size: 32px;"
+          tabindex="0"
+        >
+          <div
+            class="_indicator-icon_133tf_26"
+            style="--cpd-icon-button-size: 100%;"
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+              <path
+                d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+              />
+            </svg>
+          </div>
+        </button>
+        <button
           aria-disabled="false"
           aria-label="Video call"
           class="_icon-button_bh2qc_17"
@@ -62,7 +90,7 @@ exports[`RoomView for a local room in state CREATING should match the snapshot 1
             style="--cpd-icon-button-size: 100%;"
           >
             <svg
-              aria-labelledby=":rg4:"
+              aria-labelledby=":rhj:"
               fill="currentColor"
               height="1em"
               viewBox="0 0 24 24"
@@ -78,7 +106,7 @@ exports[`RoomView for a local room in state CREATING should match the snapshot 1
         <button
           aria-disabled="false"
           aria-label="Voice call"
-          aria-labelledby=":rg9:"
+          aria-labelledby=":rho:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -103,7 +131,7 @@ exports[`RoomView for a local room in state CREATING should match the snapshot 1
         </button>
         <button
           aria-label="Room info"
-          aria-labelledby=":rge:"
+          aria-labelledby=":rht:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -128,7 +156,7 @@ exports[`RoomView for a local room in state CREATING should match the snapshot 1
         </button>
         <button
           aria-label="Threads"
-          aria-labelledby=":rgj:"
+          aria-labelledby=":ri2:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -157,7 +185,7 @@ exports[`RoomView for a local room in state CREATING should match the snapshot 1
       >
         <div
           aria-label="2 members"
-          aria-labelledby=":rgo:"
+          aria-labelledby=":ri7:"
           class="mx_AccessibleButton mx_FacePile"
           role="button"
           tabindex="0"
@@ -268,6 +296,34 @@ exports[`RoomView for a local room in state ERROR should match the snapshot 1`] 
         style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
       >
         <button
+          aria-label="Support"
+          aria-labelledby=":rii:"
+          class="_icon-button_bh2qc_17"
+          role="button"
+          style="--cpd-icon-button-size: 32px;"
+          tabindex="0"
+        >
+          <div
+            class="_indicator-icon_133tf_26"
+            style="--cpd-icon-button-size: 100%;"
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+              <path
+                d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+              />
+            </svg>
+          </div>
+        </button>
+        <button
           aria-disabled="false"
           aria-label="Video call"
           class="_icon-button_bh2qc_17"
@@ -280,7 +336,7 @@ exports[`RoomView for a local room in state ERROR should match the snapshot 1`] 
             style="--cpd-icon-button-size: 100%;"
           >
             <svg
-              aria-labelledby=":rh2:"
+              aria-labelledby=":rin:"
               fill="currentColor"
               height="1em"
               viewBox="0 0 24 24"
@@ -296,7 +352,7 @@ exports[`RoomView for a local room in state ERROR should match the snapshot 1`] 
         <button
           aria-disabled="false"
           aria-label="Voice call"
-          aria-labelledby=":rh7:"
+          aria-labelledby=":ris:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -321,7 +377,7 @@ exports[`RoomView for a local room in state ERROR should match the snapshot 1`] 
         </button>
         <button
           aria-label="Room info"
-          aria-labelledby=":rhc:"
+          aria-labelledby=":rj1:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -346,7 +402,7 @@ exports[`RoomView for a local room in state ERROR should match the snapshot 1`] 
         </button>
         <button
           aria-label="Threads"
-          aria-labelledby=":rhh:"
+          aria-labelledby=":rj6:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -375,7 +431,7 @@ exports[`RoomView for a local room in state ERROR should match the snapshot 1`] 
       >
         <div
           aria-label="2 members"
-          aria-labelledby=":rhm:"
+          aria-labelledby=":rjb:"
           class="mx_AccessibleButton mx_FacePile"
           role="button"
           tabindex="0"
@@ -571,6 +627,34 @@ exports[`RoomView for a local room in state NEW should match the snapshot 1`] = 
         style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
       >
         <button
+          aria-label="Support"
+          aria-labelledby=":rcm:"
+          class="_icon-button_bh2qc_17"
+          role="button"
+          style="--cpd-icon-button-size: 32px;"
+          tabindex="0"
+        >
+          <div
+            class="_indicator-icon_133tf_26"
+            style="--cpd-icon-button-size: 100%;"
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+              <path
+                d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+              />
+            </svg>
+          </div>
+        </button>
+        <button
           aria-disabled="false"
           aria-label="Video call"
           class="_icon-button_bh2qc_17"
@@ -583,7 +667,7 @@ exports[`RoomView for a local room in state NEW should match the snapshot 1`] = 
             style="--cpd-icon-button-size: 100%;"
           >
             <svg
-              aria-labelledby=":rbo:"
+              aria-labelledby=":rcr:"
               fill="currentColor"
               height="1em"
               viewBox="0 0 24 24"
@@ -599,7 +683,7 @@ exports[`RoomView for a local room in state NEW should match the snapshot 1`] = 
         <button
           aria-disabled="false"
           aria-label="Voice call"
-          aria-labelledby=":rbt:"
+          aria-labelledby=":rd0:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -624,7 +708,7 @@ exports[`RoomView for a local room in state NEW should match the snapshot 1`] = 
         </button>
         <button
           aria-label="Room info"
-          aria-labelledby=":rc2:"
+          aria-labelledby=":rd5:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -649,7 +733,7 @@ exports[`RoomView for a local room in state NEW should match the snapshot 1`] = 
         </button>
         <button
           aria-label="Threads"
-          aria-labelledby=":rc7:"
+          aria-labelledby=":rda:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -678,7 +762,7 @@ exports[`RoomView for a local room in state NEW should match the snapshot 1`] = 
       >
         <div
           aria-label="2 members"
-          aria-labelledby=":rcc:"
+          aria-labelledby=":rdf:"
           class="mx_AccessibleButton mx_FacePile"
           role="button"
           tabindex="0"
@@ -951,6 +1035,34 @@ exports[`RoomView for a local room in state NEW that is encrypted should match t
         style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
       >
         <button
+          aria-label="Support"
+          aria-labelledby=":rf2:"
+          class="_icon-button_bh2qc_17"
+          role="button"
+          style="--cpd-icon-button-size: 32px;"
+          tabindex="0"
+        >
+          <div
+            class="_indicator-icon_133tf_26"
+            style="--cpd-icon-button-size: 100%;"
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+              <path
+                d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+              />
+            </svg>
+          </div>
+        </button>
+        <button
           aria-disabled="false"
           aria-label="Video call"
           class="_icon-button_bh2qc_17"
@@ -963,7 +1075,7 @@ exports[`RoomView for a local room in state NEW that is encrypted should match t
             style="--cpd-icon-button-size: 100%;"
           >
             <svg
-              aria-labelledby=":rdu:"
+              aria-labelledby=":rf7:"
               fill="currentColor"
               height="1em"
               viewBox="0 0 24 24"
@@ -979,7 +1091,7 @@ exports[`RoomView for a local room in state NEW that is encrypted should match t
         <button
           aria-disabled="false"
           aria-label="Voice call"
-          aria-labelledby=":re3:"
+          aria-labelledby=":rfc:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -1004,7 +1116,7 @@ exports[`RoomView for a local room in state NEW that is encrypted should match t
         </button>
         <button
           aria-label="Room info"
-          aria-labelledby=":re8:"
+          aria-labelledby=":rfh:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -1029,7 +1141,7 @@ exports[`RoomView for a local room in state NEW that is encrypted should match t
         </button>
         <button
           aria-label="Threads"
-          aria-labelledby=":red:"
+          aria-labelledby=":rfm:"
           class="_icon-button_bh2qc_17"
           role="button"
           style="--cpd-icon-button-size: 32px;"
@@ -1058,7 +1170,7 @@ exports[`RoomView for a local room in state NEW that is encrypted should match t
       >
         <div
           aria-label="2 members"
-          aria-labelledby=":rei:"
+          aria-labelledby=":rfr:"
           class="mx_AccessibleButton mx_FacePile"
           role="button"
           tabindex="0"
@@ -1339,6 +1451,34 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
           >
             <button
+              aria-label="Support"
+              aria-labelledby=":r2i:"
+              class="_icon-button_bh2qc_17"
+              role="button"
+              style="--cpd-icon-button-size: 32px;"
+              tabindex="0"
+            >
+              <div
+                class="_indicator-icon_133tf_26"
+                style="--cpd-icon-button-size: 100%;"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  />
+                  <path
+                    d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+                  />
+                </svg>
+              </div>
+            </button>
+            <button
               aria-disabled="true"
               aria-label="There's no one here to call"
               class="_icon-button_bh2qc_17"
@@ -1351,7 +1491,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
                 style="--cpd-icon-button-size: 100%; --cpd-color-icon-tertiary: var(--cpd-color-icon-disabled);"
               >
                 <svg
-                  aria-labelledby=":r2c:"
+                  aria-labelledby=":r2n:"
                   fill="currentColor"
                   height="1em"
                   viewBox="0 0 24 24"
@@ -1367,7 +1507,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             <button
               aria-disabled="true"
               aria-label="There's no one here to call"
-              aria-labelledby=":r2h:"
+              aria-labelledby=":r2s:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1392,7 +1532,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             </button>
             <button
               aria-label="Room info"
-              aria-labelledby=":r2m:"
+              aria-labelledby=":r31:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1417,7 +1557,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             </button>
             <button
               aria-label="Threads"
-              aria-labelledby=":r2r:"
+              aria-labelledby=":r36:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1446,7 +1586,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
           >
             <div
               aria-label="0 members"
-              aria-labelledby=":r30:"
+              aria-labelledby=":r3b:"
               class="mx_AccessibleButton mx_FacePile"
               role="button"
               tabindex="0"
@@ -1550,6 +1690,34 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
           >
             <button
+              aria-label="Support"
+              aria-labelledby=":r2i:"
+              class="_icon-button_bh2qc_17"
+              role="button"
+              style="--cpd-icon-button-size: 32px;"
+              tabindex="0"
+            >
+              <div
+                class="_indicator-icon_133tf_26"
+                style="--cpd-icon-button-size: 100%;"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  />
+                  <path
+                    d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+                  />
+                </svg>
+              </div>
+            </button>
+            <button
               aria-disabled="true"
               aria-label="There's no one here to call"
               class="_icon-button_bh2qc_17"
@@ -1562,7 +1730,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
                 style="--cpd-icon-button-size: 100%; --cpd-color-icon-tertiary: var(--cpd-color-icon-disabled);"
               >
                 <svg
-                  aria-labelledby=":r2c:"
+                  aria-labelledby=":r2n:"
                   fill="currentColor"
                   height="1em"
                   viewBox="0 0 24 24"
@@ -1578,7 +1746,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             <button
               aria-disabled="true"
               aria-label="There's no one here to call"
-              aria-labelledby=":r2h:"
+              aria-labelledby=":r2s:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1603,7 +1771,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             </button>
             <button
               aria-label="Room info"
-              aria-labelledby=":r2m:"
+              aria-labelledby=":r31:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1628,7 +1796,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
             </button>
             <button
               aria-label="Threads"
-              aria-labelledby=":r2r:"
+              aria-labelledby=":r36:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1657,7 +1825,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
           >
             <div
               aria-label="0 members"
-              aria-labelledby=":r30:"
+              aria-labelledby=":r3b:"
               class="mx_AccessibleButton mx_FacePile"
               role="button"
               tabindex="0"
@@ -1725,7 +1893,7 @@ exports[`RoomView should not display the timeline when the room encryption is lo
                   tabindex="0"
                 >
                   <div
-                    aria-labelledby=":r3e:"
+                    aria-labelledby=":r3q:"
                     class="mx_E2EIcon mx_E2EIcon_verified mx_MessageComposer_e2eIcon"
                   />
                 </span>
@@ -1934,8 +2102,36 @@ exports[`RoomView video rooms should render joined video room view 1`] = `
             style="--mx-flex-display: flex; --mx-flex-direction: row; --mx-flex-align: center; --mx-flex-justify: start; --mx-flex-gap: var(--cpd-space-2x);"
           >
             <button
+              aria-label="Support"
+              aria-labelledby=":r7u:"
+              class="_icon-button_bh2qc_17"
+              role="button"
+              style="--cpd-icon-button-size: 32px;"
+              tabindex="0"
+            >
+              <div
+                class="_indicator-icon_133tf_26"
+                style="--cpd-icon-button-size: 100%;"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 8a1.5 1.5 0 0 0-1.5 1.5 1 1 0 1 1-2 0 3.5 3.5 0 1 1 6.01 2.439c-.122.126-.24.243-.352.355-.287.288-.54.54-.76.824-.293.375-.398.651-.398.882a1 1 0 1 1-2 0c0-.874.407-1.58.819-2.11.305-.392.688-.775 1-1.085l.257-.26A1.5 1.5 0 0 0 12 8Zm1 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  />
+                  <path
+                    d="M8.1 21.212A9.738 9.738 0 0 0 12 22a9.738 9.738 0 0 0 3.9-.788 10.098 10.098 0 0 0 3.175-2.137c.9-.9 1.613-1.958 2.137-3.175A9.738 9.738 0 0 0 22 12a9.738 9.738 0 0 0-.788-3.9 10.099 10.099 0 0 0-2.137-3.175c-.9-.9-1.958-1.612-3.175-2.137A9.738 9.738 0 0 0 12 2a9.738 9.738 0 0 0-3.9.788 10.099 10.099 0 0 0-3.175 2.137c-.9.9-1.612 1.958-2.137 3.175A9.738 9.738 0 0 0 2 12a9.74 9.74 0 0 0 .788 3.9 10.098 10.098 0 0 0 2.137 3.175c.9.9 1.958 1.613 3.175 2.137Zm9.575-3.537C16.125 19.225 14.233 20 12 20c-2.233 0-4.125-.775-5.675-2.325C4.775 16.125 4 14.233 4 12c0-2.233.775-4.125 2.325-5.675C7.875 4.775 9.767 4 12 4c2.233 0 4.125.775 5.675 2.325C19.225 7.875 20 9.767 20 12c0 2.233-.775 4.125-2.325 5.675Z"
+                  />
+                </svg>
+              </div>
+            </button>
+            <button
               aria-label="Room info"
-              aria-labelledby=":r7c:"
+              aria-labelledby=":r83:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1960,7 +2156,7 @@ exports[`RoomView video rooms should render joined video room view 1`] = `
             </button>
             <button
               aria-label="Chat"
-              aria-labelledby=":r7h:"
+              aria-labelledby=":r88:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -1985,7 +2181,7 @@ exports[`RoomView video rooms should render joined video room view 1`] = `
             </button>
             <button
               aria-label="Threads"
-              aria-labelledby=":r7m:"
+              aria-labelledby=":r8d:"
               class="_icon-button_bh2qc_17"
               role="button"
               style="--cpd-icon-button-size: 32px;"
@@ -2014,7 +2210,7 @@ exports[`RoomView video rooms should render joined video room view 1`] = `
           >
             <div
               aria-label="0 members"
-              aria-labelledby=":r7r:"
+              aria-labelledby=":r8i:"
               class="mx_AccessibleButton mx_FacePile"
               role="button"
               tabindex="0"
@@ -2052,7 +2248,7 @@ exports[`RoomView video rooms should render joined video room view 1`] = `
                 </p>
               </div>
               <button
-                aria-labelledby=":r84:"
+                aria-labelledby=":r8s:"
                 class="_icon-button_bh2qc_17 _subtle-bg_bh2qc_38"
                 data-testid="base-card-close-button"
                 role="button"
