@@ -34,17 +34,15 @@ Please see LICENSE files in the repository root for full details.
         flex-direction: column;
     }
 
-    .mx_TabbedView_tabLabel:hover,
+    /* VERJI - hover color change commented out */
+    /* VERJI - active-tab background-color (var(--cpd-color-bg-subtle-secondary)) removed */
+    /* .mx_TabbedView_tabLabel:hover, */
     .mx_TabbedView_tabLabel_active {
-        color: $tab-label-active-fg-color;
+        color: #578e2f; /* Verji green */
 
         .mx_TabbedView_maskedIcon::before {
             background-color: var(--cpd-color-icon-primary);
         }
-    }
-
-    .mx_TabbedView_tabLabel_active {
-        background-color: var(--cpd-color-bg-subtle-secondary);
     }
 
     .mx_TabbedView_maskedIcon {
@@ -91,7 +89,7 @@ Please see LICENSE files in the repository root for full details.
     }
 
     .mx_TabbedView_tabLabel_active .mx_TabbedView_maskedIcon::before {
-        background-color: $accent;
+        background-color: #578e2f; /* Verji green */
     }
 
     .mx_TabbedView_maskedIcon {

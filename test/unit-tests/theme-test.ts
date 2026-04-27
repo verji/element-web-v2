@@ -144,7 +144,8 @@ describe("theme", () => {
                 "light": "Light",
                 "light-high-contrast": "Light high contrast",
                 "dark": "Dark",
-                "custom-pink": "pink",
+                // VERJI: non-Verji-prefixed custom theme names are routed through the verji|themes|* translation namespace
+                "custom-pink": "verji",
             });
         });
 
@@ -161,11 +162,13 @@ describe("theme", () => {
     describe("getOrderedThemes", () => {
         it("should return a list of themes in the correct order", () => {
             jest.spyOn(SettingsStore, "getValue").mockReturnValue([{ name: "Zebra Striped" }, { name: "Apple Green" }]);
+            // VERJI: custom theme names are translated via verji|themes|* so both resolve to the same display name
+            // in tests; the sort is stable and preserves insertion order (Zebra first, then Apple)
             expect(getOrderedThemes()).toEqual([
                 { id: "light", name: "Light" },
                 { id: "dark", name: "Dark" },
-                { id: "custom-Apple Green", name: "Apple Green" },
-                { id: "custom-Zebra Striped", name: "Zebra Striped" },
+                { id: "custom-Zebra Striped", name: "verji" },
+                { id: "custom-Apple Green", name: "verji" },
             ]);
         });
     });

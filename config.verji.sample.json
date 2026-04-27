@@ -167,6 +167,9 @@
         "UIFeature.allowDirectUserInvite": false,
         "UIFeature.searchInAllRooms": false,
         "UIFeature.leaveSpaceButton": false,
+        "UIFeature.switchSpaceOnDMSelect": false,
+        "UIFeature.showNsfwContentSetting": false,
+        "UIFeature.verjiSpaceDmBadges": true,
         "breadcrumbs": true,
         "custom_themes": [
             {

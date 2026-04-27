@@ -98,12 +98,14 @@ const DevtoolsDialog: React.FC<IProps> = ({ roomId, threadRootId, onFinished }) 
                         })}
                     </div>
                 ))}
-                <div>
-                    <h3>{_t("common|options")}</h3>
-                    <SettingsFlag name="developerMode" level={SettingLevel.ACCOUNT} />
-                    <SettingsFlag name="showHiddenEventsInTimeline" level={SettingLevel.DEVICE} />
-                    <SettingsFlag name="enableWidgetScreenshots" level={SettingLevel.ACCOUNT} />
-                </div>
+                {SettingsStore.getValue(UIFeature.EnableRoomDevToolsOptions) && (
+                    <div>
+                        <h3>{_t("common|options")}</h3>
+                        <SettingsFlag name="developerMode" level={SettingLevel.ACCOUNT} />
+                        <SettingsFlag name="showHiddenEventsInTimeline" level={SettingLevel.DEVICE} />
+                        <SettingsFlag name="enableWidgetScreenshots" level={SettingLevel.ACCOUNT} />
+                    </div>
+                )}
             </BaseTool>
         );
     }

@@ -76,7 +76,7 @@ const useExportFormState = (): ExportConfig => {
     );
     const [numberOfMessages, setNumberOfMessages] = useState<number>(config.numberOfMessages ?? 100);
     const [sizeLimit, setSizeLimit] = useState<number>(
-        SettingsStore.getValue(UIFeature.ExportDefaultSizeLimit) == false ? 20 : (config.sizeMb ?? 8),
+        SettingsStore.getValue(UIFeature.ExportDefaultSizeLimit) == false ? 2000 : (config.sizeMb ?? 8),
     );
 
     return {

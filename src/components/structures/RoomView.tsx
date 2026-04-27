@@ -118,7 +118,7 @@ import { SDKContext } from "../../contexts/SDKContext";
 import { CallStore, CallStoreEvent } from "../../stores/CallStore";
 import { Call } from "../../models/Call";
 import { RoomSearchView } from "./RoomSearchView";
-import eventSearch, { SearchInfo, SearchScope } from "../../Searching";
+import { SearchInfo, SearchScope } from "../../Searching";
 import VoipUserMapper from "../../VoipUserMapper";
 import { isCallEvent } from "./LegacyCallEventGrouper";
 import { WidgetType } from "../../widgets/WidgetType";
@@ -135,7 +135,7 @@ import { PinnedMessageBanner } from "../views/rooms/PinnedMessageBanner";
 import { ScopedRoomContextProvider, useScopedRoomContext } from "../../contexts/ScopedRoomContext";
 import { ModuleRunner } from "../../modules/ModuleRunner";
 // import eventSearch from "../../Searching";
-import searchAllEventsLocally from "../../VerjiLocalSearch"; // VERJI
+// import searchAllEventsLocally from "../../VerjiLocalSearch"; // VERJI
 
 const DEBUG = false;
 const PREVENT_MULTIPLE_JITSI_WITHIN = 30_000;
@@ -1714,15 +1714,12 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
         debuglog("sending search request");
         const abortController = new AbortController();
 
-        // VERJI START
-        let promise: Promise<ISearchResults>;
-        // currently, we use the local search for all events. edit this 'if' statement to change that.
-        if (scope === SearchScope.Room || scope === SearchScope.All) {
-            promise = searchAllEventsLocally(this.context.client!, term, roomId);
-        } else {
-            promise = eventSearch(this.context.client!, term, roomId, abortController.signal);
-        }
-        // VERJI END
+        const promise = ModuleRunner.instance.extensions.eventSearchModule.eventSearch(
+            this.context.client!,
+            term,
+            roomId,
+            abortController.signal,
+        ) as unknown as Promise<ISearchResults>;
 
         this.setState({
             timelineRenderingType: TimelineRenderingType.Search,
@@ -2604,32 +2601,15 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
             analyticsRoomType =
                 this.state.mainSplitContentType === MainSplitContentType.Call ? "video_room" : "maximised_widget";
         }
-        // VERJI MERGE - MAY CONTAIN ISSUES - CHANGES MADE IN ROOMVIEW
-        //let excludedRightPanelPhaseButtons = [RightPanelPhases.Timeline];
-        // let onForgetClick: (() => void) | null = this.onForgetClick;
-        // let onInviteClick: (() => void) | null = null;
-        // let viewingCall = false;
-
-        // // Simplify the header for other main split types
-        // switch (this.state.mainSplitContentType) {
-        //     case MainSplitContentType.MaximisedWidget:
-        //         excludedRightPanelPhaseButtons = [];
-        //         onForgetClick = null;
-        //         break;
-        //     case MainSplitContentType.Call:
-        //         excludedRightPanelPhaseButtons = [];
-        //         onForgetClick = null;
-        //         if (this.state.room.canInvite(this.context.client.getSafeUserId())) {
-        //             onInviteClick = this.onInviteClick;
-        //         }
-        //         viewingCall = true;
-        // }
+        // VERJI NOTE: Old upstream header conditional logic (excludedRightPanelPhaseButtons, onForgetClick, etc.)
+        // was removed during the Dec 2024 merge as element-web-v2 uses a different RoomHeader component.
+        // These variables are no longer passed to the header in the new upstream architecture.
 
         const CustomRoomView = { CustomComponent: React.Fragment };
         ModuleRunner.instance.invoke(CustomComponentLifecycle.RoomView, CustomRoomView as CustomComponentOpts);
         const customRoomHeaderOpts = { CustomComponent: React.Fragment };
         ModuleRunner.instance.invoke(CustomComponentLifecycle.RoomHeader, customRoomHeaderOpts as CustomComponentOpts);
-        // VERJI MERGE MAY CONTAIN ISSUES - CHANGES MADE IN WRAPPED COMPONENT
+        // Verji: CustomRoomView and CustomRoomHeader module hooks wrap the return JSX
         return (
             <CustomRoomView.CustomComponent>
                 <ScopedRoomContextProvider {...this.state}>

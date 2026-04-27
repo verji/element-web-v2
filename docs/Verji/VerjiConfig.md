@@ -175,6 +175,12 @@
   Used by : SearchBar.tsx
 - `UIFeature.leaveSpaceButton` - Shows/hides "Leave Space" button in Space-Settings
   Used by : SpaceSettingsGeneralTab.tsx
+- `UIFeature.switchSpaceOnDMSelect` - Overrides default Element-Web behaviour to attempt to switch space-context to parent space of DM. If false, we don't bother trying to set "parent space" of DM-rooms to `activeSpace`
+  Used by : SpaceStore.ts
+- `UIFeature.showNsfwContentSetting` - Shows/hides the "Show NSFW content" setting in user preferences.
+  Used by : PreferencesUserSettingsTab.tsx
+- `UIFeature.verjiSpaceDmBadges` - When enabled, includes Verji-fetched DM rooms in space badge notification counts. Allows SpaceStore to accept DM room lists from the verji-roomsublist-module and merge them into the notification state for each space. Also triggers eager pre-fetch of DMs for all spaces on startup so badges are accurate before the user visits each space. Default: false.
+  Used by : SpaceStore.ts, [verji-roomsublist-module] - CustomRoomSublist.tsx, CustomRoomSublistModule.tsx
 
 ## How to use feature flags
 
@@ -216,8 +222,10 @@ Verji uses the matrix/element module system to dynamically build customised feat
 - [@verji/verji-usermenu-module](https://github.com/verji/verji-usermenu-module)
 - [@verji/verji-onboarding-module](https://github.com/verji/verji-onboarding-module)
 - [@verji/verji-news-module](https://github.com/verji/verji-news-module)
+- [@verji/verji-roomsublist-module](https://github.com/verji/verji-roomsublist-module)
 
 ## Verji Extension Modules
 
 - [@verji/verji-usersearch-module](https://github.com/verji/verji-usersearch-module)
 - [@verji/verji-cryptosetup-module](https://github.com/verji/verji-cryptosetup-module)
+- [@verji/verji-eventsearch-module](https://github.com/verji/verji-eventsearch-module)

@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "skipLibCheck": true,
+        "preserveSymlinks": true,
         "allowImportingTsExtensions": true,
         "experimentalDecorators": false,
         "emitDecoratorMetadata": false,

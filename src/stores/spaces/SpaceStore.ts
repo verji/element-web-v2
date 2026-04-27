@@ -25,6 +25,7 @@ import { AsyncStoreWithClient } from "../AsyncStoreWithClient";
 import defaultDispatcher from "../../dispatcher/dispatcher";
 import RoomListStore from "../room-list/RoomListStore";
 import SettingsStore from "../../settings/SettingsStore";
+import { UIFeature } from "../../settings/UIFeature";
 import DMRoomMap from "../../utils/DMRoomMap";
 import { FetchRoomFn } from "../notifications/ListNotificationState";
 import { SpaceNotificationState } from "../notifications/SpaceNotificationState";
@@ -153,6 +154,8 @@ export class SpaceStoreClass extends AsyncStoreWithClient<IState> {
     private _enabledMetaSpaces: MetaSpace[] = [];
     /** Whether the feature flag is set for MSC3946 */
     private _msc3946ProcessDynamicPredecessor: boolean = SettingsStore.getValue("feature_dynamic_room_predecessors");
+    // VERJI: DM rooms fetched from Verji backend, keyed by space ID, used for badge notification calculation
+    private verjiDmRoomsBySpace = new Map<SpaceKey, Room[]>();
 
     public constructor() {
         super(defaultDispatcher, {});
@@ -664,6 +667,13 @@ export class SpaceStoreClass extends AsyncStoreWithClient<IState> {
         }
     };
 
+    // VERJI: Allow external modules to register DM rooms for a space's badge notification calculation
+    public setVerjiDmRoomsForSpace(spaceKey: SpaceKey, rooms: Room[]): void {
+        if (!SettingsStore.getValue(UIFeature.VerjiSpaceDmBadges)) return;
+        this.verjiDmRoomsBySpace.set(spaceKey, rooms);
+        this.updateNotificationStates([spaceKey]);
+    }
+
     private updateNotificationStates = (spaces?: SpaceKey[]): void => {
         if (!this.matrixClient) return;
         const enabledMetaSpaces = new Set(this.enabledMetaSpaces);
@@ -687,27 +697,43 @@ export class SpaceStoreClass extends AsyncStoreWithClient<IState> {
             }
         }
 
+        const verjiDmBadgesEnabled = SettingsStore.getValue(UIFeature.VerjiSpaceDmBadges);
+
         spaces.forEach((s) => {
             if (this.allRoomsInHome && s === MetaSpace.Home) return; // we'll be using the global notification state, skip
 
             const flattenedRoomsForSpace = this.getSpaceFilteredRoomIds(s, true);
 
             // Update NotificationStates
-            this.getNotificationState(s).setRooms(
-                visibleRooms.filter((room) => {
-                    if (s === MetaSpace.People) {
-                        return this.isRoomInSpace(MetaSpace.People, room.roomId);
+            const filteredRooms = visibleRooms.filter((room) => {
+                if (s === MetaSpace.People) {
+                    return this.isRoomInSpace(MetaSpace.People, room.roomId);
+                }
+
+                if (room.isSpaceRoom() || !flattenedRoomsForSpace.has(room.roomId)) return false;
+
+                if (dmBadgeSpace && DMRoomMap.shared().getUserIdForRoomId(room.roomId)) {
+                    return s === dmBadgeSpace;
+                }
+
+                return true;
+            });
+
+            // VERJI: Merge DM rooms from Verji backend that aren't in Matrix space membership
+            // Added after the standard filter because DMs are redirected to dmBadgeSpace above
+            if (verjiDmBadgesEnabled && !isMetaSpace(s)) {
+                const verjiDmRooms = this.verjiDmRoomsBySpace.get(s);
+                if (verjiDmRooms?.length) {
+                    const existingRoomIds = new Set(filteredRooms.map((r) => r.roomId));
+                    for (const room of verjiDmRooms) {
+                        if (!existingRoomIds.has(room.roomId)) {
+                            filteredRooms.push(room);
+                        }
                     }
+                }
+            }
 
-                    if (room.isSpaceRoom() || !flattenedRoomsForSpace.has(room.roomId)) return false;
-
-                    if (dmBadgeSpace && DMRoomMap.shared().getUserIdForRoomId(room.roomId)) {
-                        return s === dmBadgeSpace;
-                    }
-
-                    return true;
-                }),
-            );
+            this.getNotificationState(s).setRooms(filteredRooms);
         });
 
         if (dmBadgeSpace !== MetaSpace.People) {
@@ -888,6 +914,9 @@ export class SpaceStoreClass extends AsyncStoreWithClient<IState> {
 
     private switchSpaceIfNeeded = (roomId = SdkContextClass.instance.roomViewStore.getRoomId()): void => {
         if (!roomId) return;
+        // Verji specific: don't switch space on DM select if the setting is disabled
+        if (!SettingsStore.getValue(UIFeature.SwitchSpaceOnDMSelect) && DMRoomMap.shared().getUserIdForRoomId(roomId))
+            return;
         if (!this.isRoomInSpace(this.activeSpace, roomId) && !this.matrixClient?.getRoom(roomId)?.isSpaceRoom()) {
             this.switchToRelatedSpace(roomId);
         }

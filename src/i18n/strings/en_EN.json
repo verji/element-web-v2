@@ -1466,8 +1466,8 @@
         "to_room": "Invite to %(roomName)s",
         "name_email_mxid_share_space": "Invite someone using their name, email address, username (like <userId/>) or <a>share this space</a>.",
         "name_mxid_share_space": "Invite someone using their name.",
-        "name_email_mxid_share_room": "Invite someone using their name, or invite new guest using their email address.",
-        "name_mxid_share_room": "Invite someone using their name, or invite new guest using their email address.",
+        "name_email_mxid_share_room": "Invite someone using their name.",
+        "name_mxid_share_room": "Invite someone using their name.",
         "email_limit_one": "Invites by email can only be sent one at a time",
         "transfer_user_directory_tab": "User Directory",
         "transfer_dial_pad_tab": "Dial pad",
@@ -2950,7 +2950,7 @@
             "m.room.encryption": "Enable room encryption",
             "m.room.server_acl": "Change server ACLs",
             "m.reaction": "Send reactions",
-            "m.room.redaction": "Remove messages sent by me",
+            "m.room.redaction": "Remove own messages",
             "m.room.pinned_events": "Manage pinned events",
             "m.widget": "Modify widgets",
             "m.call": "Start %(brand)s calls",
@@ -3427,6 +3427,9 @@
         "error_429": "429: Too many requests.",
         "error_500": "500: Internal server error.",
         "loading_error": "Oops, something went wrong whilst loading the data.",
+        "dm_fetch_error_message": "Something went wrong fetching your direct messages for this tenant.",
+        "dm_fetch_error_timeout": "Timeout exceeded",
+        "dm_fetch_error_unknown": "Unknown error",
         "missing_info_invite": "Please fill in any missing information for your guest(s) and select the organization to which you'd like to invite them.",
         "admin_portal_invitations": "'Admin Portal' > 'Invitations' > 'Invitations without BankID'",
         "no_admin_access": "Your account isn't set up as an admin for this organization, so you can't invite guests.",
@@ -3458,11 +3461,17 @@
         "email_label": "Email",
         "existing_email_error_message": "One or more the e-mails you entered, are already Verji-users. Please confirm the information is correct, and invite them to %(tenant)s.",
         "invite_button": "Invite",
-        "power_levels": {
-            "customer_admin": "Customer",
-            "rosberg_admin": "Rosberg",
+        "power_level": {
+            "tenant_admin": "Tenant Admin",
+            "verji_admin": "Verji",
             "system_admin": "System",
-            "standard": "Standard"
+            "standard": "Standard",
+            "default": "Standard",
+            "moderator": "Moderator",
+            "admin": "Administrator",
+            "tenant": "Tenant Admin",
+            "verji": "Verji",
+            "system": "System Admin"
         },
         "connected_to_organization_label": "Connected to organization",
         "confirm_guest_invite": "Confirm guest invite",
@@ -3471,8 +3480,13 @@
         "inviting_status": "Inviting",
         "confirm_button": "Confirm",
         "existing_guest_instructions": "Following guest(s) %(users)s are already Verji users. Follow the instructions below to invite existing users.",
-        "invite_process_error": "Oops, something went wrong during the invitation process. You can track your invitation(s) by opening your %(path)s.",
-        "invite_new_users": "Invite new users to %(tenant)s",
+        "invite_process_error": "Oops, something went wrong during the invitation process. Navigate to: ",
+        "invite_dialog": {
+            "invite_new_users": "Invite new users to %(tenant)s",
+            "invalid_phonenumber": "Invalid phone number",
+            "invalid_mobilephonenumber": "Invalid mobilephone number",
+            "warning" : "Number might not support SMS"
+        },
         "user_settings_help_about": {
             "bug_report" : "Bugreporting",
             "experience_errors": "If you encounter errors in Verji,contact  Verji Support",
@@ -3495,6 +3509,10 @@
           "title" : "Lates news",
           "messages" : "News from <a>Verji</a>",
           "readarticle" : "Les hele artikkelen"
+        },
+        "themes" : {
+            "Lys" : "Light",
+            "Mørk" : "Dark"
         }
     },
     "composer": {
@@ -4104,7 +4122,7 @@
         "open_dial_pad": "Open dial pad"
     },
     "console_wait": "Wait!",
-    "console_scam_warning": "If someone told you to copy/paste something here, there is a high likelihood you're being scammed!",
+    "console_scam_warning": "Only copy or paste something here if it comes from Verji's official channels. Verji support uses console sometimes for debugging, but from other sources there is a high chance of fraud!",
     "console_dev_note": "This as a warning",
     "reject_invitation_dialog": {
         "title": "Reject invitation",

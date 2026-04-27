@@ -73,6 +73,7 @@ export const enum UIFeature {
     EnableLoginPage = "UIFeature.enableLoginPage",
     EnableNewRoomIntro = "UIFeature.enableNewRoomIntro",
     EnableRoomDevTools = "UIFeature.enableRoomDevTools",
+    EnableRoomDevToolsOptions = "UIFeature.enableRoomDevToolsOptions",
     WidgetContextDeleteButton = "UIFeature.widgetContextDeleteButton",
     ExportDefaultSizeLimit = "UIFeature.exportDefaultSizeLimit",
     AllExportTypes = "UIFeature.allExportTypes",
@@ -99,6 +100,9 @@ export const enum UIFeature {
     AllowDirectUserInvite = "UIFeature.allowDirectUserInvite",
     SearchInAllRooms = "UIFeature.searchInAllRooms",
     LeaveSpaceButton = "UIFeature.leaveSpaceButton",
+    SwitchSpaceOnDMSelect = "UIFeature.switchSpaceOnDMSelect",
+    ShowNsfwContentSetting = "UIFeature.showNsfwContentSetting",
+    VerjiSpaceDmBadges = "UIFeature.verjiSpaceDmBadges",
 }
 
 export enum UIComponent {

@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "packages": {
+    "@matrix-org/react-sdk-module-api": {
+      "version": "2.4.0",
+      "signature": "a6e9f7e93be756be8cd37f29d977357b",
+      "file": true,
+      "replaced": "2.4.0"
+    },
+    "matrix-js-sdk": {
+      "version": "35.0.0",
+      "signature": "76759b4fadd6ef3547660052fa63af89",
+      "file": true,
+      "replaced": "https://github.com/verji/matrix-js-sdk-v2.git#verji-merge-matrix-js-sdk"
+    }
+  }
+}
