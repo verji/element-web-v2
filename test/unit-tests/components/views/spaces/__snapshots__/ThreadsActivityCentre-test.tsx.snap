@@ -528,7 +528,7 @@ exports[`ThreadsActivityCentre should render the release announcement 1`] = `
       <span
         aria-owns=":rh:"
         data-floating-ui-inert=""
-        style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
+        style="clip-path: inset(50%); position: fixed; top: 0px; left: 0px;"
       />
       <span
         data-floating-ui-focus-guard=""

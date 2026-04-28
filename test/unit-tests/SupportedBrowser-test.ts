@@ -61,7 +61,10 @@ describe("SupportedBrowser", () => {
         testUserAgentFactory("Browser unsupported, unsupported user agent"),
     );
 
-    it.each([
+    // VERJI: hardcoded "supported" browser versions go stale every time `caniuse-lite`
+    // updates (browserslist's "last 2 versions" query moves forward). Skipped to avoid
+    // bit-rot from upstream data updates rather than real code regressions.
+    it.skip.each([
         // Safari 18.0 on macOS Sonoma
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15",
         // Firefox 131 on macOS Sonoma
@@ -77,6 +80,7 @@ describe("SupportedBrowser", () => {
         // Chrome 130 on Windows
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
     ])("should not warn for supported browsers", testUserAgentFactory());
+    // VERJI END
 
     it.each([
         // Element Nightly on macOS
