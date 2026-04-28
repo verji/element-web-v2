@@ -26,6 +26,10 @@ ignore.push("/SearchBar.tsx");
 ignore.push("matrix-react-sdk-module-api");
 // VERJI - The following ignores are temporary and false-positives which need to be fixed
 ignore.push("/VerjiRoomHeaderOpts.tsx");
+// VERJI - default exports whose call sites in RoomView.tsx are currently commented out;
+// retained for re-enablement/upstream-port parity.
+ignore.push("/Searching.ts");
+ignore.push("/VerjiLocalSearch.ts");
 
 // We ignore js-sdk by default as it may export for other non element-web projects
 if (!includeJSSDK) ignore.push("matrix-js-sdk");
