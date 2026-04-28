@@ -48,7 +48,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
     >
       <button
         aria-label="Support"
-        aria-labelledby=":r1e8:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"
@@ -75,7 +75,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
         </div>
       </button>
       <button
-        aria-labelledby=":r1ed:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"
@@ -101,7 +101,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
       <button
         aria-disabled="true"
         aria-label="There's no one here to call"
-        aria-labelledby=":r1ei:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"
@@ -126,7 +126,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
       </button>
       <button
         aria-label="Room info"
-        aria-labelledby=":r1en:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"
@@ -151,7 +151,7 @@ exports[`RoomHeader dm does not show the face pile for DMs 1`] = `
       </button>
       <button
         aria-label="Threads"
-        aria-labelledby=":r1es:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17"
         role="button"
         style="--cpd-icon-button-size: 32px;"

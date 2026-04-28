@@ -15,7 +15,7 @@ exports[`<RoomSummaryCard /> has button to edit topic 1`] = `
         class="mx_BaseCard_header_spacer"
       />
       <button
-        aria-labelledby=":rm:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17 _subtle-bg_bh2qc_38"
         data-testid="base-card-close-button"
         role="button"
@@ -670,7 +670,7 @@ exports[`<RoomSummaryCard /> renders the room summary 1`] = `
         class="mx_BaseCard_header_spacer"
       />
       <button
-        aria-labelledby=":r0:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17 _subtle-bg_bh2qc_38"
         data-testid="base-card-close-button"
         role="button"
@@ -1288,7 +1288,7 @@ exports[`<RoomSummaryCard /> renders the room topic in the summary 1`] = `
         class="mx_BaseCard_header_spacer"
       />
       <button
-        aria-labelledby=":rb:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17 _subtle-bg_bh2qc_38"
         data-testid="base-card-close-button"
         role="button"

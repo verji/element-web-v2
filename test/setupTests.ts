@@ -12,6 +12,10 @@ import { randomString } from "matrix-js-sdk/src/randomstring";
 import { mocked } from "jest-mock";
 
 import { PredictableRandom } from "./test-utils/predictableRandom"; // https://github.com/jsdom/jsdom/issues/2555
+// VERJI: stabilize DOM snapshots across environments — see file header.
+import useIdSnapshotSerializer from "./test-utils/useIdSnapshotSerializer";
+
+expect.addSnapshotSerializer(useIdSnapshotSerializer);
 
 declare global {
     // eslint-disable-next-line no-var

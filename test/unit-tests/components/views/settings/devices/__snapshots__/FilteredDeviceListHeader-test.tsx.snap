@@ -14,7 +14,7 @@ exports[`<FilteredDeviceListHeader /> renders correctly when all devices are sel
       >
         <input
           aria-label="Deselect all"
-          aria-labelledby=":r6:"
+          aria-labelledby="[useId]"
           checked=""
           data-testid="device-select-all-checkbox"
           id="device-select-all-checkbox"
@@ -59,7 +59,7 @@ exports[`<FilteredDeviceListHeader /> renders correctly when no devices are sele
       >
         <input
           aria-label="Select all"
-          aria-labelledby=":r0:"
+          aria-labelledby="[useId]"
           data-testid="device-select-all-checkbox"
           id="device-select-all-checkbox"
           type="checkbox"
