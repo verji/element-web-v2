@@ -1,21 +1,18 @@
 # Triggers after the playwright tests have finished,
 # taking the artifact and uploading it to Netlify for easier viewing
 name: Upload End to End Test report to Netlify
+# VERJI workflow_run trigger removed — Netlify report upload only runs on manual dispatch
 on:
-    workflow_run:
-        workflows: ["End to End Tests"]
-        types:
-            - completed
+    workflow_dispatch: {}
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.event.workflow_run.head_branch || github.run_id }}
-    cancel-in-progress: ${{ github.event.workflow_run.event == 'pull_request' }}
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 permissions: {}
 
 jobs:
     report:
-        if: github.event.workflow_run.conclusion != 'cancelled'
         name: Report results
         runs-on: ubuntu-24.04
         environment: Netlify
