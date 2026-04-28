@@ -319,7 +319,7 @@ exports[`<PinnedMessagesCard /> unpin all should not allow to unpinall 1`] = `
         </p>
       </div>
       <button
-        aria-labelledby=":rsa:"
+        aria-labelledby=":rt2:"
         class="_icon-button_bh2qc_17 _subtle-bg_bh2qc_38"
         data-testid="base-card-close-button"
         role="button"
@@ -375,7 +375,7 @@ exports[`<PinnedMessagesCard /> unpin all should not allow to unpinall 1`] = `
               class="mx_PinnedEventTile_top"
             >
               <span
-                aria-labelledby=":rsg:"
+                aria-labelledby=":rt8:"
                 class="mx_PinnedEventTile_sender mx_Username_color3"
               >
                 @alice:example.org
@@ -387,7 +387,7 @@ exports[`<PinnedMessagesCard /> unpin all should not allow to unpinall 1`] = `
                 aria-label="Open menu"
                 class="_icon-button_bh2qc_17"
                 data-state="closed"
-                id="radix-:rsl:"
+                id="radix-:rtd:"
                 role="button"
                 style="--cpd-icon-button-size: 24px;"
                 tabindex="0"
@@ -452,7 +452,7 @@ exports[`<PinnedMessagesCard /> unpin all should not allow to unpinall 1`] = `
               class="mx_PinnedEventTile_top"
             >
               <span
-                aria-labelledby=":rsn:"
+                aria-labelledby=":rtf:"
                 class="mx_PinnedEventTile_sender mx_Username_color3"
               >
                 @alice:example.org
@@ -464,7 +464,7 @@ exports[`<PinnedMessagesCard /> unpin all should not allow to unpinall 1`] = `
                 aria-label="Open menu"
                 class="_icon-button_bh2qc_17"
                 data-state="closed"
-                id="radix-:rss:"
+                id="radix-:rtk:"
                 role="button"
                 style="--cpd-icon-button-size: 24px;"
                 tabindex="0"
