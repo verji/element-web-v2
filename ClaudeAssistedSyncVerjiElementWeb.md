@@ -402,13 +402,13 @@ These 38 files were modified between the Dec 2024 merge point and the current `o
 
 ### Commits to port from `element-web/origin/verji-develop`
 
-| Date         | Hash        | Description                                                                                       | Target in v2                                       |
-| ------------ | ----------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| Feb 6, 2025  | `c9aede187` | Added `@verji/verji-eventsearch-module` to `build_config.verji.yaml`                              | `build_config.verji.yaml`                          |
-| Jun 6, 2025  | `a8468a423` | Added `@verji/verji-roomsublist-module` to `build_config.verji.yaml`                              | `build_config.verji.yaml`                          |
-| Oct 17, 2025 | `dcd322915` | New feature-flag config: update verji-sample configs for switchSpaceOnDMSelect                    | Config samples                                     |
+| Date         | Hash        | Description                                                                                       | Target in v2                                             |
+| ------------ | ----------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Feb 6, 2025  | `c9aede187` | Added `@verji/verji-eventsearch-module` to `build_config.verji.yaml`                              | `build_config.verji.yaml`                                |
+| Jun 6, 2025  | `a8468a423` | Added `@verji/verji-roomsublist-module` to `build_config.verji.yaml`                              | `build_config.verji.yaml`                                |
+| Oct 17, 2025 | `dcd322915` | New feature-flag config: update verji-sample configs for switchSpaceOnDMSelect                    | Config samples                                           |
 | Nov 28, 2025 | `7890a02f3` | Update VerjiConfig.md docs for NSFW flag                                                          | `docs/Verji/VerjiConfig.md`                              |
-| Nov 28, 2025 | `aeea8cec2` | Merge PR #13 (uiFeatureNsfw wrapper)                                                              | N/A (merge commit)                                 |
+| Nov 28, 2025 | `aeea8cec2` | Merge PR #13 (uiFeatureNsfw wrapper)                                                              | N/A (merge commit)                                       |
 | Apr 8, 2026  | `ea504ee14` | **NEW** — Config + docs for `UIFeature.verjiSpaceDmBadges` (paired with matrix-react-sdk PR #113) | `config.verji.samlple.json`, `docs/Verji/VerjiConfig.md` |
 
 ---

@@ -17,10 +17,7 @@ const STYLE_ID = "verji-support-widget-styles";
 // add. The previously hardcoded hashed class (.dTKHQv) is intentionally gone:
 // Freshworks already rebuilt it to .eSheGS, confirming hashed classes are
 // disposable.
-const HEADER_SELECTORS = [
-    '[data-testid="header-wrapper"]',
-    '[class*="WidgetHeader__Wrapper"]',
-];
+const HEADER_SELECTORS = ['[data-testid="header-wrapper"]', '[class*="WidgetHeader__Wrapper"]'];
 
 let outerObserver = null;
 let innerObserver = null;
@@ -101,10 +98,7 @@ function applyStyling(doc) {
     const header = findHeader(doc);
     if (!header) {
         if (!doc.__verjiSupportNoHeaderWarned) {
-            console.warn(
-                "[Verji] Support widget: header element not located. Selectors tried:",
-                HEADER_SELECTORS,
-            );
+            console.warn("[Verji] Support widget: header element not located. Selectors tried:", HEADER_SELECTORS);
             doc.__verjiSupportNoHeaderWarned = true;
         }
         return false;

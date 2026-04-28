@@ -18,12 +18,12 @@ The install stalls for 30+ minutes before this line appears.
 
 `element-web-v2`'s [package.json](../../package.json) declares `"name": "element-web"`. Four of the seven Verji modules reference `element-web` in their dependency manifest. Two of them used to declare it as a `dependency` with the `link:` protocol, which is what created the original EEXIST problem. That has been **corrected** — those two now declare it as a `devDependency` instead — but the historical context below explains why you might still hit EEXIST on stale workspace state:
 
-| Module | Declaration | Kind |
-|---|---|---|
-| `verji-news-module` | `"element-web": "link:../element-web-v2"` | `devDependency` (was `dependency` before Part B) |
-| `verji-usermenu-module` | `"element-web": "link:../element-web-v2"` | `devDependency` (was `dependency` before Part B) |
-| `verji-onboarding-module` | `"element-web": ">=1.11.0"` | `peerDependency` |
-| `verji-roomsublist-module` | `"element-web": ">=1.11.0"` | `peerDependency` |
+| Module                     | Declaration                               | Kind                                             |
+| -------------------------- | ----------------------------------------- | ------------------------------------------------ |
+| `verji-news-module`        | `"element-web": "link:../element-web-v2"` | `devDependency` (was `dependency` before Part B) |
+| `verji-usermenu-module`    | `"element-web": "link:../element-web-v2"` | `devDependency` (was `dependency` before Part B) |
+| `verji-onboarding-module`  | `"element-web": ">=1.11.0"`               | `peerDependency`                                 |
+| `verji-roomsublist-module` | `"element-web": ">=1.11.0"`               | `peerDependency`                                 |
 
 When `element-web` was in `dependencies`, during the installer's `yarn add -O file:../verji-*-module` call yarn v1 had to resolve it transitively. That resolution took two shapes:
 
@@ -43,9 +43,9 @@ On Windows, yarn v1 does **not** atomically unlink-then-recreate any of these sy
 Two scripts in [package.json](../../package.json) handle this:
 
 - `verji:prestart` — the Verji-owned entry point. Runs [`scripts/clean-verji-peerdep-symlinks.js`](../../scripts/clean-verji-peerdep-symlinks.js), which wipes all three places yarn v1 leaves stale link-protocol state:
-  1. `element-web-v2/node_modules/@verji` — the consumer-side install tree. Removed entirely so yarn re-copies the `file:` deps into a guaranteed-empty directory. Not wasted work: yarn v1 re-copies `file:` deps on every `yarn add` anyway.
-  2. Yarn's global link-store entry for `element-web` (`%LOCALAPPDATA%\Yarn\Data\link\element-web` on Windows; `~/.config/yarn/link/element-web` on POSIX), so the link protocol starts from a clean registration.
-  3. Each sibling `verji-*-module/node_modules/element-web` junction in the workspace. These are created by standalone `yarn install` in a module (or by a failed `yarn add` from `element-web-v2`) and persist across runs. Dangling junctions — targeting a global link-store entry that we deleted earlier — break yarn's link reconciliation silently.
+    1. `element-web-v2/node_modules/@verji` — the consumer-side install tree. Removed entirely so yarn re-copies the `file:` deps into a guaranteed-empty directory. Not wasted work: yarn v1 re-copies `file:` deps on every `yarn add` anyway.
+    2. Yarn's global link-store entry for `element-web` (`%LOCALAPPDATA%\Yarn\Data\link\element-web` on Windows; `~/.config/yarn/link/element-web` on POSIX), so the link protocol starts from a clean registration.
+    3. Each sibling `verji-*-module/node_modules/element-web` junction in the workspace. These are created by standalone `yarn install` in a module (or by a failed `yarn add` from `element-web-v2`) and persist across runs. Dangling junctions — targeting a global link-store entry that we deleted earlier — break yarn's link reconciliation silently.
 - `prestart` — a thin delegator (`yarn verji:prestart`) that exists only so the npm lifecycle auto-fires the Verji script before `yarn start`. Upstream's `start` script is untouched, which keeps future upstream merges clean.
 
 You should not need to intervene manually. If you ever want to run the cleanup on its own, `yarn verji:prestart` does it.
@@ -194,11 +194,11 @@ After a successful `yarn add`, the fingerprint plus the list of installed module
 
 ### Expected effect on the dev loop
 
-| Scenario | Before | After |
-|---|---|---|
-| Repeat `yarn start` with same module set | ~1 hour | <1 s (installer) + cold or warm webpack compile |
-| Toggle a module in `build_config.yaml` | ~1 hour | ~1 hour (expected — different module set) |
-| Edit a module's source and `yarn build` in that module | ~1 hour | ~1 hour (expected — lib mtime changed) |
+| Scenario                                               | Before  | After                                           |
+| ------------------------------------------------------ | ------- | ----------------------------------------------- |
+| Repeat `yarn start` with same module set               | ~1 hour | <1 s (installer) + cold or warm webpack compile |
+| Toggle a module in `build_config.yaml`                 | ~1 hour | ~1 hour (expected — different module set)       |
+| Edit a module's source and `yarn build` in that module | ~1 hour | ~1 hour (expected — lib mtime changed)          |
 
 Combined with the webpack filesystem cache from §4, a repeated `yarn start` with no changes can drop from "hour+" to "seconds" end-to-end.
 

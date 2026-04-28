@@ -222,8 +222,8 @@ Verji custom code in the Element codebase is marked with comment markers for tra
 - **Markdown**: `<!-- Verji -->` HTML comment above new sections. Files that are 100% Verji-custom (like this one and everything under `docs/Verji/`) do not need per-section markers.
 - **JSON** (no native comments): use a sibling `"//verji_<key>"` pseudo-key only if attribution would otherwise be unclear; prefer naming the referenced script/file with a Verji prefix instead (e.g. the `verji:prestart` entry in `package.json`).
 - **Legacy / merge-tracking markers**:
-  - `// ROSBERG` or `// Rosberg` — legacy marker from an earlier project name (same meaning as `// Verji`; do not strip when seen).
-  - `// VERJI MERGE` — flags areas that need attention after upstream merges.
+    - `// ROSBERG` or `// Rosberg` — legacy marker from an earlier project name (same meaning as `// Verji`; do not strip when seen).
+    - `// VERJI MERGE` — flags areas that need attention after upstream merges.
 
 These markers are critical during upstream syncs — they identify every line of custom code that must survive a merge. An approximate baseline count lives in the workspace-level `CLAUDE.md`; the authoritative audit command is:
 

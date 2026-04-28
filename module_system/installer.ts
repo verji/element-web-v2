@@ -207,9 +207,7 @@ function verjiGuardAgainstRecursion(config: BuildConfig): void {
     }
 
     // B1. Residue check — orphan `npm-element-web-*` cache entries from prior recursive packing.
-    const yarnCacheV6 = process.env.LOCALAPPDATA
-        ? path.join(process.env.LOCALAPPDATA, "Yarn", "Cache", "v6")
-        : null;
+    const yarnCacheV6 = process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, "Yarn", "Cache", "v6") : null;
     if (yarnCacheV6 && fs.existsSync(yarnCacheV6)) {
         try {
             const orphans = fs.readdirSync(yarnCacheV6).filter((name) => /^npm-element-web-/.test(name));

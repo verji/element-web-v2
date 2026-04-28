@@ -133,6 +133,7 @@ export function formatList(items: ReactNode[], itemLimit = items.length, include
  * @param {number?} itemLimit the number by which to limit the list.
  * @returns {string} a string constructed by joining `items` with a comma
  * between each item, but with the last item appended as " and [lastItem]".
+ * @public Verji addition retained for upstream-port parity even when no current callers — see knip.ts.
  */
 // Verji additions
 export function formatCommaSeparatedList(items: string[], itemLimit?: number): string;
