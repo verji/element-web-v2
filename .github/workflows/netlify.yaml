@@ -1,14 +1,11 @@
 # Triggers after the layered build has finished, taking the artifact
 # and uploading it to netlify
 name: Upload Preview Build to Netlify
+# VERJI workflow_run trigger removed — Netlify preview only runs on manual dispatch
 on:
-    workflow_run:
-        workflows: ["End to End Tests"]
-        types:
-            - completed
+    workflow_dispatch: {}
 jobs:
     deploy:
-        if: github.event.workflow_run.conclusion != 'cancelled' && github.event.workflow_run.event == 'pull_request'
         runs-on: ubuntu-24.04
         environment: Netlify
         permissions:

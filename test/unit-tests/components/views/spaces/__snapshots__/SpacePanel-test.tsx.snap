@@ -231,12 +231,11 @@ exports[`<SpacePanel /> should show all activated MetaSpaces in the correct orde
       class="mx_ThreadsActivityCentre_container"
     >
       <button
-        aria-controls=":r12:"
-        aria-describedby=":r12:"
+        aria-controls="[useId]"
         aria-expanded="true"
         aria-haspopup="dialog"
         aria-label="Threads"
-        aria-labelledby=":r14:"
+        aria-labelledby="[useId]"
         class="_icon-button_bh2qc_17 mx_ThreadsActivityCentreButton"
         data-floating-ui-inert=""
         role="button"
@@ -275,9 +274,9 @@ exports[`<SpacePanel /> should show all activated MetaSpaces in the correct orde
         tabindex="0"
       />
       <span
-        aria-owns=":r19:"
+        aria-owns="[useId]"
         data-floating-ui-inert=""
-        style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
+        style="clip-path: inset(50%); position: fixed; top: 0px; left: 0px;"
       />
       <span
         data-floating-ui-focus-guard=""

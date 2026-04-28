@@ -33,8 +33,7 @@ import { Action } from "../../../dispatcher/actions";
 import { useTheme } from "../../../hooks/useTheme";
 import { findHighContrastTheme, getOrderedThemes, CustomTheme as CustomThemeType, ITheme } from "../../../theme";
 import { useSettingValue } from "../../../hooks/useSettings";
-
-// VERJI MERGE - Heavily altered file, we must likely revisit and reimplement the SettingsStore.getValue(UIFeature.CustomThemePanel) Feature flag
+import { UIFeature } from "../../../settings/UIFeature";
 
 /**
  * Panel to choose the theme
@@ -50,7 +49,9 @@ export function ThemeChoicePanel(): JSX.Element {
                 <SystemTheme systemThemeActivated={themeState.systemThemeActivated} />
             )}
             <ThemeSelectors theme={themeState.theme} disabled={themeState.systemThemeActivated} />
-            {customThemeEnabled && <CustomTheme theme={themeState.theme} />}
+            {customThemeEnabled && SettingsStore.getValue(UIFeature.CustomThemePanel) && (
+                <CustomTheme theme={themeState.theme} />
+            )}
         </SettingsSubsection>
     );
 }

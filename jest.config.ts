@@ -38,7 +38,7 @@ const config: Config = {
         "recorderWorkletFactory": "<rootDir>/__mocks__/empty.js",
         "^fetch-mock$": "<rootDir>/node_modules/fetch-mock",
     },
-    transformIgnorePatterns: ["/node_modules/(?!(mime|matrix-js-sdk)).+$"],
+    transformIgnorePatterns: ["/node_modules/(?!(mime|matrix-js-sdk|matrix-web-i18n)).+$"],
     collectCoverageFrom: [
         "<rootDir>/src/**/*.{js,ts,tsx}",
         // getSessionLock is piped into a different JS context via stringification, and the coverage functionality is

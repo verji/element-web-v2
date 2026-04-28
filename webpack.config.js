@@ -197,6 +197,16 @@ module.exports = (env, argv) => {
             // We need to specify that TS can be resolved without an extension
             extensions: [".js", ".json", ".ts", ".tsx"],
             alias: {
+                // Verji Start: explicit self-reference for @verji/* modules that import
+                // Verji        from "element-web/src/...". Previously resolved via a junction
+                // Verji        that yarn v1 created from the modules' `link:../element-web-v2`
+                // Verji        dep, but that dep is now in devDependencies (see
+                // Verji        docs/Verji/DevLoopWindows.md) to avoid yarn v1's circular
+                // Verji        link-protocol EEXIST + 7 GB cache explosion. Aliasing here
+                // Verji        makes the resolution explicit and independent of yarn state.
+                "element-web": __dirname,
+                // Verji End
+
                 // alias any requires to the react module to the one in our path,
                 // otherwise we tend to get the react source included twice when
                 // using `npm link` / `yarn link`.
@@ -209,9 +219,10 @@ module.exports = (env, argv) => {
                     __dirname,
                     "node_modules/@matrix-org/react-sdk-module-api",
                 ),
-                // VERJI: We need matrix-react-sdk for modules
-                "matrix-react-sdk": path.resolve(__dirname, "node_modules/matrix-react-sdk"),
-                // and matrix-events-sdk & matrix-widget-api
+                // Verji - matrix-react-sdk alias removed: post-absorption (Dec 2024) it lives
+                // Verji   inside element-web-v2's own source. No verji-*-module imports it
+                // Verji   anymore (verified via workspace grep). Kept the matrix-events-sdk and
+                // Verji   matrix-widget-api aliases below since those remain separate packages.
                 "matrix-events-sdk": path.resolve(__dirname, "node_modules/matrix-events-sdk"),
                 "matrix-widget-api": path.resolve(__dirname, "node_modules/matrix-widget-api"),
                 "oidc-client-ts": path.resolve(__dirname, "node_modules/oidc-client-ts"),
@@ -738,8 +749,22 @@ module.exports = (env, argv) => {
             webassemblyModuleFilename: "bundles/[fullhash]/[modulehash].wasm",
         },
 
+        // Verji Start: persistent filesystem cache so repeated cold starts reuse
+        // Verji        the dependency graph. First successful compile writes to
+        // Verji        node_modules/.cache/webpack; subsequent starts reuse it.
+        // Verji        Invalidation is automatic — see docs/Verji/DevLoopWindows.md.
+        cache: {
+            type: "filesystem",
+            buildDependencies: {
+                config: [__filename],
+            },
+        },
+        // Verji End
+
         // configuration for the webpack-dev-server
         devServer: {
+            port: 8081,
+
             client: {
                 overlay: {
                     // Only show overlay on build errors as anything more can get annoying quickly

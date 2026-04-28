@@ -586,7 +586,7 @@ exports[`<ThemeChoicePanel /> renders the theme choice UI 1`] = `
             >
               <input
                 class="_input_qnvru_32"
-                id="radix-:r0:"
+                id="radix-[useId]"
                 name="systemTheme"
                 title=""
                 type="checkbox"
@@ -623,7 +623,7 @@ exports[`<ThemeChoicePanel /> renders the theme choice UI 1`] = `
               <input
                 checked=""
                 class="_input_1vw5h_26"
-                id="radix-:r1:"
+                id="radix-[useId]"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -656,7 +656,7 @@ exports[`<ThemeChoicePanel /> renders the theme choice UI 1`] = `
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r2:"
+                id="radix-[useId]"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -689,7 +689,7 @@ exports[`<ThemeChoicePanel /> renders the theme choice UI 1`] = `
             >
               <input
                 class="_input_1vw5h_26"
-                id="radix-:r3:"
+                id="radix-[useId]"
                 name="themeSelector"
                 title=""
                 type="radio"
@@ -733,7 +733,7 @@ exports[`<ThemeChoicePanel /> renders the theme choice UI 1`] = `
               <input
                 aria-describedby="radix-:r5:"
                 class="_control_9gon8_18"
-                id="radix-:r4:"
+                id="radix-[useId]"
                 name="input"
                 title=""
                 value=""
@@ -741,7 +741,7 @@ exports[`<ThemeChoicePanel /> renders the theme choice UI 1`] = `
             </div>
             <span
               class="_message_ssths_93 _help-message_ssths_99"
-              id="radix-:r5:"
+              id="radix-[useId]"
             >
               Enter the URL of a custom theme you want to apply.
             </span>

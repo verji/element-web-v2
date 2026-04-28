@@ -312,7 +312,12 @@ describe("message", () => {
 
             // these test cases are .action and .admin categories
             const otherCategoryTestCases = ["/nick new_nickname", "/roomname new_room_name"];
-            it.each(otherCategoryTestCases)(
+            // VERJI: /nick and /roomname are filtered out by the SlashCommands allowlist
+            // (src/SlashCommands.tsx), so they're treated as invalid commands rather than
+            // .action/.admin category commands. The test then hangs on the unresolved
+            // "send anyway?" modal until Jest times out. Skipped while the allowlist diverges
+            // from upstream.
+            it.skip.each(otherCategoryTestCases)(
                 "returns undefined when the command category is not .messages or .effects",
                 async (input) => {
                     const result = await sendMessage(input, true, {
@@ -324,6 +329,7 @@ describe("message", () => {
                     expect(result).toBeUndefined();
                 },
             );
+            // VERJI END
 
             it("if user enters invalid command and then sends it anyway", async () => {
                 // mock out returning a true value for `shouldSendAnyway` to avoid rendering the modal

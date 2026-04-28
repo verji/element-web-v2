@@ -8,6 +8,9 @@ Please see LICENSE files in the repository root for full details.
 import * as fs from "fs";
 import * as childProcess from "child_process";
 import * as semver from "semver";
+// Verji - crypto + path used by the install-cache short-circuit below
+import * as crypto from "crypto";
+import * as path from "path";
 
 import { type BuildConfig } from "./BuildConfig";
 
@@ -24,10 +27,242 @@ const MODULES_TS_HEADER = `
  */
 
 import { RuntimeModule } from "@matrix-org/react-sdk-module-api/lib/RuntimeModule";
+import { ModuleApi } from "@matrix-org/react-sdk-module-api/lib/ModuleApi";
+
+type ModuleConstructor = new (api: ModuleApi) => RuntimeModule;
 `;
 const MODULES_TS_DEFINITIONS = `
-export const INSTALLED_MODULES: RuntimeModule[] = [];
+export const INSTALLED_MODULES: ModuleConstructor[] = [];
 `;
+
+// Verji Start: install-cache short-circuit. On Windows, `yarn add -O file:...`
+// Verji        of the @verji/* modules takes ~1 hour per run, and is the
+// Verji        dominant cost of every `yarn start`. We compute a fingerprint
+// Verji        over the module list + each module's package.json + each
+// Verji        module's lib/ mtimes; if it matches the last successful
+// Verji        install's fingerprint AND node_modules/@verji and src/modules.ts
+// Verji        exist, we skip `yarn add` entirely and just regenerate
+// Verji        src/modules.ts from the cached installed-module list.
+// Verji        See docs/Verji/DevLoopWindows.md §6.
+const VERJI_CACHE_PATH = "./node_modules/.verji-install-cache.json";
+const VERJI_CACHE_VERSION = 1;
+
+type VerjiInstallCache = {
+    version: number;
+    fingerprint: string;
+    installedModules: string[];
+};
+
+function latestMtimeIn(dir: string): number {
+    let latest = 0;
+    try {
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const full = path.join(dir, entry.name);
+            if (entry.isDirectory()) {
+                latest = Math.max(latest, latestMtimeIn(full));
+            } else {
+                latest = Math.max(latest, fs.statSync(full).mtimeMs);
+            }
+        }
+    } catch {
+        /* directory missing or unreadable — contribute zero */
+    }
+    return latest;
+}
+
+function computeVerjiInstallFingerprint(config: BuildConfig): string {
+    const hash = crypto.createHash("sha256");
+    hash.update(JSON.stringify(config.modules));
+    for (const ref of config.modules ?? []) {
+        const m = ref.match(/^file:(.+)$/);
+        if (m) {
+            const modDir = path.resolve(m[1]);
+            const pkgPath = path.join(modDir, "package.json");
+            if (fs.existsSync(pkgPath)) hash.update(fs.readFileSync(pkgPath));
+            hash.update(String(latestMtimeIn(path.join(modDir, "lib"))));
+        }
+    }
+    return hash.digest("hex");
+}
+
+function loadVerjiInstallCache(): VerjiInstallCache | null {
+    try {
+        const raw = fs.readFileSync(VERJI_CACHE_PATH, "utf-8");
+        const parsed = JSON.parse(raw) as VerjiInstallCache;
+        if (parsed.version !== VERJI_CACHE_VERSION) return null;
+        return parsed;
+    } catch {
+        return null;
+    }
+}
+
+function writeVerjiInstallCache(cache: VerjiInstallCache): void {
+    try {
+        fs.writeFileSync(VERJI_CACHE_PATH, JSON.stringify(cache, null, 2), "utf-8");
+    } catch (err) {
+        console.warn("Verji installer: failed to write install cache:", err);
+    }
+}
+
+function writeModulesTsFor(installedModules: string[]): void {
+    let modulesTsHeader = MODULES_TS_HEADER;
+    let modulesTsDefs = MODULES_TS_DEFINITIONS;
+    let index = 0;
+    for (const moduleName of installedModules) {
+        const importName = `Module${++index}`;
+        modulesTsHeader += `import ${importName} from "${moduleName}";\n`;
+        modulesTsDefs += `INSTALLED_MODULES.push(${importName});\n`;
+    }
+    writeModulesTs(modulesTsHeader + modulesTsDefs);
+}
+
+// Verji - runtime guards that abort before yarn add runs if we detect
+// Verji   conditions that cause yarn v1 to recursively pack a workspace
+// Verji   sibling into its cache (7 GB+ per attempt, grows unboundedly).
+// Verji   See docs/Verji/VerjiModules.md §"Issues we uncovered".
+function verjiGuardAgainstRecursion(config: BuildConfig): void {
+    const problems: string[] = [];
+
+    // Z. Self-reference check — element-web-v2's OWN package.json declaring itself
+    //    as a dep. This was the actual root cause of the week-long debugging saga
+    //    in April 2026: a leftover `"element-web": "file:../element-web-v2"` entry
+    //    in element-web-v2's own devDependencies caused every `yarn install` to
+    //    recursively install element-web inside element-web inside element-web,
+    //    producing the 7 GB cache entries and BSODs. Catch this regression first
+    //    because it's the most expensive failure mode if it slips through.
+    try {
+        const ownPkg = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
+        const ownName = ownPkg.name;
+        if (typeof ownName === "string" && ownName.length > 0) {
+            for (const section of ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"]) {
+                const sectionDeps = (ownPkg[section] ?? {}) as Record<string, string>;
+                if (ownName in sectionDeps) {
+                    problems.push(
+                        `[Z] element-web-v2/package.json declares its own name "${ownName}" in \`${section}\` ` +
+                            `with spec "${sectionDeps[ownName]}". This is a self-reference that yarn v1 will ` +
+                            `try to satisfy by recursively installing the project inside itself, producing ` +
+                            `unbounded recursive packing into the yarn cache (~7 GB per attempt, fills disks, ` +
+                            `causes BSODs). Remove the entry. See docs/Verji/VerjiModules.md §"The actual root cause".`,
+                    );
+                }
+            }
+        }
+    } catch {
+        /* couldn't read own manifest — let yarn surface that error itself */
+    }
+
+    // A. Manifest check — each file: dep's package.json.
+    for (const ref of config.modules ?? []) {
+        const m = ref.match(/^file:(.+)$/);
+        if (!m) continue;
+        const modDir = path.resolve(m[1]);
+        const pkgPath = path.join(modDir, "package.json");
+        if (!fs.existsSync(pkgPath)) continue;
+        let pkg: Record<string, unknown>;
+        try {
+            pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+        } catch {
+            continue;
+        }
+        const deps = (pkg.dependencies ?? {}) as Record<string, string>;
+        const peerDeps = (pkg.peerDependencies ?? {}) as Record<string, string>;
+        // element-web cannot live in `dependencies` or `peerDependencies` — both
+        // trigger yarn v1's recursive self-packing when the consuming project
+        // also has `name: "element-web"`. peerDep triggers because yarn resolves
+        // the peer by `name` against the current project and treats it as a
+        // link-protocol satisfier. Must be in `devDependencies` only (or absent).
+        if ("element-web" in deps) {
+            problems.push(
+                `[A] ${path.basename(modDir)}: declares "element-web": "${deps["element-web"]}" in \`dependencies\`. ` +
+                    `This causes yarn v1 to recursively pack element-web into its cache ` +
+                    `(7 GB+ per attempt, grows unboundedly). Move it to \`devDependencies\` (not ` +
+                    `\`peerDependencies\` — that also triggers the same bug). See docs/Verji/VerjiModules.md §Part B.`,
+            );
+        }
+        if ("element-web" in peerDeps) {
+            problems.push(
+                `[A] ${path.basename(modDir)}: declares "element-web": "${peerDeps["element-web"]}" in \`peerDependencies\`. ` +
+                    `This *also* causes yarn v1 to recursively pack element-web (verified with depth-5 nesting ` +
+                    `on a 7 GB cache entry). Remove the entry entirely — the runtime dependency on element-web ` +
+                    `is handled by the webpack alias in element-web-v2/webpack.config.js; documenting it as a ` +
+                    `peerDep adds nothing functional and triggers the bug. See docs/Verji/VerjiModules.md.`,
+            );
+        }
+        for (const [depName, depSpec] of Object.entries(deps)) {
+            if (depName === "element-web") continue; // already flagged above
+            if (typeof depSpec === "string" && depSpec.startsWith("link:")) {
+                const linkPath = depSpec.slice("link:".length);
+                const resolvedTarget = path.resolve(modDir, linkPath);
+                const workspaceRoot = path.resolve(modDir, "..");
+                if (resolvedTarget === workspaceRoot || resolvedTarget.startsWith(workspaceRoot + path.sep)) {
+                    problems.push(
+                        `[A] ${path.basename(modDir)}: declares "${depName}": "${depSpec}" in \`dependencies\`. ` +
+                            `This is a workspace-sibling \`link:\` reference that may trigger the same ` +
+                            `recursive-packing failure mode as the element-web case. Move it to ` +
+                            `\`devDependencies\`.`,
+                    );
+                }
+            }
+        }
+    }
+
+    // B1. Residue check — orphan `npm-element-web-*` cache entries from prior recursive packing.
+    const yarnCacheV6 = process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, "Yarn", "Cache", "v6") : null;
+    if (yarnCacheV6 && fs.existsSync(yarnCacheV6)) {
+        try {
+            const orphans = fs.readdirSync(yarnCacheV6).filter((name) => /^npm-element-web-/.test(name));
+            if (orphans.length > 0) {
+                problems.push(
+                    `[B] Found ${orphans.length} orphan \`npm-element-web-*\` cache entr${orphans.length === 1 ? "y" : "ies"} in ${yarnCacheV6}. ` +
+                        `Residue from a prior recursive-packing run; will grow unboundedly if install continues. ` +
+                        `Clean it up (see docs/Verji/VerjiModules.md §"What to check if issues recur") before retrying.`,
+                );
+            }
+        } catch {
+            /* unreadable cache — skip */
+        }
+    }
+
+    // B2. Residue check — recursive @verji/<mod>/node_modules/element-web/node_modules/element-web nesting.
+    const verjiDir = path.resolve("./node_modules/@verji");
+    if (fs.existsSync(verjiDir)) {
+        try {
+            for (const mod of fs.readdirSync(verjiDir)) {
+                const nestedPath = path.join(
+                    verjiDir,
+                    mod,
+                    "node_modules",
+                    "element-web",
+                    "node_modules",
+                    "element-web",
+                );
+                if (fs.existsSync(nestedPath)) {
+                    problems.push(
+                        `[B] Recursive element-web nesting detected at ${nestedPath}. ` +
+                            `This is the exact failure mode that caused 7 GB cache entries and disk exhaustion. ` +
+                            `Run \`yarn verji:prestart\` to clean and retry.`,
+                    );
+                    break;
+                }
+            }
+        } catch {
+            /* unreadable — skip */
+        }
+    }
+
+    if (problems.length > 0) {
+        console.error(
+            "Verji installer: ABORT — detected conditions that cause yarn v1 to recursively pack element-web:",
+        );
+        for (const p of problems) {
+            console.error("  " + p);
+        }
+        console.error("");
+        console.error("See docs/Verji/VerjiModules.md for the full explanation and fixes.");
+        process.exit(1);
+    }
+}
+// Verji End
 
 export function installer(config: BuildConfig): void {
     if (!config.modules?.length) {
@@ -35,6 +270,25 @@ export function installer(config: BuildConfig): void {
         writeModulesTs(MODULES_TS_HEADER + MODULES_TS_DEFINITIONS);
         return;
     }
+
+    // Verji Start: short-circuit if module set + content unchanged since last successful install.
+    const fingerprint = computeVerjiInstallFingerprint(config);
+    const cached = loadVerjiInstallCache();
+    const verjiDirExists = fs.existsSync("./node_modules/@verji");
+    const modulesTsExists = fs.existsSync("./src/modules.ts");
+    if (cached && cached.fingerprint === fingerprint && verjiDirExists && modulesTsExists) {
+        console.log("Verji installer: fingerprint matches last successful install — skipping yarn add.");
+        console.log("Verji installer: reusing modules:", cached.installedModules);
+        writeModulesTsFor(cached.installedModules);
+        console.log("Verji installer: done (short-circuited).");
+        return;
+    }
+    if (cached) {
+        console.log("Verji installer: fingerprint changed since last install — running full yarn add.");
+    } else {
+        console.log("Verji installer: no install cache yet — running full yarn add.");
+    }
+    // Verji End
 
     let exitCode = 0;
 
@@ -47,9 +301,13 @@ export function installer(config: BuildConfig): void {
     // them from our "must be a module" assumption later on.
     const currentOptDeps = getOptionalDepNames(packageDeps.packageJson);
 
+    // Verji - abort early if any module manifest shape or residual workspace
+    // Verji   state would trigger yarn v1's recursive self-packing.
+    verjiGuardAgainstRecursion(config);
+
     try {
         // Install the modules with yarn
-        const yarnAddRef = config.modules.join(" ");
+        const yarnAddRef = config.modules!.join(" ");
         callYarnAdd(yarnAddRef); // install them all at once
 
         // Grab the optional dependencies again and exclude what was there already. Everything
@@ -94,6 +352,12 @@ export function installer(config: BuildConfig): void {
         }
         writeModulesTs(modulesTsHeader + modulesTsDefs);
         console.log("Done installing modules");
+        // Verji - persist fingerprint so the next `yarn start` can short-circuit.
+        writeVerjiInstallCache({
+            version: VERJI_CACHE_VERSION,
+            fingerprint,
+            installedModules,
+        });
     } finally {
         // Always restore package details (or at least try to)
         writePackageDetails(packageDeps);

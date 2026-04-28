@@ -438,16 +438,16 @@ export default class RolesRoomSettingsTab extends React.Component<IProps, RolesR
         const eventPowerSelectors = Object.keys(eventsLevels)
             //Verji start
             .filter((eventType) => {
-                const rosbergHidden = [
+                const verjiHidden = [
                     "im.vector.modular.widgets",
                     "m.room.tombstone",
                     "m.room.third_party_invite",
                     "m.room.server_acl",
                     "m.room.history_visibility",
                     "m.room.canonical_alias",
-                    "m.room.redaction",
+                    // "m.room.redaction",
                 ];
-                return rosbergHidden.indexOf(eventType) === -1;
+                return verjiHidden.indexOf(eventType) === -1;
             }) // Verji end
 
             .map((eventType, i) => {

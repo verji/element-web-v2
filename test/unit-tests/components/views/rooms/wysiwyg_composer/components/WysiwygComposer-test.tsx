@@ -68,7 +68,12 @@ describe("WysiwygComposer", () => {
         beforeEach(async () => {
             mockPlatformPeg({ overrideBrowserShortcuts: jest.fn().mockReturnValue(false) });
             customRender(onChange, onSend);
-            await waitFor(() => expect(screen.getByRole("textbox")).toHaveAttribute("contentEditable", "true"));
+            // VERJI: bumped from default 1000ms — first editable render in CI does the
+            // cold-start WASM init for @vector-im/matrix-wysiwyg, which can exceed 1s on
+            // Linux runners.
+            await waitFor(() => expect(screen.getByRole("textbox")).toHaveAttribute("contentEditable", "true"), {
+                timeout: 10000,
+            });
         });
 
         afterEach(() => {

@@ -1360,6 +1360,10 @@ export const SETTINGS: { [setting: string]: ISetting } = {
         supportedLevels: LEVELS_UI_FEATURE,
         default: true,
     },
+    [UIFeature.EnableRoomDevToolsOptions]: {
+        supportedLevels: LEVELS_UI_FEATURE,
+        default: true,
+    },
     [UIFeature.WidgetContextDeleteButton]: {
         supportedLevels: LEVELS_UI_FEATURE,
         default: true,
@@ -1467,6 +1471,19 @@ export const SETTINGS: { [setting: string]: ISetting } = {
     [UIFeature.LeaveSpaceButton]: {
         supportedLevels: LEVELS_UI_FEATURE,
         default: true,
+    },
+    [UIFeature.SwitchSpaceOnDMSelect]: {
+        supportedLevels: LEVELS_UI_FEATURE,
+        default: true,
+    },
+    [UIFeature.ShowNsfwContentSetting]: {
+        supportedLevels: LEVELS_UI_FEATURE,
+        default: true,
+    },
+    // VERJI: When enabled, includes Verji-fetched DM rooms in space badge notification counts
+    [UIFeature.VerjiSpaceDmBadges]: {
+        supportedLevels: LEVELS_UI_FEATURE,
+        default: false,
     },
 
     // Electron-specific settings, they are stored by Electron and set/read over an IPC.

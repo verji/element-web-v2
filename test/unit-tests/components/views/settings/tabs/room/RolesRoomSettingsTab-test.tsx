@@ -107,7 +107,8 @@ describe("RolesRoomSettingsTab", () => {
                         target: { value: 0 },
                     });
 
-                    expect(getJoinCallSelectedOption(tab)?.textContent).toBe("Default");
+                    // VERJI: default power level is labelled "Standard" in Verji's role mapping
+                    expect(getJoinCallSelectedOption(tab)?.textContent).toBe("Standard");
                     expect(cli.sendStateEvent).toHaveBeenCalledWith(roomId, EventType.RoomPowerLevels, {
                         events: {
                             [ElementCall.MEMBER_EVENT_TYPE.name]: 0,
@@ -128,7 +129,8 @@ describe("RolesRoomSettingsTab", () => {
                         target: { value: 0 },
                     });
 
-                    expect(getStartCallSelectedOption(tab)?.textContent).toBe("Default");
+                    // VERJI: default power level is labelled "Standard" in Verji's role mapping
+                    expect(getStartCallSelectedOption(tab)?.textContent).toBe("Standard");
                     expect(cli.sendStateEvent).toHaveBeenCalledWith(roomId, EventType.RoomPowerLevels, {
                         events: {
                             [ElementCall.CALL_EVENT_TYPE.name]: 0,

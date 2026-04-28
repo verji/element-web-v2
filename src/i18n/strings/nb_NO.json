@@ -27,6 +27,9 @@
         "error_429": "429: For mange forespørsler.",
         "error_500": "500: Intern serverfeil.",
         "loading_error": "Oops, noe gikk galt under lasting av data.",
+        "dm_fetch_error_message": "Noe gikk galt ved henting av direktemeldingene dine for denne enheten.",
+        "dm_fetch_error_timeout": "Tidsavbrudd",
+        "dm_fetch_error_unknown": "Ukjent feil",
         "missing_info_invite": "Vennligst fyll ut all manglende informasjon for dine gjester og velg organisasjonen du ønsker å invitere dem til.",
         "admin_portal_invitations": "'Admin Portal' > 'Invitasjoner' > 'Invitasjoner uten BankID'",
         "no_admin_access": "Din konto er ikke satt opp som administrator for denne organisasjonen, så du kan ikke invitere gjester.",
@@ -58,11 +61,17 @@
         "email_label": "E-post",
         "existing_email_error_message": "En eller flere av e-postene du skrev inn, er allerede Verji-brukere. Vennligst bekreft at informasjonen er korrekt, og inviter dem til %(tenant)s.",
         "invite_button": "Inviter",
-        "power_levels": {
-            "customer_admin": "Kunde",
-            "rosberg_admin": "Rosberg",
+        "power_level": {
+            "tenant_admin": "Leietager Admin",
+            "verji_admin": "Verji",
             "system_admin": "System",
-            "standard": "Standard"
+            "standard": "Standard",
+            "default": "Standard",
+            "moderator": "Moderator",
+            "admin": "Administrator",
+            "tenant": "Leietager Admin",
+            "verji": "Verji",
+            "system": "System Admin"
         },
         "connected_to_organization_label": "Tilkoblet til organisasjon",
         "confirm_guest_invite": "Bekreft gjesteinvitasjon",
@@ -71,8 +80,13 @@
         "inviting_status": "Inviterer",
         "confirm_button": "Bekreft",
         "existing_guest_instructions": "Følgende gjest(er) %(users)s er allerede Verji-brukere. Følg instruksjonene nedenfor for å invitere eksisterende brukere.",
-        "invite_process_error": "Oops, noe gikk galt under invitasjonsprosessen. Du kan spore invitasjonene dine ved å åpne din %(path)s.",
-        "invite_new_users": "Inviter nye brukere til %(tenant)s",
+        "invite_process_error": "Oops, noe gikk galt under invitasjonsprosessen. Naviger til: ",
+        "invite_dialog": {
+            "invite_new_users": "Inviter nye brukere til %(tenant)s",
+            "invalid_phonenumber": "Ugyldig telefonnummer",
+            "invalid_mobilephonenumber": "Ugyldig mobilnummer",
+            "warning" : "Nummeret støtter kanskje ikke SMS"
+        },
         "user_settings_help_about": {
             "bug_report": "Feilrapportering",
             "experience_errors": "Dersom du opplever feil i Verji, kan du kontakte Verji Support",
@@ -95,6 +109,10 @@
             "title": "Nyheter",
             "messages": "Nyheter fra Verji",
             "readarticle": "Les hele artikkelen"
+        },
+        "themes": {
+            "Lys": "Lys",
+            "Mørk": "Mørk"
         }
     },
     "%(duration)sd": "%(duration)sd",
@@ -1177,7 +1195,7 @@
         "voice_message_button": "Talemelding"
     },
     "console_dev_note": "Dette til advarsel",
-    "console_scam_warning": "Hvis noen ba deg om å kopiere/lime inn noe her, er det stor sannsynlighet for at du blir svindlet!",
+    "console_scam_warning": "Kun kopier eller lime inn noe her hvis det kommer fra Verjis offisielle kanaler. Verji support bruker console noen ganger for å feilsøke, men fra andre kilder er det stor sjanse for svindel!",
     "console_wait": "Vent!",
     "create_room": {
         "action_create_room": "Opprett rom",
@@ -1842,9 +1860,9 @@
         "failed_title": "Klarte ikke invitere",
         "invalid_address": "Adressen ble ikke gjenkjent",
         "key_share_warning": "Inviterte personer Kan lese tidligere meldinger.",
-        "name_email_mxid_share_room": "Inviter noen ved å bruke navn, eller inviter nye gjester med e-postadressen deres.",
+        "name_email_mxid_share_room": "Inviter noen ved å bruke deres navn.",
         "name_email_mxid_share_space": "Inviter noen ved å bruke navn, e-postadresse, brukernavn (lik <userId/>) eller <a> del dette området</a>.",
-        "name_mxid_share_room": "Inviter noen ved å bruke deres navn, eller inviter nye gjester med e-postadressen deres",
+        "name_mxid_share_room": "Inviter noen ved å bruke deres navn.",
         "name_mxid_share_space": "Inviter noen ved å bruke deres navn",
         "recents_section": "Nylige samtaler",
         "room_failed_partial": "Vi sendte de andre, men folkene nedenfor kunne ikke inviteres til <RoomName/>",
@@ -2245,7 +2263,7 @@
         "google_trademarks": "Google Play og Google Play-logoen er varemerker for Google LLC.",
         "has_avatar_label": "Flott, det vil hjelp folk å ha tillit til at det er deg",
         "intro_byline": "Ei samtalene dine.",
-        "intro_welcome": "Velkommen til %(appName)s",
+        "intro_welcome": "Velkommen til Verji",
         "no_avatar_label": "Legg til et bilde slik at folk vet at det er deg.",
         "only_n_steps_to_go": {
             "one": "Bare %(count)s trinn igjen",
@@ -2842,7 +2860,7 @@
             "m.room.name_space": "Endre område navn",
             "m.room.pinned_events": "Administrer festede hendelser",
             "m.room.power_levels": "Endre tillatelser",
-            "m.room.redaction": "Fjern meldinger sendt av meg",
+            "m.room.redaction": "Fjern egne meldinger",
             "m.room.server_acl": "Endre server-ACL-er",
             "m.room.tombstone": "Oppgrader rommet",
             "m.room.topic": "Endre samtaletema",
@@ -3795,7 +3813,7 @@
     },
     "theme": {
         "light_high_contrast": "Lys høy kontrast",
-        "match_system": "Match system"
+        "match_system": "Systemtema"
     },
     "thread_view_back_action_label": "Tilbake til tråden",
     "threads": {

@@ -193,7 +193,10 @@ export default class MessageContextMenu extends React.Component<IProps, IState> 
             this.props.mxEvent.getType() !== EventType.RoomEncryption &&
             redactable;
         //Verji end
-        // VERJI MERGE - May have to revisit pin-button mechanics (Our version differs a bit)
+        // VERJI MERGE: upstream Element removed the `feature_pinning` setting (pinning is now stable, not behind a flag).
+        // The Dec-2024 absorption left the `if (!SettingsStore.getValue("feature_pinning")) canPin = false;` check
+        // in place, but the setting is no longer registered in Settings.tsx — calling getValue throws and breaks the
+        // whole context menu. Removed; permissions checks via PinningUtils still gate the action correctly.
         const canPin = PinningUtils.canPin(cli, this.props.mxEvent) || PinningUtils.canUnpin(cli, this.props.mxEvent);
 
         this.setState({ canRedact, canPin });
