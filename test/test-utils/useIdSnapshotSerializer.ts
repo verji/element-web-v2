@@ -1,4 +1,5 @@
-// VERJI - Custom snapshot serializer added by Verji.
+// VERJI - Custom snapshot serializer added by Verji. Internal/private code; no copyright header by intent.
+/* eslint-disable matrix-org/require-copyright-header */
 /*
 Custom snapshot serializer that normalizes React 18 `useId()` values so
 DOM snapshots stay stable across environments. Without this, the same component

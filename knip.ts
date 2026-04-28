@@ -50,6 +50,8 @@ export default {
         "@types/katex",
         // Used at runtime by `webpack serve` in the start:js script
         "webpack-dev-server",
+        // Type-only import in test/test-utils/useIdSnapshotSerializer.ts; provided transitively by jest
+        "pretty-format",
         // Verji ignore dependencies used in verji-modules
         "browserify",
         "rss-parser",
