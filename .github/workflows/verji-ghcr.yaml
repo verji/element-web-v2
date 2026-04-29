@@ -30,7 +30,8 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v5
               with:
-                  fetch-depth: 0 # needed for docker-package to be able to calculate the version
+                  fetch-depth: 0 # full history needed by docker-package for version calculation
+                  fetch-tags: true # `git describe --tags` inside the container needs the tags
 
             - name: Log in to GHCR
               uses: docker/login-action@v3
@@ -49,8 +50,8 @@ jobs:
                   IMAGE="${{ env.REGISTRY }}/element-web-v2"
 
                   docker build \
+                    --secret id=gh_packages_token,env=GH_PACKAGES_TOKEN \
                     --build-arg BUILD_ID=${{ github.run_number }} \
-                    --build-arg GH_PACKAGES_TOKEN=${{ secrets.VERJI_REPO_READ_PAT }} \
                     -t "${IMAGE}:${TAG}" \
                     -t "${IMAGE}:latest" \
                     -f Dockerfile.Verji \

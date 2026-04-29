@@ -1,7 +1,8 @@
+# syntax=docker/dockerfile:1
+
 # Builder
 FROM node:20-bullseye AS builder
 
-ARG GH_PACKAGES_TOKEN
 ARG BUILD_ID
 
 RUN apt-get update && apt-get install -y git dos2unix
@@ -11,19 +12,25 @@ WORKDIR /src
 
 COPY . /src
 
-# .npmrc — auth for @verji/* packages from GitHub Packages registry
-RUN echo '@verji:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken='${GH_PACKAGES_TOKEN} >> .npmrc
-
-# Allow yarn install to clone private github URL deps (matrix-js-sdk-v2,
-# matrix-react-sdk-module-api) using the same token. Token must have read
-# access to those repos — see VerjiModuleVersioning.md "Cross-repo package access".
-RUN git config --global url."https://x-access-token:${GH_PACKAGES_TOKEN}@github.com/".insteadOf "https://github.com/"
-
 # Include the verji modules in the build (rename verji build_config.yaml)
 RUN mv build_config.verji.yaml build_config.yaml
 RUN cat build_config.yaml
 
-RUN yarn --network-timeout=200000 install
+# Install dependencies with the GH_PACKAGES_TOKEN mounted as a BuildKit secret.
+# The token is available only as a tmpfs file at /run/secrets/ during this RUN —
+# never written to any image layer or build cache. Used for two things:
+#   1. .npmrc auth → @verji/* packages from GitHub Packages registry
+#   2. git insteadOf → private github URL deps (matrix-js-sdk-v2, module-api)
+# Both .npmrc and ~/.gitconfig are removed at end-of-RUN so the resulting layer
+# carries no trace of the token. See VerjiModuleVersioning.md "Cross-repo package access".
+RUN --mount=type=secret,id=gh_packages_token \
+    TOKEN=$(cat /run/secrets/gh_packages_token) && \
+    echo "@verji:registry=https://npm.pkg.github.com" > .npmrc && \
+    echo "//npm.pkg.github.com/:_authToken=${TOKEN}" >> .npmrc && \
+    git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/" && \
+    yarn --network-timeout=200000 install && \
+    rm .npmrc && \
+    rm -f /root/.gitconfig
 
 RUN dos2unix /src/scripts/docker-package.sh && bash /src/scripts/docker-package.sh "$BUILD_ID"
 
@@ -37,8 +44,6 @@ COPY --from=builder /src/webapp /app
 
 # Override default nginx config
 COPY /nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
-
-RUN rm -rf .npmrc
 
 RUN rm -rf /usr/share/nginx/html \
   && ln -s /app /usr/share/nginx/html

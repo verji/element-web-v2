@@ -16,5 +16,5 @@ then
 fi
 
 DIST_VERSION=$("$DIR"/normalize-version.sh "$DIST_VERSION")
-DIST_VERSION="$DIST_VERSION-va-$1"
+DIST_VERSION="$DIST_VERSION-verji-$1"
 VERSION=$DIST_VERSION yarn build
