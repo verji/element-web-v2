@@ -1,17 +1,7 @@
 # Builder
-FROM node:20-bullseye as builder
+FROM node:20-bullseye AS builder
 
-# Support custom branches of the react-sdk and js-sdk. This also helps us build
-# images of element-web develop.
-ARG USE_CUSTOM_SDKS=true
-ARG REACT_SDK_REPO
-ARG REACT_SDK_BRANCH="verji-develop"
-ARG JS_SDK_REPO
-ARG JS_SDK_BRANCH="verji-develop"
-ARG MODULE_API_REPO
-ARG MODULE_API_BRANCH="verji-main"
 ARG GH_PACKAGES_TOKEN
-
 ARG BUILD_ID
 
 RUN apt-get update && apt-get install -y git dos2unix
@@ -21,17 +11,19 @@ WORKDIR /src
 
 COPY . /src
 
-#Create .npmrc file
+# .npmrc — auth for @verji/* packages from GitHub Packages registry
 RUN echo '@verji:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken='${GH_PACKAGES_TOKEN} >> .npmrc
-RUN cat .npmrc
+
+# Allow yarn install to clone private github URL deps (matrix-js-sdk-v2,
+# matrix-react-sdk-module-api) using the same token. Token must have read
+# access to those repos — see VerjiModuleVersioning.md "Cross-repo package access".
+RUN git config --global url."https://x-access-token:${GH_PACKAGES_TOKEN}@github.com/".insteadOf "https://github.com/"
+
 # Include the verji modules in the build (rename verji build_config.yaml)
 RUN mv build_config.verji.yaml build_config.yaml
 RUN cat build_config.yaml
 
-RUN dos2unix /src/scripts/docker-link-repos.sh && bash /src/scripts/docker-link-repos.sh
-RUN dos2unix /src/scripts/docker-link-module-api.sh && bash /src/scripts/docker-link-module-api.sh
 RUN yarn --network-timeout=200000 install
-# RUN yarn build
 
 RUN dos2unix /src/scripts/docker-package.sh && bash /src/scripts/docker-package.sh "$BUILD_ID"
 
