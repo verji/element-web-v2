@@ -1,0 +1,66 @@
+name: Build and push image to GitHub Container Registry
+on:
+    workflow_dispatch: {}
+    push:
+        branches: [verji-develop]
+        paths-ignore:
+            - "**.md"
+            - ".github/**"
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref_name }}
+    cancel-in-progress: ${{ github.ref != 'refs/heads/verji-develop' }}
+
+jobs:
+    build-and-push:
+        name: Build and push
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: read
+            packages: write
+
+        env:
+            REGISTRY: ghcr.io/verji
+            GH_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0 # needed for docker-package to be able to calculate the version
+
+            - name: Log in to GHCR
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Compute short SHA
+              id: sha
+              run: echo "short=$(echo ${{ github.sha }} | cut -c1-7)" >> "$GITHUB_OUTPUT"
+
+            - name: Build and push Docker image
+              run: |
+                  TAG="${{ steps.sha.outputs.short }}-${{ github.run_number }}"
+                  IMAGE="${{ env.REGISTRY }}/element-web-v2"
+
+                  docker build \
+                    --build-arg USE_CUSTOM_SDKS=true \
+                    --build-arg REACT_SDK_REPO=${{ secrets.REACT_SDK_WITH_TOKEN }} \
+                    --build-arg JS_SDK_REPO=${{ secrets.JS_SDK_WITH_TOKEN }} \
+                    --build-arg MODULE_API_REPO=${{ secrets.MODULE_API_WITH_TOKEN }} \
+                    --build-arg BUILD_ID=${{ github.run_number }} \
+                    --build-arg GH_PACKAGES_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+                    -t "${IMAGE}:${TAG}" \
+                    -t "${IMAGE}:latest" \
+                    -f Dockerfile.Verji \
+                    .
+
+                  docker push "${IMAGE}:${TAG}"
+                  docker push "${IMAGE}:latest"
+
+                  echo "### Published" >> "$GITHUB_STEP_SUMMARY"
+                  echo "- \`${IMAGE}:${TAG}\`" >> "$GITHUB_STEP_SUMMARY"
+                  echo "- \`${IMAGE}:latest\`" >> "$GITHUB_STEP_SUMMARY"

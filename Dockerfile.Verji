@@ -10,7 +10,7 @@ ARG JS_SDK_REPO
 ARG JS_SDK_BRANCH="verji-develop"
 ARG MODULE_API_REPO
 ARG MODULE_API_BRANCH="verji-main"
-ARG GITHUB_TOKEN
+ARG GH_PACKAGES_TOKEN
 
 ARG BUILD_ID
 
@@ -22,7 +22,7 @@ WORKDIR /src
 COPY . /src
 
 #Create .npmrc file
-RUN echo '@verji:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken='${GITHUB_TOKEN} >> .npmrc
+RUN echo '@verji:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken='${GH_PACKAGES_TOKEN} >> .npmrc
 RUN cat .npmrc
 # Include the verji modules in the build (rename verji build_config.yaml)
 RUN mv build_config.verji.yaml build_config.yaml

@@ -232,12 +232,9 @@ The future webpack-alias approach ([DevLoopWindows.md §7](./DevLoopWindows.md#7
 
 The devDep move (Part B) is also correct for published packages: `dependencies` of a published package become install-time deps of its consumers, which would force anyone installing the module from GitHub Packages to also pull `link:../element-web-v2` — nonsense for a published package. The corrected manifests are safer to publish.
 
-When publishing a new version of `verji-news-module` or `verji-usermenu-module`:
+For the full versioning policy, dual-track architecture (legacy vs v2), dist-tag conventions, per-module manifest shapes, the publish-v2 workflow, and CI auth setup, see **[VerjiModuleVersioning.md](./VerjiModuleVersioning.md)** — the authoritative reference for the release/CI side of the modules.
 
-1. Commit the Part B manifest change in the module's repo.
-2. Bump the version.
-3. Publish to GitHub Packages.
-4. No changes needed in the module's consumers beyond the version bump in build_config.yaml (if they switch from `file:` to registry refs).
+Quick pointer: each module repo has both `main` (legacy) and `main-v2` (v2) branches. Pushes to `main-v2` auto-publish to GitHub Packages under `--tag verji-v2`. Module versions: legacy stays in current series; v2 modules are all `2.0.0+`.
 
 ### The 60-second cleanup if state is actually broken
 
