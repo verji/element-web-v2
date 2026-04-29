@@ -16,21 +16,25 @@ COPY . /src
 RUN mv build_config.verji.yaml build_config.yaml
 RUN cat build_config.yaml
 
-# Install + build with GH_PACKAGES_TOKEN mounted as a BuildKit secret.
-# The token is mounted at /run/secrets/ during this RUN; never written to a layer
-# or the build cache. Used for:
-#   1. .npmrc auth → @verji/* packages from GitHub Packages registry
-#   2. git insteadOf → private github URL deps (matrix-js-sdk-v2, module-api)
-# Install AND build both need this auth — `yarn build:genfiles` invokes the module
-# installer, which runs `yarn add @verji/<module>@verji-v2` against the GH Packages
-# registry, so the .npmrc must still be in place when docker-package.sh runs.
-# Auth files removed at end-of-RUN so the layer carries no token trace.
+# Install + build with two BuildKit secrets mounted:
+#   - gh_packages_token: GITHUB_TOKEN of element-web-v2's workflow.
+#     Reads @verji/* packages from the GitHub Packages npm registry (npm.pkg.github.com).
+#     Cross-package access granted per module via the package's "Manage Actions access" setting.
+#   - verji_repo_read_pat: fine-grained PAT with Contents:Read on the two private upstream repos.
+#     Used by `git insteadOf` so yarn install can clone matrix-js-sdk-v2 / module-api source.
+# Both are tmpfs-mounted at /run/secrets/ during this RUN — never written to a layer or
+# build cache. Install AND build both need this auth: `yarn build:genfiles` invokes the
+# module installer (yarn add @verji/<module>@verji-v2) which hits the GH Packages registry,
+# so .npmrc must still be in place when docker-package.sh runs.
+# .npmrc and ~/.gitconfig are removed at end-of-RUN so the layer carries no token trace.
 # See VerjiModuleVersioning.md "Cross-repo package access".
 RUN --mount=type=secret,id=gh_packages_token \
-    TOKEN=$(cat /run/secrets/gh_packages_token) && \
+    --mount=type=secret,id=verji_repo_read_pat \
+    NPM_TOKEN=$(cat /run/secrets/gh_packages_token) && \
+    GIT_TOKEN=$(cat /run/secrets/verji_repo_read_pat) && \
     echo "@verji:registry=https://npm.pkg.github.com" > .npmrc && \
-    echo "//npm.pkg.github.com/:_authToken=${TOKEN}" >> .npmrc && \
-    git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/" && \
+    echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> .npmrc && \
+    git config --global url."https://x-access-token:${GIT_TOKEN}@github.com/".insteadOf "https://github.com/" && \
     yarn --network-timeout=200000 install && \
     dos2unix /src/scripts/docker-package.sh && \
     bash /src/scripts/docker-package.sh "${BUILD_ID}" && \

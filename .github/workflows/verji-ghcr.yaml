@@ -22,9 +22,13 @@ jobs:
 
         env:
             REGISTRY: ghcr.io/verji
-            # PAT with Contents:Read on verji/matrix-js-sdk-v2 and verji/matrix-react-sdk-module-api,
-            # plus read:packages for @verji/* npm registry. See VerjiModuleVersioning.md.
-            GH_PACKAGES_TOKEN: ${{ secrets.VERJI_REPO_READ_PAT }}
+            # GITHUB_TOKEN reads @verji/* from GitHub Packages npm registry — auth granted via
+            # each module package's "Manage Actions access" settings in GitHub UI.
+            GH_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # Fine-grained PAT with Contents:Read on the two private upstream repos
+            # (verji/matrix-js-sdk-v2 and verji/matrix-react-sdk-module-api). Used by the
+            # Docker build's `git insteadOf` to clone those repos. See VerjiModuleVersioning.md.
+            VERJI_REPO_READ_PAT: ${{ secrets.VERJI_REPO_READ_PAT }}
 
         steps:
             - name: Checkout
@@ -51,6 +55,7 @@ jobs:
 
                   docker build \
                     --secret id=gh_packages_token,env=GH_PACKAGES_TOKEN \
+                    --secret id=verji_repo_read_pat,env=VERJI_REPO_READ_PAT \
                     --build-arg BUILD_ID=${{ github.run_number }} \
                     -t "${IMAGE}:${TAG}" \
                     -t "${IMAGE}:latest" \
