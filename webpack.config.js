@@ -214,6 +214,15 @@ module.exports = (env, argv) => {
                 "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
 
                 // Same goes for js/react-sdk - we don't need two copies.
+                // Verji - the verji fork of matrix-js-sdk does not commit lib/ to git,
+                // Verji   so the github URL clone fetched by yarn install has only src/.
+                // Verji   The @verji/* modules' published lib/ output references
+                // Verji   "matrix-js-sdk/lib/*" paths (compiled from .ts at module publish
+                // Verji   time). Without this alias, webpack can't resolve those imports
+                // Verji   in the consumer build. Redirecting /lib to /src lets webpack +
+                // Verji   babel compile from matrix-js-sdk's source instead, which IS
+                // Verji   present in node_modules.
+                "matrix-js-sdk/lib": path.resolve(__dirname, "node_modules/matrix-js-sdk/src"),
                 "matrix-js-sdk": path.resolve(__dirname, "node_modules/matrix-js-sdk"),
                 "@matrix-org/react-sdk-module-api": path.resolve(
                     __dirname,
