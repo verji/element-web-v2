@@ -28,10 +28,10 @@ skip_module_dependency_version_check: true
 #
 # The values of this are provided to `yarn add` for inclusion.
 modules:
-    - "@verji/verji-cryptosetup-module"
-    - "@verji/verji-usermenu-module"
-    - "@verji/verji-onboarding-module"
-    - "@verji/verji-usersearch-module"
-    - "@verji/verji-news-module"
-    - "@verji/verji-eventsearch-module"
-    - "@verji/verji-roomsublist-module"
+    - "@verji/verji-cryptosetup-module@verji-v2"
+    - "@verji/verji-usermenu-module@verji-v2"
+    - "@verji/verji-onboarding-module@verji-v2"
+    - "@verji/verji-usersearch-module@verji-v2"
+    - "@verji/verji-news-module@verji-v2"
+    - "@verji/verji-eventsearch-module@verji-v2"
+    - "@verji/verji-roomsublist-module@verji-v2"
