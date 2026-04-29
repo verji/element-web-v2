@@ -16,23 +16,26 @@ COPY . /src
 RUN mv build_config.verji.yaml build_config.yaml
 RUN cat build_config.yaml
 
-# Install dependencies with the GH_PACKAGES_TOKEN mounted as a BuildKit secret.
-# The token is available only as a tmpfs file at /run/secrets/ during this RUN —
-# never written to any image layer or build cache. Used for two things:
+# Install + build with GH_PACKAGES_TOKEN mounted as a BuildKit secret.
+# The token is mounted at /run/secrets/ during this RUN; never written to a layer
+# or the build cache. Used for:
 #   1. .npmrc auth → @verji/* packages from GitHub Packages registry
 #   2. git insteadOf → private github URL deps (matrix-js-sdk-v2, module-api)
-# Both .npmrc and ~/.gitconfig are removed at end-of-RUN so the resulting layer
-# carries no trace of the token. See VerjiModuleVersioning.md "Cross-repo package access".
+# Install AND build both need this auth — `yarn build:genfiles` invokes the module
+# installer, which runs `yarn add @verji/<module>@verji-v2` against the GH Packages
+# registry, so the .npmrc must still be in place when docker-package.sh runs.
+# Auth files removed at end-of-RUN so the layer carries no token trace.
+# See VerjiModuleVersioning.md "Cross-repo package access".
 RUN --mount=type=secret,id=gh_packages_token \
     TOKEN=$(cat /run/secrets/gh_packages_token) && \
     echo "@verji:registry=https://npm.pkg.github.com" > .npmrc && \
     echo "//npm.pkg.github.com/:_authToken=${TOKEN}" >> .npmrc && \
     git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/" && \
     yarn --network-timeout=200000 install && \
+    dos2unix /src/scripts/docker-package.sh && \
+    bash /src/scripts/docker-package.sh "${BUILD_ID}" && \
     rm .npmrc && \
     rm -f /root/.gitconfig
-
-RUN dos2unix /src/scripts/docker-package.sh && bash /src/scripts/docker-package.sh "$BUILD_ID"
 
 # Copy the config now so that we don't create another layer in the app image
 RUN cp /src/config.sample.json /src/webapp/config.json
